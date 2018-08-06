@@ -47,79 +47,57 @@ class Description extends React.Component {
     }
 }
 
-// class Posts extends React.Component {
-//     render() {
-//         return(
-//             null
-//         );
-//     }
-// }
-
-function Posts(props) {
-    const posts = props.posts;
-    const listPosts = posts.map((post) =>
-        <Post 
-            key={post.id}
-            data={post.data}
-        />
-    );
-    return (
-      <ul>
-        {listPosts}
-      </ul>
-    );
-  }
-
 class Post extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         data: [],
-    //     };
-    // }
-    // componentDidMount() {
-    //     let newState = [];
-    //     db.collection("Posts").get().then(function(querySnapshot) {
-    //         querySnapshot.forEach(function(doc) {
-    //             newState.push({
-    //                 data: doc.data()
-    //             });
-    //         });
-    //     });
-    //     this.setState({
-    //         data: newState
-    //     });
-    // }
     render() {
         return(
             <li>
-                <Media />
+                <h2>hi!</h2>
+                {/* <Media />
                 <PostTitle asking_price={this.props.data.asking_price} manufacturer={this.props.data.manufacturer} length={this.props.data.length}/>
                 <PostDetails location={this.props.data.location} posted_date={this.props.data.posted_date}/>
                 <Condition condition={this.props.data.condition} boat_name={this.props.data.boat_name}/>
-                <Description description={this.props.data.description}/>
+                <Description description={this.props.data.description}/> */}
             </li>
         );
     }
 }
 
-const posts = [
-    {id: 1, data: {asking_price: 7999, boat_name: 'Tigan', condition: 'Good', description: 'This is a description', length: 26, location: '[48.8172, 123.6151]', manufacturer: 'Merriholm', posted_date: 'August 3, 2018 at 2:00:00 PM UTC-7', renewal_date: 'September 3, 2018 at 2:00:00 PM UTC-7', sold: false, user: 'Users/oSAdnOKBql2C2KkPJqST'}},
-    {id: 2, data: {asking_price: 9999, boat_name: 'Ecliptic', condition: 'Poor', description: 'This is a decriptionThis is a description', length: 29, location: '[48.8172, 123.6151]', manufacturer: 'Sun Star', posted_date: 'August 3, 2018 at 2:00:00 PM UTC-7', renewal_date: 'September 3, 2018 at 2:00:00 PM UTC-7', sold: false, user: 'Users/oSAdnOKBql2C2KkPJqST'}}
-]
-
-db.collection("Posts").get().then(function(querySnapshot) {
-    querySnapshot.forEach(function(doc) {
-        posts.push({
-            data: doc.data(),
-            id: doc.id
-        });
-        console.log(doc.id);
-    });
-});
+class Posts extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: [],
+        };
+    }
+    componentDidMount() {
+        db.collection("Posts").get()
+            .then((querySnapshot) => { 
+                let data = querySnapshot.docs.map(doc => ({ data: doc.data(), id: doc.id })) 
+                this.setState({
+                    data: data
+                });
+            })
+    }
+    renderPosts() {
+        return this.state.data.map((post, index) => {
+            return (
+                <div>
+                    {post.id}
+                </div>
+            )
+        })
+    }
+    render() {
+        return(
+            <div>
+                {this.renderPosts()}
+            </div>
+        );
+    }
+}
 
 ReactDOM.render(
-    <Posts posts={posts}/>, 
+    <Posts />, 
     document.getElementById('root')
 );
 
