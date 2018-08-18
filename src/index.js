@@ -1,15 +1,36 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'moment'
 // import App from './App.js';
 import firebase from './firebase.js';
+import moment from 'moment'
+import Geocode from "react-geocode";
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 
 const db = firebase.firestore();
 const settings = {timestampsInSnapshots: true};
 db.settings(settings);
-var moment = require('moment');
+
+// // set Google Maps Geocoding API for purposes of quota management. Its optional but recommended.
+Geocode.setApiKey("AIzaSyAFXhI5s36SfJEqv6dNDoIHjhbaHLfqwLc");
+ 
+// Enable or disable logs. Its optional.
+Geocode.enableDebug();
+ 
+// // Get address from latidude & longitude.
+function getAddress(location) {
+  const lat = location.latitude.toString()
+  const long = location.longitude.toString()
+  Geocode.fromLatLng(lat, long).then(
+    response => {
+        const address = response.results[0].formatted_address;
+        console.log(address);
+    },
+    error => {
+        console.error(error);
+    }
+  );
+}
 
 class Media extends React.Component {
     render() {
@@ -62,14 +83,14 @@ class Post extends React.Component {
         const dateObject = moment.unix((date.seconds));
         return dateObject.format("MMMM Do YYYY")
     }
-    render() {        
+    render() {
         return(
             <li>
                 <PostTitle />
                 <Media />
                 <PostDetails  
                    posted_date={this.parseDate(this.props.data.posted_date)} 
-                   location="location"
+                   location={getAddress(this.props.data.location)}
                 />
                 <Condition condition={this.props.data.condition} boat_name={this.props.data.boat_name} />
                 <Description description={this.props.data.description}/>
