@@ -16,21 +16,6 @@ Geocode.setApiKey("AIzaSyAFXhI5s36SfJEqv6dNDoIHjhbaHLfqwLc");
  
 // Enable or disable logs. Its optional.
 Geocode.enableDebug();
- 
-// // Get address from latidude & longitude.
-function getAddress(location) {
-  const lat = location.latitude.toString()
-  const long = location.longitude.toString()
-  Geocode.fromLatLng(lat, long).then(
-    response => {
-        const address = response.results[0].formatted_address;
-        console.log(address);
-    },
-    error => {
-        console.error(error);
-    }
-  );
-}
 
 class Media extends React.Component {
     render() {
@@ -48,10 +33,48 @@ class PostTitle extends React.Component {
     }
 }
 
-class PostDetails extends React.Component {
+class Map extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: "",
+        };
+    }
+    componentDidMount() {
+        const lat = this.props.lat.toString()
+        const long = this.props.long.toString()
+        Geocode.fromLatLng(lat, long).then(
+            response => {
+                const address = response.results[2].formatted_address;
+                this.setState({
+                    data: address
+                });
+            },
+            error => {
+                //parse and return error
+                console.error(error);
+            }
+          );
+    }
     render() {
         return(
-            <h4>{this.props.posted_date} || {this.props.location}</h4>
+            <div>{this.state.data}</div>
+        );
+    }
+}
+
+class PostDetails extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: [],
+        };
+    }
+    componentDidMount() {
+    }
+    render() {
+        return( 
+            <h4>{this.props.posted_date} || <Map lat={this.props.lat} long={this.props.long}/></h4>
         );
     }
 }
@@ -86,11 +109,16 @@ class Post extends React.Component {
     render() {
         return(
             <li>
-                <PostTitle />
+                <PostTitle 
+                    asking_price={this.props.data.asking_price}
+                    manufacturer={this.props.data.manufacturer}
+                    length={this.props.data.length}
+                />
                 <Media />
                 <PostDetails  
                    posted_date={this.parseDate(this.props.data.posted_date)} 
-                   location={getAddress(this.props.data.location)}
+                   lat={this.props.data.location.latitude}
+                   long={this.props.data.location.longitude}
                 />
                 <Condition condition={this.props.data.condition} boat_name={this.props.data.boat_name} />
                 <Description description={this.props.data.description}/>
