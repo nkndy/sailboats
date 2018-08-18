@@ -1,11 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App.js';
+import 'moment'
+// import App from './App.js';
 import firebase from './firebase.js';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 
-var db = firebase.firestore();
+const db = firebase.firestore();
+const settings = {timestampsInSnapshots: true};
+db.settings(settings);
+var moment = require('moment');
 
 class Media extends React.Component {
     render() {
@@ -48,15 +52,27 @@ class Description extends React.Component {
 }
 
 class Post extends React.Component {
-    render() {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: [],
+        };
+    }
+    parseDate(date) {
+        const dateObject = moment.unix((date.seconds));
+        return dateObject.format("MMMM Do YYYY")
+    }
+    render() {        
         return(
             <li>
-                <h2>hi!</h2>
-                {/* <Media />
-                <PostTitle asking_price={this.props.data.asking_price} manufacturer={this.props.data.manufacturer} length={this.props.data.length}/>
-                <PostDetails location={this.props.data.location} posted_date={this.props.data.posted_date}/>
-                <Condition condition={this.props.data.condition} boat_name={this.props.data.boat_name}/>
-                <Description description={this.props.data.description}/> */}
+                <PostTitle />
+                <Media />
+                <PostDetails  
+                   posted_date={this.parseDate(this.props.data.posted_date)} 
+                   location="location"
+                />
+                <Condition condition={this.props.data.condition} boat_name={this.props.data.boat_name} />
+                <Description description={this.props.data.description}/>
             </li>
         );
     }
@@ -78,20 +94,12 @@ class Posts extends React.Component {
                 });
             })
     }
-    renderPosts() {
-        return this.state.data.map((post, index) => {
-            return (
-                <div>
-                    {post.id}
-                </div>
-            )
-        })
-    }
     render() {
         return(
-            <div>
-                {this.renderPosts()}
-            </div>
+            this.state.data.map((post) => {
+            return (
+                <Post data={post.data} key={post.id}/>
+            )})
         );
     }
 }
