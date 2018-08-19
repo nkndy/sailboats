@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import firebase from './firebase.js';
-import Slider from "react-slick";
 import './App.css';
 
 const db = firebase.firestore();
@@ -36,16 +35,15 @@ class MediaSlider extends React.Component {
         arrows: false
       };
     return (
-        <h1>Hello</h1>
-//     <Slider {...settings}>
-//         {this.state.data.map(function(data, index) {
-//                return (
-//                <div key={index}>
-//                    <img src={data} />
-//                </div>
-//                );
-//            })}
-//        </Slider>
+        <div>
+            {this.state.data.map(function(data, index) {
+                return (
+                <div key={index}>
+                    <img src={data} />
+                </div>
+                );
+            })}
+        </div>
     );
     }
   }

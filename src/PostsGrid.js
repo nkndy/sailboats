@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import firebase from './firebase.js';
 import Post from './Post.js'
+import AppBar from './AppBar.js';
 
 const db = firebase.firestore();
 const settings = {timestampsInSnapshots: true};
@@ -13,11 +13,6 @@ db.settings(settings);
 const styles = theme => ({
   root: {
     flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing.unit * 2,
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
   },
 });
 
@@ -40,6 +35,7 @@ class PostsGrid extends React.Component {
   render() {
     return (
       <div className={this.props.root}>
+      <AppBar />
           {this.state.data.map((post) => {
             return (
               <Grid 
@@ -49,7 +45,7 @@ class PostsGrid extends React.Component {
                 spacing={24}
                 key={post.id}
               >
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12} sm={8} md={6}>
                     <Post data={post.data} document_id={post.id}/>
                 </Grid>
               </Grid>

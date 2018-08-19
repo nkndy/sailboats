@@ -1,12 +1,8 @@
-/* @import "~slick-carousel/slick/slick.css";
-@import "~slick-carousel/slick/slick-theme.css";
+.body {
+  margin: 9em 0 6em;
+}
 
 img {
+  min-width: 100%;
   max-width: 100%;
 }
-.media {
-  max-width: 300px;
-}
-.post {
-  flex-grow: 1;
-} */
