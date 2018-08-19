@@ -1,4 +1,4 @@
-@import "~slick-carousel/slick/slick.css";
+/* @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
 
 img {
@@ -7,3 +7,6 @@ img {
 .media {
   max-width: 300px;
 }
+.post {
+  flex-grow: 1;
+} */
