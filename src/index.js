@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 import firebase from './firebase.js';
 import moment from 'moment'
 import Geocode from "react-geocode";
+import Slider from "react-slick";
+import './App.css';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 
@@ -13,14 +15,60 @@ db.settings(settings);
 
 // // set Google Maps Geocoding API for purposes of quota management. Its optional but recommended.
 Geocode.setApiKey("AIzaSyAFXhI5s36SfJEqv6dNDoIHjhbaHLfqwLc");
- 
 // Enable or disable logs. Its optional.
 Geocode.enableDebug();
 
+class MediaSlider extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: [
+                "https://firebasestorage.googleapis.com/v0/b/sailboats-445f9.appspot.com/o/IMG_0725.JPG?alt=media&token=240bdadf-c07e-401d-a4bf-bf7ff842cdcb",
+                "https://firebasestorage.googleapis.com/v0/b/sailboats-445f9.appspot.com/o/IMG_0984.JPG?alt=media&token=4ec26818-7bd8-4e9c-9257-6573c2cf0a93"
+            ],
+        };
+    }
+    render() {
+      var settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false
+      };
+      return (
+        <Slider {...settings}>
+            {this.state.data.map(function(data, index) {
+                return (
+                <div key={index}>
+                    <img src={data} />
+                </div>
+                );
+            })}
+        </Slider>
+      );
+    }
+  }
+
 class Media extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: [
+                "https://firebasestorage.googleapis.com/v0/b/sailboats-445f9.appspot.com/o/IMG_0725.JPG?alt=media&token=240bdadf-c07e-401d-a4bf-bf7ff842cdcb",
+                "https://firebasestorage.googleapis.com/v0/b/sailboats-445f9.appspot.com/o/IMG_0984.JPG?alt=media&token=4ec26818-7bd8-4e9c-9257-6573c2cf0a93"
+            ],
+        };
+    }
     render() {
         return(
-            <div>media</div>
+            this.state.data.map((media) => {
+                return (
+                    <div>
+                        <img src={media}/>
+                    </div>
+                )})
         );
     }
 }
@@ -108,13 +156,13 @@ class Post extends React.Component {
     }
     render() {
         return(
-            <li>
+            <div className="post">
                 <PostTitle 
                     asking_price={this.props.data.asking_price}
                     manufacturer={this.props.data.manufacturer}
                     length={this.props.data.length}
                 />
-                <Media />
+                <MediaSlider />
                 <PostDetails  
                    posted_date={this.parseDate(this.props.data.posted_date)} 
                    lat={this.props.data.location.latitude}
@@ -122,7 +170,7 @@ class Post extends React.Component {
                 />
                 <Condition condition={this.props.data.condition} boat_name={this.props.data.boat_name} />
                 <Description description={this.props.data.description}/>
-            </li>
+            </div>
         );
     }
 }
