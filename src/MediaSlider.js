@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import firebase from './firebase.js';
+import Slider from "react-slick";
 import './App.css';
 
 const db = firebase.firestore();
@@ -31,11 +32,10 @@ class MediaSlider extends React.Component {
         infinite: true,
         speed: 500,
         slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false
+        slidesToScroll: 1
       };
-    return (
-        <div>
+      return (
+        <Slider {...settings}>
             {this.state.data.map(function(data, index) {
                 return (
                 <div key={index}>
@@ -43,9 +43,52 @@ class MediaSlider extends React.Component {
                 </div>
                 );
             })}
-        </div>
-    );
+        </Slider>
+      );
     }
   }
+
+// class MediaSlider extends React.Component {
+//     constructor(props) {
+//         super(props);
+//         this.state = {
+//             data: [],
+//         };
+//     }
+//     componentDidMount() {
+//         db.collection('Posts').doc(this.props.document_id).get()
+//             .then((querySnapshot) => {
+//             let data = [];
+//             querySnapshot.data().media.forEach((item) => {
+//                 data.push(item.media_url)
+//             });
+//             this.setState({
+//                 data: data
+//             });
+//         });
+//     }
+//     render() {
+//       var settings = {
+//         dots: true,
+//         infinite: true,
+//         speed: 500,
+//         slidesToShow: 1,
+//         slidesToScroll: 1,
+//         arrows: false
+//       };
+//     return (
+//         <div>
+//             <SimpleSlider />
+//             {this.state.data.map(function(data, index) {
+//                 return (
+//                 <div key={index}>
+//                     <img src={data} />
+//                 </div>
+//                 );
+//             })}
+//         </div>
+//     );
+//     }
+//   }
 
 export default MediaSlider;
