@@ -30,10 +30,10 @@ class PostTitle extends React.Component {
         return(
         <div>
             <Grid container>
-                <Grid item xs>
+                <Grid item xs className="title">
                     <Grid container>
                         <Grid item xs={12}>
-                            <Typography variant="title">
+                            <Typography variant="subheading">
                                 {this.props.length + "' " + this.props.manufacturer + " " + this.props.model_name}
                             </Typography>
                         </Grid>
@@ -44,8 +44,8 @@ class PostTitle extends React.Component {
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid item xs={3}>
-                    <Typography variant="title" align="right">
+                <Grid item xs={3} className="price">
+                    <Typography variant="subheading" align="right">
                         {'$' + this.props.asking_price}
                     </Typography>
                 </Grid>

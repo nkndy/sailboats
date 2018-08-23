@@ -2,10 +2,25 @@
 @import "~slick-carousel/slick/slick-theme.css";
 
 .body {
-  margin: 9em 0 6em;
+  margin: 5.5em 0 1.95em;
 }
+
+@media only screen and (min-width: 768px){
+  .body {
+    margin: 9em 0 6em;
+  }
+}
+
 
 img {
   min-width: 100%;
   max-width: 100%;
+}
+
+.thumbnail-post .title {
+  padding-left: 0.65em;
+}
+
+.thumbnail-post .price {
+  padding-right: 0.65em;
 }

@@ -8,13 +8,6 @@ import MediaSlider from './MediaSlider.js'
 import MediaThumb from './MediaThumb.js'
 import Grid from '@material-ui/core/Grid';
 
-function Media(props) {
-    if (props.is_featured) {
-      return <MediaSlider document_id={props.document_id}/>;
-    }
-    return <h1>Test</h1>;
-}
-
 class Post extends React.Component {
     constructor(props) {
         super(props);
