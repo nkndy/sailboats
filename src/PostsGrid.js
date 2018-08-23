@@ -28,7 +28,8 @@ class PostsGrid extends React.Component {
           .then((querySnapshot) => { 
               let data = querySnapshot.docs.map(doc => ({ data: doc.data(), id: doc.id })) 
               this.setState({
-                  data: data
+                  data: data,
+                  active: false
               });
           })
   }
@@ -45,7 +46,7 @@ class PostsGrid extends React.Component {
                 spacing={24}
                 key={post.id}
               >
-                <Grid item xs={12} sm={8} md={6}>
+                <Grid item xs={12} sm={post.data.featured_post ? 9 : 7} md={post.data.featured_post ? 6 : 4}>
                     <Post data={post.data} document_id={post.id}/>
                 </Grid>
               </Grid>
