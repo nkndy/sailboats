@@ -5,6 +5,8 @@ import PostDetails from './PostDetails.js'
 import Condition from './Condition.js'
 import Description from './Description.js'
 import MediaSlider from './MediaSlider.js'
+import MediaThumb from './MediaThumb.js'
+import Grid from '@material-ui/core/Grid';
 
 function Media(props) {
     if (props.is_featured) {
@@ -47,14 +49,22 @@ class Post extends React.Component {
                 </div>
             ) : (
                 <div className="thumbnail-post">
-                    <PostTitle 
-                        asking_price={this.props.data.asking_price}
-                        manufacturer={this.props.data.manufacturer}
-                        length={this.props.data.length}
-                        lat={this.props.data.location.latitude}
-                        long={this.props.data.location.longitude}
-                        model_name={this.props.data.model_name} 
-                    />  
+                <Grid container>
+                    <Grid item xs={3}>
+                        <MediaThumb document_id={this.props.document_id}/>
+                    </Grid>
+                    <Grid item xs>
+                        <PostTitle 
+                            asking_price={this.props.data.asking_price}
+                            manufacturer={this.props.data.manufacturer}
+                            length={this.props.data.length}
+                            lat={this.props.data.location.latitude}
+                            long={this.props.data.location.longitude}
+                            model_name={this.props.data.model_name}
+                            document_id={this.props.document_id} 
+                        />                  
+                    </Grid>
+                </Grid>
                 </div>
             )            
         );

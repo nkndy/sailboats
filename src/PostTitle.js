@@ -31,20 +31,22 @@ class PostTitle extends React.Component {
         <div>
             <Grid container>
                 <Grid item xs>
-                    <Typography variant="title">
-                        {this.props.length + "' " + this.props.manufacturer + " " + this.props.model_name}
-                    </Typography>
+                    <Grid container>
+                        <Grid item xs={12}>
+                            <Typography variant="title">
+                                {this.props.length + "' " + this.props.manufacturer + " " + this.props.model_name}
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Typography variant="caption">
+                                {this.state.location}
+                            </Typography>
+                        </Grid>
+                    </Grid>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={3}>
                     <Typography variant="title" align="right">
                         {'$' + this.props.asking_price}
-                    </Typography>
-                </Grid>
-            </Grid>
-            <Grid container>
-                <Grid item>
-                    <Typography variant="caption" gutterBottom>
-                        {this.state.location}
                     </Typography>
                 </Grid>
             </Grid>
