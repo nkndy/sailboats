@@ -6,7 +6,7 @@ const db = firebase.firestore();
 const settings = {timestampsInSnapshots: true};
 db.settings(settings);
 
-class MediaSlider extends React.Component {
+class MediaThumb extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -34,4 +34,4 @@ class MediaSlider extends React.Component {
     }
   }
 
-export default MediaSlider;
+export default MediaThumb;

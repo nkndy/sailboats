@@ -25,11 +25,10 @@ class PostsGrid extends React.Component {
   }
   componentDidMount() {
       db.collection("Posts").get()
-          .then((querySnapshot) => { 
-              let data = querySnapshot.docs.map(doc => ({ data: doc.data(), id: doc.id })) 
+          .then((querySnapshot) => {
+              let data = querySnapshot.docs.map(doc => ({ data: doc.data(), id: doc.id }))
               this.setState({
                   data: data,
-                  active: false
               });
           })
   }
@@ -39,15 +38,18 @@ class PostsGrid extends React.Component {
       <AppBar />
           {this.state.data.map((post) => {
             return (
-              <Grid 
+              <Grid
                 container
                 justify="center"
-                alignItems="center" 
+                alignItems="center"
                 spacing={24}
                 key={post.id}
               >
                 <Grid item xs={12} sm={post.data.featured_post ? 9 : 7} md={post.data.featured_post ? 6 : 4}>
-                    <Post data={post.data} document_id={post.id}/>
+                    <Post
+                      data={post.data}
+                      document_id={post.id}
+                    />
                 </Grid>
               </Grid>
             )}

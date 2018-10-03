@@ -47,7 +47,7 @@ class MediaSlider extends React.Component {
                 } else if (data.item.media_type === 2) {
                   return (
                     <div key={index}>
-                      <ReactPlayer url={data.item.media_url} playing controls="true" width="100%" height="auto"/>
+                      <ReactPlayer url={data.item.media_url} controls={true} width="100%" height="auto"/>
                     </div>
                   );
                 }
