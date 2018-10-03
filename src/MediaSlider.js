@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import firebase from './firebase.js';
 import Slider from "react-slick";
+import ReactPlayer from 'react-player'
 import './App.css';
 
 const db = firebase.firestore();
@@ -19,7 +20,7 @@ class MediaSlider extends React.Component {
             .then((querySnapshot) => {
             let data = [];
             querySnapshot.data().media.forEach((item) => {
-                data.push(item.media_url)
+                data.push({item})
             });
             this.setState({
                 data: data
@@ -29,7 +30,7 @@ class MediaSlider extends React.Component {
     render() {
         let settings = {
         dots: true,
-        infinite: true,
+        infinite: false,
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1
@@ -37,11 +38,19 @@ class MediaSlider extends React.Component {
       return (
         <Slider {...settings}>
             {this.state.data.map(function(data, index) {
-                return (
-                <div key={index}>
-                    <img src={data} />
-                </div>
-                );
+                if (data.item.media_type === 1) {
+                  return (
+                    <div key={index}>
+                        <img src={data.item.media_url} />
+                    </div>
+                  );
+                } else if (data.item.media_type === 2) {
+                  return (
+                    <div key={index}>
+                      <ReactPlayer url={data.item.media_url} playing controls="true" width="100%" height="auto"/>
+                    </div>
+                  );
+                }
             })}
         </Slider>
       );
