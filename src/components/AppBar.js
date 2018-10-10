@@ -13,6 +13,7 @@ import { withStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import AddCircle from '@material-ui/icons/AddCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
@@ -193,24 +194,14 @@ class PrimarySearchAppBar extends React.Component {
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
               <IconButton color="inherit">
-                <Badge className={classes.margin} badgeContent={4} color="secondary">
-                  <NavLink to="/new-sailboat-listing">
-                    <MailIcon />
-                  </ NavLink>
-                </Badge>
+                <NavLink to="/new-sailboat-listing">
+                  <AddCircle />
+                </ NavLink>
               </IconButton>
               <IconButton color="inherit">
-                <Badge className={classes.margin} badgeContent={17} color="secondary">
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton>
-              <IconButton
-                aria-owns={isMenuOpen ? 'material-appbar' : null}
-                aria-haspopup="true"
-                onClick={this.handleProfileMenuOpen}
-                color="inherit"
-              >
-                <AccountCircle />
+                <NavLink to="/my-account">
+                  <AccountCircle />
+                </ NavLink>
               </IconButton>
             </div>
             <div className={classes.sectionMobile}>
