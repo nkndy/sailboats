@@ -68,7 +68,15 @@ class AccountDialogue extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      open: this.props.showAccountDialogue
     };
+  }
+
+  componentWillReceiveProps(nextProps){
+    console.log(nextProps.showAccountDialogue)
+    if(nextProps.showAccountDialogue !== this.props.showAccountDialogue){
+        this.setState({open: nextProps.showAccountDialogue});
+    }
   }
 
   handleClose = value => {
@@ -79,7 +87,7 @@ class AccountDialogue extends React.Component {
     return (
       <div>
         <AccountDialogueWrapped
-          open={this.props.showAccountDialogue}
+          open={this.state.open}
           onClose={this.handleClose}
         />
       </div>

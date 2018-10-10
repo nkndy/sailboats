@@ -16,7 +16,7 @@ class App extends Component {
       username: '',
       items: [],
       user: null,
-      showAccountDialogue: true
+      showAccountDialogue: false
     };
   }
   render() {
