@@ -36,6 +36,9 @@ class AccountDialogue extends React.Component {
 
   // Listen to the Firebase Auth state and set the local state.
   componentDidMount() {
+    this.unregisterAuthObserver = auth.onAuthStateChanged(
+        (user) => this.setState({isSignedIn: !!user})
+    );
     auth.onAuthStateChanged((user) => {
       if (user) {
           this.setState({ user })

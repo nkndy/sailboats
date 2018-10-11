@@ -39,7 +39,7 @@ const footers = [
   },
   {
     title: 'FAQ',
-    description: ['Are Listings Free?'],
+    description: ['Are Listings on Tradewind Free?', 'What should I look out for when buying?'],
   },
   {
     title: 'Support',
