@@ -31,7 +31,7 @@ const styles = theme => ({
   },
 });
 
-function Home(props) {
+function Page(props) {
     const { classes } = props;
     return (
       <React.Fragment>
@@ -42,8 +42,8 @@ function Home(props) {
     );
 }
 
-Home.propTypes = {
+Page.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Home);
+export default withStyles(styles)(Page);
