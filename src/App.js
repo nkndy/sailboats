@@ -8,6 +8,7 @@ import NewListing from "./components/NewListing";
 import MyAccount from "./components/MyAccount";
 import Error from "./components/Error";
 import AccountDialogue from "./components/AccountDialogue";
+import Footer from "./components/Footer";
 
 class App extends Component {
   constructor() {
@@ -37,6 +38,7 @@ class App extends Component {
             <PrivateRoute path="/my-account" component={MyAccount} />
             <Route component={Error}/>
           </Switch>
+          <Footer />
         </div>
       </BrowserRouter>
     );
