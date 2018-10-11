@@ -1,7 +1,7 @@
-// Import FirebaseAuth and firebase.
 import React from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase, { auth, google } from './firebase';
+import Account from './Account'
 
 class AccountDialogue extends React.Component {
   // The component's Local state.
@@ -36,9 +36,6 @@ class AccountDialogue extends React.Component {
 
   // Listen to the Firebase Auth state and set the local state.
   componentDidMount() {
-    this.unregisterAuthObserver = auth.onAuthStateChanged(
-        (user) => this.setState({isSignedIn: !!user})
-    );
     auth.onAuthStateChanged((user) => {
       if (user) {
           this.setState({ user })

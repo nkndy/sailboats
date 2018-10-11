@@ -175,7 +175,7 @@ class PrimarySearchAppBar extends React.Component {
             </IconButton>*/}
             <Typography className={classes.title} variant="title" color="inherit" noWrap>
               <NavLink to="/">
-                Sailboats
+                Tradewind
               </NavLink>
             </Typography>
             <div className={classes.search}>

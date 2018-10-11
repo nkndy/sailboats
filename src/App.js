@@ -5,7 +5,7 @@ import './App.css';
 import AppBar from "./components/AppBar";
 import Home from "./components/Home";
 import NewListing from "./components/NewListing";
-import MyAccount from "./components/MyAccount";
+import Account from "./components/Account";
 import Error from "./components/Error";
 import AccountDialogue from "./components/AccountDialogue";
 import Footer from "./components/Footer";
@@ -21,7 +21,7 @@ class App extends Component {
     };
   }
   render() {
-    const PrivateRoute = ({ component: Component, ...rest }) => (
+    const AccountRoute = ({ component: Component, ...rest }) => (
       <Route {...rest} render={(props) => (
         (this.state.user != null)
           ? <Component {...props} />
@@ -35,7 +35,7 @@ class App extends Component {
           <Switch>
             <Route path="/" component={Home} exact />
             <Route path="/new-sailboat-listing" component={NewListing} />
-            <PrivateRoute path="/my-account" component={MyAccount} />
+            <AccountRoute path="/my-account" component={Account} />
             <Route component={Error}/>
           </Switch>
           <Footer />
