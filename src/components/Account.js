@@ -41,6 +41,9 @@ const styles = theme => ({
 class Account extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      data: [],
+    };
     this.logout = this.logout.bind(this);
   }
   componentDidMount() {
@@ -65,7 +68,11 @@ class Account extends React.Component {
       <React.Fragment>
         <div className={classNames(classes.layout)}>
           <h4 className={classNames(classes.tagline)}>Account</h4>
-          <ThumbnailPost />
+            {this.state.data.map((post) => {
+              return (
+                <ThumbnailPost key={post.id} data={post.data}/>
+              );
+            })}
           <button onClick={this.logout}>Logout</button>
         </div>
       </React.Fragment>

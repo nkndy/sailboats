@@ -21,10 +21,10 @@ function PaperSheet(props) {
     <div>
       <Paper className={classNames(classes.root)} elevation={1}>
         <Typography variant="title" component="h3">
-          This is a sheet of paper.
+          {props.data.boat_name}
         </Typography>
         <Typography component="p">
-          Paper can be used to build surface or other elements for your application.
+          {props.data.description}
         </Typography>
       </Paper>
     </div>
