@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import firebase from './firebase.js';
+import firebase from '../firebase.js';
 import Slider from "react-slick";
 import ReactPlayer from 'react-player'
-import './App.css';
+import '../App.css';
 
 const db = firebase.firestore();
 const settings = {timestampsInSnapshots: true};

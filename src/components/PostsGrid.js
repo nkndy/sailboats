@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import firebase from './firebase.js';
+import firebase from '../firebase.js';
 import Post from './Post.js'
-import AppBar from './AppBar.js';
 
 const db = firebase.firestore();
 const settings = {timestampsInSnapshots: true};
+
 db.settings(settings);
 
 const styles = theme => ({
@@ -35,7 +35,6 @@ class PostsGrid extends React.Component {
   render() {
     return (
       <div className={this.props.root}>
-      <AppBar />
           {this.state.data.map((post) => {
             return (
               <Grid

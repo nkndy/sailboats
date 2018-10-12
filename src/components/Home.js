@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import PostsGrid from './PostsGrid';
 
 const styles = theme => ({
   '@global': {
@@ -38,6 +39,7 @@ function Home(props) {
       <div className={classNames(classes.layout)}>
         <h4 className={classNames(classes.tagline)}>Find your next adventure</h4>
       </div>
+      <PostsGrid />
       </React.Fragment>
     );
 }

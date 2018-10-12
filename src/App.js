@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import './App.css';
-import firebase, { auth } from './components/firebase';
+import firebase, { auth } from './firebase';
 import AppBar from "./components/AppBar";
 import Home from "./components/Home";
 import NewListing from "./components/NewListing";
@@ -30,7 +30,7 @@ class App extends Component {
     })
   }
   render() {
-    const PrivateRoute = ({ component: Component, ...rest }) => (
+    const AccountRoute = ({ component: Component, ...rest }) => (
       <Route {...rest} render={(props) => (
         (this.state.user != null)
           ?
@@ -56,7 +56,7 @@ class App extends Component {
               path="/login"
               render={(props) => <AccountDialogue {...props} onUserUpdate={this.onUserUpdate} user={this.state.user} />}
             />
-            <PrivateRoute path="/my-account" component={Account} />
+            <AccountRoute path="/my-account" component={Account} />
             <Route component={Error}/>
           </Switch>
           <Footer />

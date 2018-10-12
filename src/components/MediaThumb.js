@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import firebase from './firebase.js';
-import './App.css';
+import firebase from '../firebase.js';
+import '../App.css';
 
 const db = firebase.firestore();
 const settings = {timestampsInSnapshots: true};

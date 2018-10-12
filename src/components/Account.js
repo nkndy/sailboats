@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { auth } from './firebase';
+import { auth } from '../firebase';
 
 const styles = theme => ({
   '@global': {
