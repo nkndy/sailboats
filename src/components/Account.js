@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { auth } from './firebase'
+import { auth } from './firebase';
 
 const styles = theme => ({
   '@global': {
@@ -38,11 +38,10 @@ class Account extends React.Component {
     this.logout = this.logout.bind(this);
   }
   logout() {
-    // auth.onAuthStateChanged(function (user) {
-    //   this.setState({
-    //     user: null,
-    //   })
-    // });
+    auth.signOut()
+     .then(() => {
+       console.log("logged out")
+     });
   }
   render() {
     const { classes } = this.props;
