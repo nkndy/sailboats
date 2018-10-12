@@ -36,6 +36,7 @@ class App extends Component {
           ?
           <Component {...props}
             onUserLogout={this.onUserLogout}
+            user_id={this.state.user.uid}
           />
           :
           <Redirect

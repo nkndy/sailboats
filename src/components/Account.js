@@ -1,8 +1,14 @@
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import ThumbnailPost from './ThumbnailPost'
 import { withStyles } from '@material-ui/core/styles';
-import { auth } from '../firebase';
+import firebase, { auth } from '../firebase';
+
+const db = firebase.firestore();
+const settings = {timestampsInSnapshots: true};
+
+db.settings(settings);
 
 const styles = theme => ({
   '@global': {
@@ -37,6 +43,16 @@ class Account extends React.Component {
     super(props);
     this.logout = this.logout.bind(this);
   }
+  componentDidMount() {
+    db.collection("Posts").where("user", "==", this.props.user_id)
+      .get()
+      .then((querySnapshot) => {
+        let data = querySnapshot.docs.map(doc => ({ data: doc.data(), id: doc.id }))
+        this.setState({
+            data: data,
+        });
+      });
+  }
   logout() {
     auth.signOut()
      .then(() => {
@@ -49,33 +65,13 @@ class Account extends React.Component {
       <React.Fragment>
         <div className={classNames(classes.layout)}>
           <h4 className={classNames(classes.tagline)}>Account</h4>
+          <ThumbnailPost />
           <button onClick={this.logout}>Logout</button>
         </div>
       </React.Fragment>
     );
   }
 }
-
-// function Account(props) {
-//     const { classes } = props;
-//     let logout = () => {
-//       console.log("hello");
-//       auth.signOut()
-//       .then(() => {
-//         this.setState({
-//           user: null
-//         });
-//       });
-//     }
-//     return (
-//       <React.Fragment>
-//       <div className={classNames(classes.layout)}>
-//         <h4 className={classNames(classes.tagline)}>Account</h4>
-//         <button onClick={logout}>Logout</button>
-//       </div>
-//       </React.Fragment>
-//     );
-// }
 
 Account.propTypes = {
   classes: PropTypes.object.isRequired,

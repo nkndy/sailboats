@@ -19,7 +19,6 @@ class AccountDialogue extends React.Component {
       let token = result.credential.accessToken;
       // The signed-in user info.
       let user = result.user;
-      console.log("hello");
     }).catch(function(error) {
       // Handle Errors here.
       let errorCode = error.code;
@@ -40,7 +39,6 @@ class AccountDialogue extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     if (!this.props.user) {
       return (
         <div>
