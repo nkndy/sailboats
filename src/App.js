@@ -14,9 +14,6 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentItem: '',
-      username: '',
-      items: [],
       user: null
     };
     this.onUserUpdate = this.onUserUpdate.bind(this);

@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import { auth } from './firebase'
 
 const styles = theme => ({
   '@global': {
@@ -31,16 +32,52 @@ const styles = theme => ({
   },
 });
 
-function Account(props) {
-    const { classes } = props;
-    return (
+class Account extends React.Component {
+  constructor(props) {
+    super(props);
+    this.logout = this.logout.bind(this);
+  }
+  logout() {
+    auth.signOut().then(function() {
+      console.log('Signed Out');
+    }, function(error) {
+      console.error('Sign Out Error', error);
+    });
+  }
+
+  render() {
+    const { classes } = this.props;
+    return(
       <React.Fragment>
-      <div className={classNames(classes.layout)}>
-        <h4 className={classNames(classes.tagline)}>Account</h4>
-      </div>
+        <div className={classNames(classes.layout)}>
+          <h4 className={classNames(classes.tagline)}>Account</h4>
+          <button onClick={this.logout}>Logout</button>
+        </div>
       </React.Fragment>
     );
+  }
 }
+
+// function Account(props) {
+//     const { classes } = props;
+//     let logout = () => {
+//       console.log("hello");
+//       auth.signOut()
+//       .then(() => {
+//         this.setState({
+//           user: null
+//         });
+//       });
+//     }
+//     return (
+//       <React.Fragment>
+//       <div className={classNames(classes.layout)}>
+//         <h4 className={classNames(classes.tagline)}>Account</h4>
+//         <button onClick={logout}>Logout</button>
+//       </div>
+//       </React.Fragment>
+//     );
+// }
 
 Account.propTypes = {
   classes: PropTypes.object.isRequired,

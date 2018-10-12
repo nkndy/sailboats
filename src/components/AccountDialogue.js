@@ -1,10 +1,5 @@
 import React from 'react';
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import firebase, { auth, google } from './firebase';
-
-function SignInWithGoogle(props) {
-  return <button>Sign In With Google</button>;
-}
+import firebase, { auth } from './firebase';
 
 class AccountDialogue extends React.Component {
   // The component's Local state.
@@ -45,11 +40,6 @@ class AccountDialogue extends React.Component {
     this.unregisterAuthObserver = auth.onAuthStateChanged(
         (user) => this.props.onUserUpdate(user)
     );
-  }
-
-  // Make sure we un-register Firebase observers when the component unmounts.
-  componentWillUnmount() {
-    // this.unregisterAuthObserver();
   }
 
   render() {
