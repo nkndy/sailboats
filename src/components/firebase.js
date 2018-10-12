@@ -30,8 +30,5 @@
   export const doPasswordUpdate = (password) =>
   auth.currentUser.updatePassword(password);
 
-
-  export const google = firebase.auth.GoogleAuthProvider.PROVIDER_ID;
-  export const email = firebase.auth.EmailAuthProvider.PROVIDER_ID;
   export const auth = firebase.auth();
   export default firebase;

@@ -11,21 +11,27 @@ import AccountDialogue from "./components/AccountDialogue";
 import Footer from "./components/Footer";
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       currentItem: '',
       username: '',
       items: [],
       user: null
     };
+    this.onUserUpdate = this.onUserUpdate.bind(this);
+  }
+  onUserUpdate(user) {
+    this.setState({
+      user: user,
+    });
   }
   render() {
     const AccountRoute = ({ component: Component, ...rest }) => (
       <Route {...rest} render={(props) => (
         (this.state.user != null)
           ? <Component {...props} />
-          : <AccountDialogue />
+          : <AccountDialogue onUserUpdate={this.onUserUpdate}/>
       )} />
     )
     return (

@@ -1,54 +1,55 @@
 import React from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase, { auth, google } from './firebase';
-import Account from './Account'
+
+function SignInWithGoogle(props) {
+  return <button>Sign In With Google</button>;
+}
 
 class AccountDialogue extends React.Component {
   // The component's Local state.
-    constructor() {
-      super();
+    constructor(props) {
+      super(props);
       this.state = {
         currentItem: '',
         username: '',
         items: [],
         user: null // <-- add this line
       }
+      this.login = this.login.bind(this);
     }
 
-  // Configure FirebaseUI.
-  uiConfig = {
-    // Popup signin flow rather than redirect flow.
-    signInFlow: 'popup',
-    // We will display Google
-    signInOptions: [
-      google
-    ],
-    callbacks: {
-      // Avoid redirects after sign-in.
-      signInSuccessWithAuthResult: (result) => {
-        const user = result.user;
-        this.setState({
-          user
-        });
-      }
-    }
-  };
+  login() {
+    // console.log(this.props);
+    // console.log("Hello");
+    let provider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider).then(function(result) {
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      let token = result.credential.accessToken;
+      // The signed-in user info.
+      let user = result.user;
+    }).catch(function(error) {
+      // Handle Errors here.
+      let errorCode = error.code;
+      let errorMessage = error.message;
+      // The email of the user's account used.
+      let email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      let credential = error.credential;
+      // ...
+    });
+  }
 
   // Listen to the Firebase Auth state and set the local state.
   componentDidMount() {
     this.unregisterAuthObserver = auth.onAuthStateChanged(
-        (user) => this.setState({isSignedIn: !!user})
+        (user) => this.props.onUserUpdate(user)
     );
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-          this.setState({ user })
-      }
-    });
   }
 
   // Make sure we un-register Firebase observers when the component unmounts.
   componentWillUnmount() {
-    this.unregisterAuthObserver();
+    // this.unregisterAuthObserver();
   }
 
   render() {
@@ -57,7 +58,7 @@ class AccountDialogue extends React.Component {
         <div>
           <h1>My App</h1>
           <p>Please sign-in:</p>
-          <StyledFirebaseAuth uiConfig={this.uiConfig} firebaseAuth={auth}/>
+          <button onClick={this.login}>Sign In With Google</button>
         </div>
       );
     }
