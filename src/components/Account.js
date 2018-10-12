@@ -38,13 +38,12 @@ class Account extends React.Component {
     this.logout = this.logout.bind(this);
   }
   logout() {
-    auth.signOut().then(function() {
-      console.log('Signed Out');
-    }, function(error) {
-      console.error('Sign Out Error', error);
-    });
+    // auth.onAuthStateChanged(function (user) {
+    //   this.setState({
+    //     user: null,
+    //   })
+    // });
   }
-
   render() {
     const { classes } = this.props;
     return(
