@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import CreateListingStepper from './CreateListingStepper';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
@@ -37,6 +38,7 @@ function NewListing(props) {
       <React.Fragment>
       <div className={classNames(classes.layout)}>
         <h4 className={classNames(classes.tagline)}>New Listing</h4>
+        <CreateListingStepper />
       </div>
       </React.Fragment>
     );
