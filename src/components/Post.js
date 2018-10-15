@@ -20,7 +20,7 @@ class Post extends React.Component {
             this.state.active ? (
               <FeaturedPost data={this.props.data} document_id={this.props.document_id}/>
             ) : (
-              <ThumbnailPost data={this.props.data} />
+              <ThumbnailPost data={this.props.data} document_id={this.props.document_id}/>
             )
         );
     }

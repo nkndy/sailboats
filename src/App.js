@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import NewListing from "./components/NewListing";
 import Account from "./components/Account";
 import AccountDialogue from "./components/AccountDialogue";
+import DetailView from "./components/DetailView";
 import Error from "./components/Error";
 import Footer from "./components/Footer";
 
@@ -52,6 +53,7 @@ class App extends Component {
           <Switch>
             <Route path="/" component={Home} exact />
             <Route path="/new-sailboat-listing" component={NewListing} />
+            <Route path={`/listing/:listingId`} component={DetailView}/>
             <Route
               path="/login"
               render={(props) => <AccountDialogue {...props} onUserUpdate={this.onUserUpdate} user={this.state.user} />}

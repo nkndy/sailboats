@@ -6,6 +6,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import NavigateNext from '@material-ui/icons/NavigateNext';
+import { Link } from "react-router-dom";
 
 const styles = theme => ({
   root: {
@@ -58,7 +59,9 @@ function ThumnailPost(props) {
         </div>
         <div className={classNames(classes.actionColumn)}>
           <IconButton className={classes.button}>
-            <NavigateNext />
+            <Link to={`/listing/${props.document_id}`}>
+              <NavigateNext />
+            </Link>
           </IconButton>
         </div>
       </Paper>
