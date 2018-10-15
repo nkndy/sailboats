@@ -4,6 +4,8 @@ import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import NavigateNext from '@material-ui/icons/NavigateNext';
 
 const styles = theme => ({
   root: {
@@ -22,6 +24,13 @@ const styles = theme => ({
     backgroundSize: `cover`,
     minWidth: 150,
     backgroundColor: 'grey',
+  },
+  actionColumn: {
+    ...theme.mixins.gutters(),
+    paddingTop: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2,
+    display: 'flex',
+    alignItems: 'center'
   },
 });
 
@@ -46,6 +55,11 @@ function ThumnailPost(props) {
           <Typography component="p">
             {props.data.description}
           </Typography>
+        </div>
+        <div className={classNames(classes.actionColumn)}>
+          <IconButton className={classes.button}>
+            <NavigateNext />
+          </IconButton>
         </div>
       </Paper>
     </div>
