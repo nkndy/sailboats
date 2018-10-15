@@ -1,7 +1,6 @@
 import React from 'react';
 import firebase, { auth } from '../firebase';
-import { Route, Redirect } from 'react-router-dom';
-import Account from "./Account";
+import { Redirect } from 'react-router-dom';
 
 class AccountDialogue extends React.Component {
   // The component's Local state.

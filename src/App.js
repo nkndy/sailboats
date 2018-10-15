@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import './App.css';
-import firebase, { auth } from './firebase';
 import AppBar from "./components/AppBar";
 import Home from "./components/Home";
 import NewListing from "./components/NewListing";

@@ -4,7 +4,6 @@ import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import CardMedia from '@material-ui/core/CardMedia';
 
 const styles = theme => ({
   root: {
@@ -20,14 +19,13 @@ const styles = theme => ({
     flexDirection: 'column',
   },
   thumbnailImage: {
-    width: 150,
-    height: 150,
+    backgroundSize: `cover`,
+    minWidth: 150,
     backgroundColor: 'grey',
-    // src={props.data.media[0].media_url
   },
 });
 
-function PaperSheet(props) {
+function ThumnailPost(props) {
   const { classes } = props;
   return (
     <div>
@@ -35,8 +33,9 @@ function PaperSheet(props) {
         <div
           className={classNames(classes.thumbnailImage)}
           style={{
-            backgroundImage: `url(${props.data.media[0].media_url})`, 
-            backgroundSize: `cover`
+            backgroundImage: `url(${props.data.media[0].media_url})`,
+            backgroundSize: `cover`,
+            minWidth: 150,
           }}
         >
         </div>
@@ -53,8 +52,8 @@ function PaperSheet(props) {
   );
 }
 
-PaperSheet.propTypes = {
+ThumnailPost.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(PaperSheet);
+export default withStyles(styles)(ThumnailPost);

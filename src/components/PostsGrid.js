@@ -44,7 +44,7 @@ class PostsGrid extends React.Component {
                 spacing={24}
                 key={post.id}
               >
-                <Grid item xs={12} sm={post.data.featured_post ? 9 : 7} md={post.data.featured_post ? 6 : 4}>
+                <Grid item>
                     <Post
                       data={post.data}
                       document_id={post.id}

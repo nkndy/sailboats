@@ -38,8 +38,8 @@ function Home(props) {
       <React.Fragment>
       <div className={classNames(classes.layout)}>
         <h4 className={classNames(classes.tagline)}>Find your next adventure</h4>
+        <PostsGrid />
       </div>
-      <PostsGrid />
       </React.Fragment>
     );
 }
