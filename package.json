@@ -6,6 +6,7 @@
     "@material-ui/core": "^3.0.0",
     "@material-ui/icons": "^3.0.1",
     "ajv": "^6.5.4",
+    "fg-loadcss": "^2.0.1",
     "firebase": "^5.5.4",
     "firebaseui": "^3.4.1",
     "jquery": "^3.3.1",

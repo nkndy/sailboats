@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import MediaSlider from './MediaSlider';
+import ListingSocialIcons from './ListingSocialIcons';
 import firebase from '../firebase.js';
 import Geocode from "react-geocode";
 import IconButton from '@material-ui/core/IconButton';
@@ -48,7 +49,7 @@ const styles = theme => ({
     fontWeight: 'initial',
   },
   paper: {
-    paddingBottom: theme.spacing.unit,
+    marginBottom: theme.spacing.unit,
   },
   contactButton: {
     fontSize: 'large',
@@ -101,6 +102,9 @@ class DetailView extends React.Component {
             <Grid item xs={12} md={8}>
               <Paper className={classes.paper}><MediaSlider document_id={this.props.match.params.listingId} /></Paper>
               <Paper className={classes.paper}>Map</Paper>
+              <Paper className={classes.paper} elevation={0}>
+                <ListingSocialIcons />
+              </Paper>
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
               <Paper className={classes.paper} elevation={0}>
@@ -132,17 +136,6 @@ class DetailView extends React.Component {
                 <Typography variant="body1" component="p">
                   {this.state.data.description}
                 </Typography>
-              </Paper>
-              <Paper className={classes.paper} elevation={0}>
-                <IconButton className={classes.contactButton} aria-label="Email">
-                  <EmailIcon fontSize="inherit"/>
-                </IconButton>
-                <IconButton className={classes.contactButton} aria-label="Phone">
-                  <PhoneIcon fontSize="inherit"/>
-                </IconButton>
-                <IconButton className={classes.contactButton} aria-label="Text">
-                  <TextIcon fontSize="inherit"/>
-                </IconButton>
               </Paper>
             </Grid>
             <Grid item xs={12} sm={6}>
