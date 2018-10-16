@@ -10,6 +10,8 @@ import firebase from '../firebase.js';
 import Geocode from "react-geocode";
 import IconButton from '@material-ui/core/IconButton';
 import EmailIcon from '@material-ui/icons/Email';
+import PhoneIcon from '@material-ui/icons/Phone';
+import TextIcon from '@material-ui/icons/Textsms';
 
 const db = firebase.firestore();
 const settings = {timestampsInSnapshots: true};
@@ -23,6 +25,7 @@ const styles = theme => ({
   },
   root: {
     flexGrow: 1,
+    alignItems: "flex-start",
   },
   layout: {
     width: 'auto',
@@ -46,6 +49,9 @@ const styles = theme => ({
   },
   paper: {
     paddingBottom: theme.spacing.unit,
+  },
+  contactButton: {
+    fontSize: 'large',
   },
 });
 
@@ -92,10 +98,11 @@ class DetailView extends React.Component {
       <div className={classNames(classes.layout)}>
         <div className={classes.root}>
           <Grid container spacing={16}>
-            <Grid item xs={12} sm={8}>
+            <Grid item xs={12} md={8}>
               <Paper className={classes.paper}><MediaSlider document_id={this.props.match.params.listingId} /></Paper>
+              <Paper className={classes.paper}>Map</Paper>
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} sm={6} md={4}>
               <Paper className={classes.paper} elevation={0}>
                 <Typography variant="title" component="h2">
                   {this.state.data.manufacturer + " " + this.state.data.length + "'"}
@@ -108,8 +115,14 @@ class DetailView extends React.Component {
                 </Typography>
               </Paper>
               <Paper className={classes.paper} elevation={0}>
-                <IconButton className={classes.button} aria-label="Email">
-                  <EmailIcon fontSize="small"/>
+                <IconButton className={classes.contactButton} aria-label="Email">
+                  <EmailIcon fontSize="inherit"/>
+                </IconButton>
+                <IconButton className={classes.contactButton} aria-label="Phone">
+                  <PhoneIcon fontSize="inherit"/>
+                </IconButton>
+                <IconButton className={classes.contactButton} aria-label="Text">
+                  <TextIcon fontSize="inherit"/>
                 </IconButton>
               </Paper>
               <Paper className={classes.paper} elevation={0}>
@@ -120,15 +133,22 @@ class DetailView extends React.Component {
                   {this.state.data.description}
                 </Typography>
               </Paper>
-              <Paper className={classes.paper}>Map</Paper>
+              <Paper className={classes.paper} elevation={0}>
+                <IconButton className={classes.contactButton} aria-label="Email">
+                  <EmailIcon fontSize="inherit"/>
+                </IconButton>
+                <IconButton className={classes.contactButton} aria-label="Phone">
+                  <PhoneIcon fontSize="inherit"/>
+                </IconButton>
+                <IconButton className={classes.contactButton} aria-label="Text">
+                  <TextIcon fontSize="inherit"/>
+                </IconButton>
+              </Paper>
             </Grid>
-            <Grid item xs={12} sm={4}>
-              <Paper className={classes.paper}>Description</Paper>
-            </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} sm={6}>
               <Paper className={classes.paper}>Gear</Paper>
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} md={6}>
               <Paper className={classes.paper}>Chat</Paper>
             </Grid>
           </Grid>
