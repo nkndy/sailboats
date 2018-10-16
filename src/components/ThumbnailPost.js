@@ -39,7 +39,7 @@ function ThumnailPost(props) {
   const { classes } = props;
   return (
     <div>
-      <Paper className={classNames(classes.root)} elevation={1}>
+      <Paper className={classNames(classes.root)} elevation={0}>
         <div
           className={classNames(classes.thumbnailImage)}
           style={{

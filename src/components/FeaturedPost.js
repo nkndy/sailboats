@@ -39,7 +39,7 @@ function parseDate(date) {
 function FeaturedPost(props) {
   const { classes } = props;
   return (
-    <Paper className={classNames(classes.root)} elevation={3}>
+    <Paper className={classNames(classes.root)} elevation={1}>
       <div>
         <MediaSlider document_id={props.document_id}/>
       </div>

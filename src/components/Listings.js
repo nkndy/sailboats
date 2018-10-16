@@ -14,6 +14,7 @@ const styles = theme => ({
     width: 'auto',
     marginLeft: theme.spacing.unit * 3,
     marginRight: theme.spacing.unit * 3,
+    paddingTop: theme.spacing.unit * 4,
     marginTop: '70px',
     [theme.breakpoints.up(900 + theme.spacing.unit * 3 * 2)]: {
       width: 900,
@@ -32,20 +33,19 @@ const styles = theme => ({
   },
 });
 
-function Home(props) {
+function Listings(props) {
     const { classes } = props;
     return (
       <React.Fragment>
       <div className={classNames(classes.layout)}>
-        <h4 className={classNames(classes.tagline)}>Find your next adventure</h4>
         <PostsGrid />
       </div>
       </React.Fragment>
     );
 }
 
-Home.propTypes = {
+Listings.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Home);
+export default withStyles(styles)(Listings);

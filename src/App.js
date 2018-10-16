@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import './App.css';
 import AppBar from "./components/AppBar";
-import Home from "./components/Home";
+import Landing from "./components/Landing";
+import Listings from "./components/Listings";
 import NewListing from "./components/NewListing";
 import Account from "./components/Account";
 import AccountDialogue from "./components/AccountDialogue";
@@ -51,7 +52,8 @@ class App extends Component {
         <div>
           <AppBar status={this.state}/>
           <Switch>
-            <Route path="/" component={Home} exact />
+            <Route path="/" component={Landing} exact />
+            <Route path="/listings" component={Listings} exact />
             <Route path="/new-sailboat-listing" component={NewListing} />
             <Route path={`/listing/:listingId`} component={DetailView}/>
             <Route
