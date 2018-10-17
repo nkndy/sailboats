@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import MediaSlider from './MediaSlider';
-import MapContainer from './Map';
+import MapContainer from './MapContainer';
 import ListingSocialIcons from './ListingSocialIcons';
 import firebase from '../firebase.js';
 import Geocode from "react-geocode";

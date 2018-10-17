@@ -19,6 +19,10 @@ const CustomLoadingContainer = (props) => (
 )
 
 export class MapContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    console.log(props)
+  }
   render() {
     const mapStyle = {
         width: "100%",

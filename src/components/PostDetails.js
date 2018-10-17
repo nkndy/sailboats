@@ -1,14 +1,16 @@
 import React from 'react';
-import Map from './Map.js'
+
 
 class PostDetails extends React.Component {
     componentDidMount() {
     }
     render() {
-        return( 
+        return(
             <div>
             {this.props.posted_date}
-            <Map lat={this.props.lat} long={this.props.long} />
+            {/*
+<Map lat={this.props.lat} long={this.props.long} />
+              */}
             </div>
         );
     }
