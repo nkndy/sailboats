@@ -36,7 +36,6 @@ export class MapContainer extends React.Component {
       //Perform some operation here
       const newLocation = this.props.location;
       this.setState({location: newLocation});
-      console.log(this.state.location);
     }
   }
   updateCenter = () => {
