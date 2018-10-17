@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import MediaSlider from './MediaSlider';
-import Map from './Map';
+import MapContainer from './Map';
 import ListingSocialIcons from './ListingSocialIcons';
 import firebase from '../firebase.js';
 import Geocode from "react-geocode";
@@ -58,6 +58,9 @@ const styles = theme => ({
   contactButton: {
     fontSize: 'large',
   },
+  mapHeight: {
+    height: '100%',
+  },
 });
 
 class DetailView extends React.Component {
@@ -99,7 +102,7 @@ class DetailView extends React.Component {
     render() {
     const { classes, theme } = this.props;
     return (
-      <React.Fragment>
+
       <div className={classNames(classes.layout)}>
         <div className={classes.root}>
           <Grid container spacing={16}>
@@ -108,7 +111,7 @@ class DetailView extends React.Component {
                 <MediaSlider document_id={this.props.match.params.listingId} />
               </Paper>
               <Paper className={classNames(classes.paper, classes.map)} elevation={0}>
-                <Map location={this.state.data.location}/>
+                <MapContainer location={this.state.data.location} classes={classes.mapHeight}/>
               </Paper>
               <Paper className={classes.paper} elevation={0}>
                 <ListingSocialIcons />
@@ -155,7 +158,7 @@ class DetailView extends React.Component {
           </Grid>
         </div>
       </div>
-      </React.Fragment>
+
     );
   }
 }

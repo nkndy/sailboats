@@ -1,8 +1,9 @@
-@import "~slick-carousel/slick/slick.css";
-@import "~slick-carousel/slick/slick-theme.css";
-
 a {
   text-decoration: none;
+}
+
+.mapHeight {
+  height: 100%;
 }
 
 img {
