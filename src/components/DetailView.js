@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import MediaSlider from './MediaSlider';
+import Map from './Map';
 import ListingSocialIcons from './ListingSocialIcons';
 import firebase from '../firebase.js';
 import Geocode from "react-geocode";
@@ -50,6 +51,9 @@ const styles = theme => ({
   },
   paper: {
     marginBottom: theme.spacing.unit,
+  },
+  map: {
+    height: '300px',
   },
   contactButton: {
     fontSize: 'large',
@@ -100,8 +104,12 @@ class DetailView extends React.Component {
         <div className={classes.root}>
           <Grid container spacing={16}>
             <Grid item xs={12} md={8}>
-              <Paper className={classes.paper}><MediaSlider document_id={this.props.match.params.listingId} /></Paper>
-              <Paper className={classes.paper}>Map</Paper>
+              <Paper className={classes.paper}>
+                <MediaSlider document_id={this.props.match.params.listingId} />
+              </Paper>
+              <Paper className={classNames(classes.paper, classes.map)} elevation={0}>
+                <Map location={this.state.data.location}/>
+              </Paper>
               <Paper className={classes.paper} elevation={0}>
                 <ListingSocialIcons />
               </Paper>
@@ -112,7 +120,7 @@ class DetailView extends React.Component {
                   {this.state.data.manufacturer + " " + this.state.data.length + "'"}
                 </Typography>
                 <Typography variant="subheading" component="h3" gutterBottom>
-                  { this.state.boat_name != null ? (this.state.location) : (this.state.data.boat_name + ", " + this.state.location)}
+                  {this.state.boat_name != null ? (this.state.location) : (this.state.data.boat_name + ", " + this.state.location)}
                 </Typography>
                 <Typography variant="headline" component="h4">
                   {"$" + this.state.data.asking_price}
