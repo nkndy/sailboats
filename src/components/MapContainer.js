@@ -21,7 +21,23 @@ const CustomLoadingContainer = (props) => (
 export class MapContainer extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props)
+    this.state = {
+      location: {},
+    };
+  }
+  static getDerivedStateFromProps(nextProps, prevState){
+     if(nextProps.location!==prevState.location){
+       return { location: nextProps.location};
+    }
+    else return null;
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if(prevProps.location!==this.props.location){
+      //Perform some operation here
+      const newLocation = this.props.location;
+      this.setState({location: newLocation});
+      console.log(this.state)
+    }
   }
   render() {
     const mapStyle = {
