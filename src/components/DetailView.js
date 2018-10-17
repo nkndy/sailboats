@@ -113,9 +113,6 @@ class DetailView extends React.Component {
               <Paper className={classNames(classes.paper, classes.map)} elevation={0}>
                 <MapContainer location={this.state.data.location} classes={classes.mapHeight}/>
               </Paper>
-              <Paper className={classes.paper} elevation={0}>
-                <ListingSocialIcons />
-              </Paper>
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
               <Paper className={classes.paper} elevation={0}>
@@ -141,12 +138,15 @@ class DetailView extends React.Component {
                 </IconButton>
               </Paper>
               <Paper className={classes.paper} elevation={0}>
-                <Typography variant="caption" component="p">
+                <Typography variant="caption" component="p" gutterBottom>
                   {"Declared by owner to be in " + this.state.data.condition + " condition overall."}
                 </Typography>
                 <Typography variant="body1" component="p">
                   {this.state.data.description}
                 </Typography>
+              </Paper>
+              <Paper className={classes.paper} elevation={0}>
+                <ListingSocialIcons />
               </Paper>
             </Grid>
             <Grid item xs={12} sm={6}>

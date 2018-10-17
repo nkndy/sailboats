@@ -66,6 +66,11 @@ export class MapContainer extends React.Component {
             lng: -123.3656,
           }}
           center={this.updateCenter()}
+          mapTypeControl={false}
+          scaleControl={false}
+          streetViewControl={false}
+          rotateControl={false}
+          fullscreenControl={false}
         >
         </Map>
       </div>
