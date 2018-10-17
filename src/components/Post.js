@@ -10,11 +10,6 @@ class Post extends React.Component {
             active: props.data.featured_post,
         };
     }
-    togglePost(e) {
-      this.setState({
-        active: !e
-      })
-    }
     render() {
         return(
             this.state.active ? (

@@ -36,7 +36,17 @@ export class MapContainer extends React.Component {
       //Perform some operation here
       const newLocation = this.props.location;
       this.setState({location: newLocation});
-      console.log(this.state)
+      console.log(this.state.location);
+    }
+  }
+  updateCenter = () => {
+    if (this.state.location != undefined) {
+      let lat = this.state.location.latitude;
+      let lng = this.state.location.longitude;
+      return {
+        lat: lat,
+        lng: lng,
+      }
     }
   }
   render() {
@@ -52,7 +62,13 @@ export class MapContainer extends React.Component {
       <div style={mapStyle}>
         <Map
           google={this.props.google}
-        />
+          initialCenter={{
+            lat: 48.4284,
+            lng: -123.3656,
+          }}
+          center={this.updateCenter()}
+        >
+        </Map>
       </div>
     );
   }
