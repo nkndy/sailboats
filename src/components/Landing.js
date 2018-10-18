@@ -90,7 +90,7 @@ function Landing(props) {
           </NavLink>
         </div>
       </div>
-      <div className={classNames(classes.layout)}>
+      <div>
         <FeaturedRow />
       </div>
       <div className={classNames(classes.layout)}>
