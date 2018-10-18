@@ -7,6 +7,8 @@ import NearMe from '@material-ui/icons/NearMe';
 import { withStyles } from '@material-ui/core/styles';
 import { NavLink } from "react-router-dom";
 import bgImage from '../assets/img/headerbg.png';
+import PricingTable from './PricingTable'
+import FeaturedRow from './FeaturedRow'
 
 const styles = theme => ({
   '@global': {
@@ -72,9 +74,10 @@ function Landing(props) {
       <div className={classNames(classes.layout)}>
         <div className={classNames(classes.landingSection)}>
           <Typography variant="subheading" gutterBottom>
-            This is some lorem ipsum about how we are a global sailboat marketplace.
-            We have thousands of views per day and are the best place to facilitate the sale of an old friend or
-            to find the next adventuremobile
+            Tradewind is the best global online sailboat marketplace.
+            Post a free Listing. Create a premium listing. Save searches.
+            Chat to sellers. Communicate directly to buyers.
+            List as a verified Broker.
           </Typography>
           <Typography variant="headline" component="h2" gutterBottom>
             Browse Thousands Of SailBoats Worldwide
@@ -86,12 +89,12 @@ function Landing(props) {
             </Button>
           </NavLink>
         </div>
-        <div className={classNames(classes.landingSection)}>
-          Featured Boats
-        </div>
-        <div className={classNames(classes.landingSection)}>
-          Ad Prices Table
-        </div>
+      </div>
+      <div className={classNames(classes.layout)}>
+        <FeaturedRow />
+      </div>
+      <div className={classNames(classes.layout)}>
+          <PricingTable />
       </div>
       </React.Fragment>
     );

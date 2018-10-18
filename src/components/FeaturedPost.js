@@ -4,7 +4,6 @@ import classNames from 'classnames';
 import moment from 'moment';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import PostTitle from './PostTitle.js';
 import MediaSlider from './MediaSlider.js';
 import Condition from './Condition.js';

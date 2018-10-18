@@ -1,9 +1,6 @@
 import React from 'react';
 import Geocode from "react-geocode";
-import GoogleMapReact from 'google-map-react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
+import { Map, GoogleApiWrapper } from 'google-maps-react';
 
 // // set Google Maps Geocoding API for purposes of quota management. Its optional but recommended.
 Geocode.setApiKey("AIzaSyA56WfgzuCmL-Qtji_kytS50CCk9QJpmIE");
@@ -39,7 +36,7 @@ export class MapContainer extends React.Component {
     }
   }
   updateCenter = () => {
-    if (this.state.location != undefined) {
+    if (this.state.location !== undefined) {
       let lat = this.state.location.latitude;
       let lng = this.state.location.longitude;
       return {

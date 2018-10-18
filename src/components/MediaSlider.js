@@ -2,21 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import MobileStepper from '@material-ui/core/MobileStepper';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
-import { autoPlay } from 'react-swipeable-views-utils';
 import ReactPlayer from 'react-player'
 import firebase from '../firebase.js';
 
 const db = firebase.firestore();
 const settings = {timestampsInSnapshots: true};
 db.settings(settings);
-
-let tutorialSteps = [];
 
 const styles = theme => ({
   root: {
@@ -89,7 +84,7 @@ class MediaSlider extends React.Component {
         >
           {this.state.data.map((step, index) => (
             <div key={this.props.document_id + index}>
-              {step.item.media_type == 1 ? (
+              {step.item.media_type === 1 ? (
                 <img className={classes.img} src={step.item.media_url} alt={step.label} />
               ) : (
                 <ReactPlayer url={step.item.media_url} controls={true} width="100%" height="auto"/>

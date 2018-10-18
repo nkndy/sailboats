@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { loadCSS } from 'fg-loadcss/src/loadCSS';
 import { withStyles } from '@material-ui/core/styles';
-import red from '@material-ui/core/colors/red';
 import Icon from '@material-ui/core/Icon';
 
 const styles = theme => ({
