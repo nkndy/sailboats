@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
 });
 
-class Description extends React.Component {
+class ComponentTemplate extends React.Component {
     constructor(props){
       super(props);
     };
@@ -16,16 +15,13 @@ class Description extends React.Component {
         const { classes } = this.props;
         return(
           <React.Fragment>
-          <Typography>
-          {this.props.data.description}
-          </Typography>
           </React.Fragment>
         );
     }
 }
 
-Description.propTypes = {
+ComponentTemplate.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Description);
+export default withStyles(styles)(ComponentTemplate);

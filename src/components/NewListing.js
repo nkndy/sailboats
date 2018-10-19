@@ -38,6 +38,11 @@ function NewListing(props) {
       <React.Fragment>
       <div className={classNames(classes.layout)}>
         <h4 className={classNames(classes.tagline)}>New Listing</h4>
+        manadtory fields:
+        location
+        manufacturer
+        length
+        year
         <CreateListingStepper />
       </div>
       </React.Fragment>

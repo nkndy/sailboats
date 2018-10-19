@@ -5,15 +5,19 @@ import Geocode from "react-geocode";
 
 class PostTitle extends React.Component {
     constructor(props) {
-        super(props);
-        this.state = {
-            location: "",
-        };
+      super(props);
+      this.state = {
+          location: "",
+      };
     }
     componentDidMount() {
-        const lat = this.props.lat.toString()
-        const long = this.props.long.toString()
-        Geocode.fromLatLng(lat, long).then(
+      if (this.props.data.location == null) {
+        console.log('missing location')
+      } else {
+        Geocode.fromLatLng(
+               this.props.data.location._lat,
+               this.props.data.location._long
+               ).then(
             response => {
                 const address = response.results[2].formatted_address;
                 this.setState({
@@ -25,16 +29,17 @@ class PostTitle extends React.Component {
                 console.error(error);
             }
           );
+      }
     }
     render () {
         return(
-        <div>
+
             <Grid container>
                 <Grid item xs>
                     <Grid container>
                         <Grid item xs={12}>
                             <Typography variant="title">
-                                {this.props.length + "' " + this.props.manufacturer + " " + this.props.model_name}
+                                {this.props.data.year + " " + this.props.data.length + "' " + this.props.data.manufacturer + " " + this.props.data.model_name}
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
@@ -46,11 +51,11 @@ class PostTitle extends React.Component {
                 </Grid>
                 <Grid item xs={3}>
                     <Typography variant="title" align="right">
-                        {'$' + this.props.asking_price}
+                        {'$' + this.props.data.asking_price}
                     </Typography>
                 </Grid>
             </Grid>
-        </div>
+
         );
     }
 }

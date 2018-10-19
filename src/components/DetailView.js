@@ -6,14 +6,11 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import MediaSlider from './MediaSlider';
+import ContactMethods from './ContactMethods';
 import MapContainer from './MapContainer';
 import ListingSocialIcons from './ListingSocialIcons';
 import firebase from '../firebase.js';
 import Geocode from "react-geocode";
-import IconButton from '@material-ui/core/IconButton';
-import EmailIcon from '@material-ui/icons/Email';
-import PhoneIcon from '@material-ui/icons/Phone';
-import TextIcon from '@material-ui/icons/Textsms';
 
 const db = firebase.firestore();
 const settings = {timestampsInSnapshots: true};
@@ -127,15 +124,7 @@ class DetailView extends React.Component {
                 </Typography>
               </Paper>
               <Paper className={classes.paper} elevation={0}>
-                <IconButton className={classes.contactButton} aria-label="Email">
-                  <EmailIcon fontSize="inherit"/>
-                </IconButton>
-                <IconButton className={classes.contactButton} aria-label="Phone">
-                  <PhoneIcon fontSize="inherit"/>
-                </IconButton>
-                <IconButton className={classes.contactButton} aria-label="Text">
-                  <TextIcon fontSize="inherit"/>
-                </IconButton>
+                <ContactMethods />
               </Paper>
               <Paper className={classes.paper} elevation={0}>
                 <Typography variant="caption" component="p" gutterBottom>

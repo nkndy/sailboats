@@ -7,8 +7,8 @@ import NearMe from '@material-ui/icons/NearMe';
 import { withStyles } from '@material-ui/core/styles';
 import { NavLink } from "react-router-dom";
 import bgImage from '../assets/img/headerbg.png';
-import PricingTable from './PricingTable'
-import FeaturedRow from './FeaturedRow'
+import PricingTable from './PricingTable';
+import FeaturedRow from './FeaturedRow';
 
 const styles = theme => ({
   '@global': {
