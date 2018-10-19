@@ -15,6 +15,7 @@ db.settings(settings);
 const styles = theme => ({
   tagline: {
     textAlign: 'center',
+    paddingTop: theme.spacing.unit * 4,
     paddingBottom: theme.spacing.unit * 4,
     fontWeight: 'initial',
   },

@@ -83,7 +83,7 @@ function Landing(props) {
             Browse Thousands Of SailBoats Worldwide
           </Typography>
           <NavLink to="/listings">
-            <Button variant="extendedFab" aria-label="Delete" className={classes.button}>
+            <Button color="secondary" variant="extendedFab" aria-label="Delete" className={classes.button}>
               <NearMe className={classes.extendedIcon} />
               Find your next adventure
             </Button>

@@ -62,7 +62,7 @@ function PricingTable(props) {
         </Typography>
         <Grid container spacing={40} alignItems="flex-end">
           {tiers.map(tier => (
-            // Enterprise card is full width at sm breakpoint
+            // Premium card is full width at sm breakpoint
             <Grid item key={tier.title} xs={12} sm={tier.title === 'Enterprise' ? 12 : 6} md={4}>
               <Card>
                 <CardHeader
@@ -89,7 +89,7 @@ function PricingTable(props) {
                   ))}
                 </CardContent>
                 <CardActions className={classes.cardActions}>
-                  <Button fullWidth variant={tier.buttonVariant} color="primary">
+                  <Button fullWidth variant={tier.buttonVariant} color="secondary">
                     {tier.buttonText}
                   </Button>
                 </CardActions>
