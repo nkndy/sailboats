@@ -42,12 +42,15 @@ class FeaturedRow extends React.Component {
   render(){
     const { classes } = this.props;
     var settings = {
-  dots: true,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 1,
-  slidesToScroll: 1
-};
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 2,
+      slidesToScroll: 1,
+      centerMode: true,
+      centerPadding: '60px',
+      lazyLoad: 'ondemand',
+    };
     return (
       <React.Fragment>
         <Typography variant="headline" component="h3" className={classNames(classes.tagline)}>
@@ -56,7 +59,7 @@ class FeaturedRow extends React.Component {
         <Slider {...settings}>
         {this.state.data.map((data) => {
           return(
-              <FeaturedSlide key={data.id}/>
+              <FeaturedSlide key={data.id} data={data.data}/>
           )}
         )}
         </Slider>
