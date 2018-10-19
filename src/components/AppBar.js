@@ -17,6 +17,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import { NavLink } from "react-router-dom";
+import Avatar from '@material-ui/core/Avatar';
 
 import './AppBar.css'
 
@@ -26,6 +27,10 @@ const styles = theme => ({
   },
   grow: {
     flexGrow: 1,
+  },
+  avatar: {
+    width: '35px',
+    height: '35px',
   },
   menuButton: {
     marginLeft: -12,
@@ -198,9 +203,20 @@ class PrimarySearchAppBar extends React.Component {
                 </ NavLink>
               </IconButton>
               <IconButton color="inherit">
+              {
+                (this.props.user != null)
+                ?
+                <NavLink to="/my-account">
+                  <Avatar
+                    alt={this.props.user.displayName}
+                    src={this.props.user.photoURL}
+                    className={classes.avatar}
+                  />
+                </ NavLink>
+                :
                 <NavLink to="/my-account">
                   <AccountCircle />
-                </ NavLink>
+                </ NavLink> }
               </IconButton>
             </div>
             <div className={classes.sectionMobile}>

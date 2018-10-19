@@ -50,7 +50,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-          <AppBar status={this.state}/>
+          <AppBar status={this.state} user={this.state.user}/>
           <Switch>
             <Route path="/" component={Landing} exact />
             <Route path="/listings" component={Listings} exact />
