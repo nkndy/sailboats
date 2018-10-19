@@ -6,7 +6,9 @@ import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import PostTitle from './PostTitle';
 import ContactMethods from './ContactMethods'
-import Description from './Description'
+import TruncatedDescription from './TruncatedDescription'
+import ListingSocialIcons from './ListingSocialIcons'
+import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
   tagline: {
@@ -31,8 +33,12 @@ const styles = theme => ({
     height: '300px',
     [theme.breakpoints.up(900 + theme.spacing.unit * 3 * 2)]: {
       height: '400px',
-
     },
+  },
+  button: {
+    marginTop: theme.spacing.unit * 1.75,
+    marginBottom: theme.spacing.unit * 1.25,
+    width: '100%',
   },
 });
 
@@ -58,7 +64,11 @@ class FeaturedSlide extends React.Component {
       <Paper className={classes.slide} elevation={0}>
         <PostTitle data={this.props.data}/>
         <ContactMethods  data={this.props.data}/>
-        <Description data={this.props.data}/>
+        <TruncatedDescription data={this.props.data}/>
+        <Button size="small" color="secondary" className={classes.button} variant="contained">
+          View More
+        </Button>
+        <ListingSocialIcons />
       </Paper>
       </React.Fragment>
     );

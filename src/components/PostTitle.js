@@ -33,29 +33,27 @@ class PostTitle extends React.Component {
     }
     render () {
         return(
-
             <Grid container>
-                <Grid item xs>
+                <Grid item xs={12}>
                     <Grid container>
                         <Grid item xs={12}>
-                            <Typography variant="title">
+                            <Typography variant="headline" gutterBottom>
                                 {this.props.data.year + " " + this.props.data.length + "' " + this.props.data.manufacturer + " " + this.props.data.model_name}
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
-                            <Typography variant="caption">
+                            <Typography variant="caption" gutterBottom>
                                 {this.state.location}
                             </Typography>
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid item xs={3}>
-                    <Typography variant="title" align="right">
+                <Grid item xs={12}>
+                    <Typography variant="title">
                         {'$' + this.props.data.asking_price}
                     </Typography>
                 </Grid>
             </Grid>
-
         );
     }
 }

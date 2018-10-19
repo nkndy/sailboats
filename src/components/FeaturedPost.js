@@ -7,7 +7,6 @@ import Paper from '@material-ui/core/Paper';
 import PostTitle from './PostTitle.js';
 import MediaSlider from './MediaSlider.js';
 import Condition from './Condition.js';
-import Description from './Description.js';
 import PostDetails from './PostDetails.js';
 
 const styles = theme => ({
