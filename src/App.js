@@ -20,11 +20,13 @@ class App extends Component {
     };
     this.onUserUpdate = this.onUserUpdate.bind(this);
     this.onUserLogout = this.onUserLogout.bind(this);
-    firebase.auth().onAuthStateChanged(function(user) {
+    firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        this.setState({ user });
+        this.setState({ user: user });
       }
-    });
+    })
+  }
+  componentDidMount() {
   }
   onUserUpdate(user) {
     this.setState({

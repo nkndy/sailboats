@@ -9,12 +9,16 @@ import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import { NavLink } from "react-router-dom";
 
 const styles = theme => ({
   tagline: {
     textAlign: 'center',
     paddingBottom: theme.spacing.unit * 4,
     fontWeight: 'initial',
+  },
+  fullWidth : {
+    width: '100%',
   },
 });
 
@@ -25,6 +29,7 @@ const tiers = [
     description: ["Easily Add photo's", 'Email Phone & SMS Contact', 'SomeOther Feature'],
     buttonText: 'Post Now for free',
     buttonVariant: 'outlined',
+    buttonLink: '/new-sailboat-listing',
   },
   {
     title: 'Premium Listing',
@@ -38,6 +43,7 @@ const tiers = [
     ],
     buttonText: 'Get started',
     buttonVariant: 'contained',
+    buttonLink: '/new-sailboat-listing',
   },
   {
     title: 'List as a Broker',
@@ -50,6 +56,7 @@ const tiers = [
     ],
     buttonText: 'Contact us',
     buttonVariant: 'outlined',
+    buttonLink: '/new-sailboat-listing',
   },
 ];
 
@@ -89,9 +96,11 @@ function PricingTable(props) {
                   ))}
                 </CardContent>
                 <CardActions className={classes.cardActions}>
-                  <Button fullWidth variant={tier.buttonVariant} color="secondary">
-                    {tier.buttonText}
-                  </Button>
+                  <NavLink to={tier.buttonLink} style={{ width: '100%' }}>
+                    <Button variant={tier.buttonVariant} color="secondary" className={classes.fullWidth}>
+                      {tier.buttonText}
+                    </Button>
+                  </NavLink>
                 </CardActions>
               </Card>
             </Grid>
