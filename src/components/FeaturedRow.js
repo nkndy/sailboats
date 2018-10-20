@@ -7,7 +7,6 @@ import Typography from '@material-ui/core/Typography';
 import FeaturedSlide from './FeaturedSlide';
 import Slider from "react-slick";
 
-
 const db = firebase.firestore();
 const settings = {timestampsInSnapshots: true};
 db.settings(settings);
@@ -44,11 +43,11 @@ class FeaturedRow extends React.Component {
     const { classes } = this.props;
     var settings = {
       dots: false,
-      infinite: true,
       speed: 500,
       slidesToShow: 6,
       slidesToScroll: 2,
       centerMode: true,
+      arrows: false,
       responsive: [
         {
           breakpoint: 1920,

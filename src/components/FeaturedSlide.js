@@ -62,7 +62,7 @@ class FeaturedSlide extends React.Component {
         <ContactMethods  data={this.props.data}/>
         <TruncatedDescription data={this.props.data}/>
         <Button size="small" color="secondary" className={classes.button} variant="contained">
-          <Link to={`/listing/${this.props.document_id}`}>
+          <Link to={`/listing/:${this.props.document_id}`}>
             View More
           </Link>
         </Button>

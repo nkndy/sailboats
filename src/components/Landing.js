@@ -56,6 +56,7 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit * 15,
     backgroundImage: `url(${bgImage})`,
     backgroundPosition: 'right bottom',
+    backgroundSize: 'cover',
     [theme.breakpoints.up(900 + theme.spacing.unit * 3 * 2)]: {
 
     },
