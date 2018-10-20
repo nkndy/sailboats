@@ -19,7 +19,7 @@ class PostTitle extends React.Component {
                this.props.data.location._long
                ).then(
             response => {
-                const address = response.results[2].formatted_address;
+                const address = response.results[3].formatted_address;
                 this.setState({
                     location: address
                 });
@@ -36,16 +36,18 @@ class PostTitle extends React.Component {
             <Grid container>
                 <Grid item xs={12}>
                     <Grid container>
-                        <Grid item xs={12}>
-                            <Typography variant="headline" gutterBottom>
+                        <Grid item xs={12} >
+                            <Typography variant="headline">
                                 {this.props.data.year + " " + this.props.data.length + "' " + this.props.data.manufacturer + " " + this.props.data.model_name}
                             </Typography>
                         </Grid>
-                        <Grid item xs={12}>
+                        {this.state.location ?
+                          <Grid item xs={12}>
                             <Typography variant="caption" gutterBottom>
-                                {this.state.location}
+                              {this.state.location}
                             </Typography>
-                        </Grid>
+                          </Grid>
+                        : null}
                     </Grid>
                 </Grid>
                 <Grid item xs={12}>

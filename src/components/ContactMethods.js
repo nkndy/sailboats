@@ -7,8 +7,9 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
-  contactButton: {
-
+  contactButtonWrapper: {
+    marginTop: theme.spacing.unit * 1.25,
+    marginBottom: theme.spacing.unit * 1.5,
   },
 });
 
@@ -21,7 +22,7 @@ class ContactMethods extends React.Component {
     render() {
         const { classes } = this.props;
         return(
-          <React.Fragment>
+          <div className={classes.contactButtonWrapper}>
             <IconButton className={classes.contactButton} aria-label="Email">
               <EmailIcon fontSize="inherit"/>
             </IconButton>
@@ -31,7 +32,7 @@ class ContactMethods extends React.Component {
             <IconButton className={classes.contactButton} aria-label="Text">
               <TextIcon fontSize="inherit"/>
             </IconButton>
-          </React.Fragment>
+          </div>
         );
     }
 }

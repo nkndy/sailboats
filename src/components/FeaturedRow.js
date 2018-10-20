@@ -89,7 +89,7 @@ class FeaturedRow extends React.Component {
         <Slider {...settings}>
         {this.state.data.map((data) => {
           return(
-              <FeaturedSlide key={data.id} data={data.data}/>
+              <FeaturedSlide key={data.id} data={data.data} document_id={data.id}/>
           )}
         )}
         </Slider>

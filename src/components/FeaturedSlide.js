@@ -9,6 +9,7 @@ import ContactMethods from './ContactMethods'
 import TruncatedDescription from './TruncatedDescription'
 import ListingSocialIcons from './ListingSocialIcons'
 import Button from '@material-ui/core/Button';
+import { Link } from "react-router-dom";
 
 const styles = theme => ({
   tagline: {
@@ -36,8 +37,8 @@ const styles = theme => ({
     },
   },
   button: {
-    marginTop: theme.spacing.unit * 1.75,
-    marginBottom: theme.spacing.unit * 1.25,
+    marginTop: theme.spacing.unit * 2.5,
+    marginBottom: theme.spacing.unit * 1.75,
     width: '100%',
   },
 });
@@ -46,6 +47,7 @@ class FeaturedSlide extends React.Component {
   constructor(props){
     super(props);
   }
+  getFeatured = (media) => media.find((media) => (media.featured_media == true));
   render() {
     const { classes } = this.props;
     return (
@@ -53,22 +55,18 @@ class FeaturedSlide extends React.Component {
       // already exists in slick slider library see lazy load settings
       <React.Fragment>
       <Paper elevation={0} className={classNames(classes.slide, classes.imageRoot)}>
-        <img src={
-          this.props.data.media.map((media) => {
-            if (media.featured_media === true) {
-              return media.media_url
-            }
-          })
-        } className={classes.featuredImg}/>
+        <img src={(this.getFeatured(this.props.data.media)).media_url} className={classes.featuredImg}/>
       </Paper>
       <Paper className={classes.slide} elevation={0}>
         <PostTitle data={this.props.data}/>
         <ContactMethods  data={this.props.data}/>
         <TruncatedDescription data={this.props.data}/>
         <Button size="small" color="secondary" className={classes.button} variant="contained">
-          View More
+          <Link to={`/listing/${this.props.document_id}`}>
+            View More
+          </Link>
         </Button>
-        <ListingSocialIcons />
+        <ListingSocialIcons data={this.props.data}/>
       </Paper>
       </React.Fragment>
     );
