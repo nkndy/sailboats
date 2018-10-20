@@ -43,7 +43,7 @@ class FeaturedRow extends React.Component {
   render(){
     const { classes } = this.props;
     var settings = {
-      arrows: false,
+      dots: false,
       infinite: true,
       speed: 500,
       slidesToShow: 6,
@@ -55,6 +55,7 @@ class FeaturedRow extends React.Component {
           settings: {
             slidesToShow: 4,
             slidesToScroll: 1,
+            arrows: false,
           },
         },
         {
@@ -62,6 +63,7 @@ class FeaturedRow extends React.Component {
           settings: {
             slidesToShow: 3,
             slidesToScroll: 1,
+            arrows: false,
           },
         },
         {
@@ -69,6 +71,7 @@ class FeaturedRow extends React.Component {
           settings: {
             slidesToShow: 2,
             slidesToScroll: 1,
+            arrows: false,
           },
         },
         {
@@ -76,6 +79,7 @@ class FeaturedRow extends React.Component {
           settings: {
             slidesToShow: 1,
             slidesToScroll: 1,
+            arrows: false,
           },
         },
       ],
