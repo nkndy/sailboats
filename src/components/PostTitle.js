@@ -2,6 +2,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Geocode from "react-geocode";
+import NumberFormat from 'react-number-format';
 
 class PostTitle extends React.Component {
     constructor(props) {
@@ -52,7 +53,7 @@ class PostTitle extends React.Component {
                 </Grid>
                 <Grid item xs={12}>
                     <Typography variant="title">
-                        {'$' + this.props.data.asking_price}
+                        <NumberFormat value={this.props.data.asking_price} displayType={'text'} thousandSeparator={true} prefix={'$'} />
                     </Typography>
                 </Grid>
             </Grid>

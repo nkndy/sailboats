@@ -38,6 +38,7 @@ class AccountDialogue extends React.Component {
   }
 
   render() {
+    const { from } = this.props.location.state || { from: { pathname: '/' } };
     if (!this.props.user) {
       return (
         <div>

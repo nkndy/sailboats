@@ -24,7 +24,7 @@ class App extends Component {
       if (user) {
         this.setState({ user: user });
       }
-    })
+    });
   }
   componentDidMount() {
   }
@@ -54,7 +54,23 @@ class App extends Component {
             }}
           />
       )} />
-    )
+    );
+    const CreatePostRoute = ({component: Component, ...rest}) => (
+      <Route {...rest} render={(props) => (
+        (this.state.user != null)
+          ?
+          <Component {...props}
+            onUserLogout={this.onUserLogout}
+            user_id={this.state.user.uid}
+          />
+          :
+          <Redirect
+            to={{
+              pathname: "/login",
+            }}
+          />
+      )} />
+    );
     return (
       <BrowserRouter>
         <div>
@@ -62,12 +78,12 @@ class App extends Component {
           <Switch>
             <Route path="/" component={Landing} exact />
             <Route path="/listings" component={Listings} exact />
-            <Route path="/new-sailboat-listing" component={NewListing} />
-            <Route path={`/listing/:listingId`} component={DetailView}/>
+            <Route path={`/listing/:listingId`} component={DetailView} />
             <Route
               path="/login"
               render={(props) => <AccountDialogue {...props} onUserUpdate={this.onUserUpdate} user={this.state.user} />}
             />
+            <CreatePostRoute path="/new-sailboat-listing" component={NewListing} />
             <AccountRoute path="/my-account" component={Account} />
             <Route component={Error}/>
           </Switch>
