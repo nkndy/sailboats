@@ -8,6 +8,7 @@ import StepContent from '@material-ui/core/StepContent';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import SelectAdType from './SelectAdType';
 
 const styles = theme => ({
   root: {
@@ -26,15 +27,18 @@ const styles = theme => ({
 });
 
 function getSteps() {
-  return ['Select campaign settings', 'Create an ad group', 'Create an ad'];
+  return [
+    'Lets Start With Some Basic Information bout the Vessel',
+    'Create an ad group',
+    'Create an ad',
+    'test'
+  ];
 }
 
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return `For each ad campaign that you create, you can control how much
-              you're willing to spend on clicks and conversions, which networks
-              and geographical locations you want your ads to show on, and more.`;
+      return  'Empty'
     case 1:
       return 'An ad group contains one or more ads which target a shared set of keywords.';
     case 2:
@@ -42,12 +46,14 @@ function getStepContent(step) {
               and learn how to enhance your ads using features like ad extensions.
               If you run into any problems with your ads, find out how to tell if
               they're running and how to resolve approval issues.`;
+    case 3:
+      return ;
     default:
       return 'Unknown step';
   }
 }
 
-class VerticalLinearStepper extends React.Component {
+class CreateListingStepper extends React.Component {
   state = {
     activeStep: 0,
   };
@@ -78,35 +84,106 @@ class VerticalLinearStepper extends React.Component {
     return (
       <div className={classes.root}>
         <Stepper activeStep={activeStep} orientation="vertical">
-          {steps.map((label, index) => {
-            return (
-              <Step key={label}>
-                <StepLabel>{label}</StepLabel>
-                <StepContent>
-                  <Typography>{getStepContent(index)}</Typography>
-                  <div className={classes.actionsContainer}>
-                    <div>
-                      <Button
-                        disabled={activeStep === 0}
-                        onClick={this.handleBack}
-                        className={classes.button}
-                      >
-                        Back
-                      </Button>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={this.handleNext}
-                        className={classes.button}
-                      >
-                        {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                      </Button>
-                    </div>
-                  </div>
-                </StepContent>
-              </Step>
-            );
-          })}
+          <Step key={0}>
+            <StepLabel>{getStepContent(0)}</StepLabel>
+            <StepContent>
+              <SelectAdType handleSubscriptionSelect={this.props.handleSubscriptionSelect} document_id={this.props.document_id} />
+              <div className={classes.actionsContainer}>
+                <div>
+                  <Button
+                    disabled={activeStep === 0}
+                    onClick={this.handleBack}
+                    className={classes.button}
+                  >
+                    Back
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={this.handleNext}
+                    className={classes.button}
+                  >
+                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                  </Button>
+                </div>
+              </div>
+            </StepContent>
+          </Step>
+          <Step key={1}>
+            <StepLabel>{getStepContent(1)}</StepLabel>
+            <StepContent>
+              <p>test</p>
+              <div className={classes.actionsContainer}>
+                <div>
+                  <Button
+                    disabled={activeStep === 0}
+                    onClick={this.handleBack}
+                    className={classes.button}
+                  >
+                    Back
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={this.handleNext}
+                    className={classes.button}
+                  >
+                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                  </Button>
+                </div>
+              </div>
+            </StepContent>
+          </Step>
+          <Step key={2}>
+            <StepLabel>{getStepContent(2)}</StepLabel>
+            <StepContent>
+              <p>test</p>
+              <div className={classes.actionsContainer}>
+                <div>
+                  <Button
+                    disabled={activeStep === 0}
+                    onClick={this.handleBack}
+                    className={classes.button}
+                  >
+                    Back
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={this.handleNext}
+                    className={classes.button}
+                  >
+                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                  </Button>
+                </div>
+              </div>
+            </StepContent>
+          </Step>
+          <Step key={3}>
+            <StepLabel>{getStepContent(3)}</StepLabel>
+            <StepContent>
+              <p>test</p>
+              <div className={classes.actionsContainer}>
+                <div>
+                  <Button
+                    disabled={activeStep === 0}
+                    onClick={this.handleBack}
+                    className={classes.button}
+                  >
+                    Back
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={this.handleNext}
+                    className={classes.button}
+                  >
+                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                  </Button>
+                </div>
+              </div>
+            </StepContent>
+          </Step>
         </Stepper>
         {activeStep === steps.length && (
           <Paper square elevation={0} className={classes.resetContainer}>
@@ -121,8 +198,8 @@ class VerticalLinearStepper extends React.Component {
   }
 }
 
-VerticalLinearStepper.propTypes = {
+CreateListingStepper.propTypes = {
   classes: PropTypes.object,
 };
 
-export default withStyles(styles)(VerticalLinearStepper);
+export default withStyles(styles)(CreateListingStepper);

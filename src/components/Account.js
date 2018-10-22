@@ -39,6 +39,7 @@ const styles = theme => ({
 });
 
 class Account extends React.Component {
+  _isMounted = false;
   constructor(props) {
     super(props);
     this.state = {
@@ -47,14 +48,20 @@ class Account extends React.Component {
     this.logout = this.logout.bind(this);
   }
   componentDidMount() {
+    this._isMounted = true;
     db.collection("Posts").where("user", "==", this.props.user_id)
       .get()
       .then((querySnapshot) => {
-        let data = querySnapshot.docs.map(doc => ({ data: doc.data(), id: doc.id }))
-        this.setState({
-            data: data,
-        });
+        if (this._isMounted) {
+          let data = querySnapshot.docs.map(doc => ({ data: doc.data(), id: doc.id }))
+          this.setState({
+              data: data,
+          });
+        }
       });
+  }
+  componentWillUnmount() {
+    this._isMounted = false;
   }
   logout() {
     auth.signOut()

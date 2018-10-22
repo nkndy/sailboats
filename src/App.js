@@ -10,7 +10,7 @@ import AccountDialogue from "./components/AccountDialogue";
 import DetailView from "./components/DetailView";
 import Error from "./components/Error";
 import Footer from "./components/Footer";
-import firebase from './firebase.js';
+import firebase, { auth } from './firebase.js';
 
 class App extends Component {
   constructor(props) {
@@ -20,13 +20,11 @@ class App extends Component {
     };
     this.onUserUpdate = this.onUserUpdate.bind(this);
     this.onUserLogout = this.onUserLogout.bind(this);
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        this.setState({ user: user });
-      }
-    });
   }
   componentDidMount() {
+    this.unregisterAuthObserver = auth.onAuthStateChanged(
+        (user) => this.setState({ user: user })
+    );
   }
   onUserUpdate(user) {
     this.setState({
