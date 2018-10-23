@@ -51,7 +51,6 @@ class CreateListing extends React.Component {
         listingId: null,
         isPremium: false,
         uid: null,
-        stripe: null,
       }
       this.handleSubscriptionSelect = this.handleSubscriptionSelect.bind(this);
       this.handleNext = this.handleNext.bind(this);
@@ -61,7 +60,8 @@ class CreateListing extends React.Component {
         isPremium: e.target.value,
       })
     }
-    handleNext(inputValues) {
+    handleNext(values) {
+      let valuesForUpdate = values.values;
       if (this.state.listingId === null) {
         posts.add({
             active_post: false,
@@ -80,7 +80,17 @@ class CreateListing extends React.Component {
             console.error("Error adding document: ", error);
         });
       } else {
+        Object.keys(valuesForUpdate).map((keyName, keyIndex) => {
+        // use keyName to get current key's name
+        // and a[keyName] to get its value
+          this.setState({
+            [keyName]: valuesForUpdate[keyName]
+          });
+        })
       }
+    }
+    componentDidUpdate() {
+      console.log(this.state);
     }
     render() {
     const { classes } = this.props;

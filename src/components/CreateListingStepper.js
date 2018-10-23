@@ -77,10 +77,6 @@ class CreateListingStepper extends React.Component {
     })
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log(this.state);
-  }
-
   render() {
     const { classes } = this.props;
     const { activeStep } = this.state;
