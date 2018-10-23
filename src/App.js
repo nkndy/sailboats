@@ -4,7 +4,7 @@ import './App.css';
 import AppBar from "./components/AppBar";
 import Landing from "./components/Landing";
 import Listings from "./components/Listings";
-import NewListing from "./components/NewListing";
+import CreateListing from "./components/CreateListing";
 import Account from "./components/Account";
 import AccountDialogue from "./components/AccountDialogue";
 import DetailView from "./components/DetailView";
@@ -81,8 +81,8 @@ class App extends Component {
               path="/login"
               render={(props) => <AccountDialogue {...props} onUserUpdate={this.onUserUpdate} user={this.state.user} />}
             />
-            <CreatePostRoute path="/new-sailboat-listing" component={NewListing} />
-            <AccountRoute path="/my-account" component={NewListing} />
+            <CreatePostRoute path="/new-sailboat-listing" component={CreateListing} />
+            <AccountRoute path="/my-account" component={CreateListing} />
             <Route component={Error}/>
           </Switch>
           <Footer />

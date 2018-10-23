@@ -7,6 +7,8 @@ import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import firebase from '../firebase';
+import {Helmet} from "react-helmet";
+import {StripeProvider} from 'react-stripe-elements';
 
 const db = firebase.firestore();
 const settings = {timestampsInSnapshots: true};
@@ -42,21 +44,26 @@ const styles = theme => ({
   },
 });
 
-class NewListing extends React.Component {
+class CreateListing extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
         subscriptionId: null,
         isPremium: false,
         uid: null,
+        stripe: null,
       }
       this.handleSubscriptionSelect = this.handleSubscriptionSelect.bind(this);
+      this.createStripeCustomer = this.createStripeCustomer.bind(this);
       this.handleNext = this.handleNext.bind(this);
     }
     handleSubscriptionSelect(e) {
       this.setState({
-        isPremium: e.target.value
+        isPremium: e.target.value,
       })
+    }
+    createStripeCustomer() {
+      console.log(window.Stripe('pk_test_D8R4GPbMBD7nAB4kO3QkiycS'));
     }
     handleNext(inputValues) {
       if (this.state.subscriptionId === null) {
@@ -70,7 +77,7 @@ class NewListing extends React.Component {
         .then((docRef) => {
             console.log("Document written with ID: ", docRef.id);
             this.setState({
-              subscriptionId: docRef.id,
+              listingId: docRef.id,
             });
         })
         .catch((error) => {
@@ -83,17 +90,21 @@ class NewListing extends React.Component {
     render() {
     const { classes } = this.props;
     return (
-      <Grid container className={classes.layout} spacing={16}>
-        <Grid item xs={12}>
-          <CreateListingStepper handleSubscriptionSelect={this.handleSubscriptionSelect} handleNext={this.handleNext} />
+      <React.Fragment>
+      <StripeProvider stripe={this.state.stripe}>
+        <Grid container className={classes.layout} spacing={16}>
+          <Grid item xs={12}>
+            <CreateListingStepper handleSubscriptionSelect={this.handleSubscriptionSelect} handleNext={this.handleNext} createStripeCustomer={this.createStripeCustomer} />
+          </Grid>
         </Grid>
-      </Grid>
+      </StripeProvider>
+      </React.Fragment>
     );
   }
 }
 
-NewListing.propTypes = {
+CreateListing.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(NewListing);
+export default withStyles(styles)(CreateListing);

@@ -27,15 +27,6 @@ const styles = theme => ({
   },
 });
 
-function getSteps() {
-  return [
-    'Lets Start With Some Basic Information bout the Vessel',
-    'Create an ad group',
-    'Create an ad',
-    'test'
-  ];
-}
-
 function getStepContent(step) {
   switch (step) {
     case 0:
@@ -82,7 +73,6 @@ class CreateListingStepper extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const steps = getSteps();
     const { activeStep } = this.state;
 
     return (
@@ -104,10 +94,10 @@ class CreateListingStepper extends React.Component {
                   <Button
                     variant="contained"
                     color="primary"
-                    onClick={this.handleNext}
+                    onClick={()=>{ this.handleNext(); this.props.createStripeCustomer() }}
                     className={classes.button}
                   >
-                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                    Next
                   </Button>
                 </div>
               </div>
@@ -132,7 +122,7 @@ class CreateListingStepper extends React.Component {
                     onClick={this.handleNext}
                     className={classes.button}
                   >
-                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                    Next
                   </Button>
                 </div>
               </div>
@@ -157,7 +147,7 @@ class CreateListingStepper extends React.Component {
                     onClick={this.handleNext}
                     className={classes.button}
                   >
-                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                    Next
                   </Button>
                 </div>
               </div>
@@ -182,14 +172,14 @@ class CreateListingStepper extends React.Component {
                     onClick={this.handleNext}
                     className={classes.button}
                   >
-                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                  Next
                   </Button>
                 </div>
               </div>
             </StepContent>
           </Step>
         </Stepper>
-        {activeStep === steps.length && (
+        {activeStep === 4 && (
           <Paper square elevation={0} className={classes.resetContainer}>
             <Typography>All steps completed - you&quot;re finished</Typography>
             <Button onClick={this.handleReset} className={classes.button}>
