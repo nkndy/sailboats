@@ -75,11 +75,13 @@ class Account extends React.Component {
       <React.Fragment>
         <div className={classNames(classes.layout)}>
           <h4 className={classNames(classes.tagline)}>Account</h4>
+          {/*
             {this.state.data.map((post) => {
               return (
                 <ThumbnailPost key={post.id} data={post.data}/>
               );
             })}
+            */}
           <button onClick={this.logout}>Logout</button>
         </div>
       </React.Fragment>

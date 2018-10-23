@@ -1,3 +1,22 @@
 {
-  "indexes": []
+  "indexes": [
+    {
+      "collectionId": "Posts",
+      "state": "READY",
+      "fields": [
+        {
+          "fieldPath": "active_post",
+          "mode": "ASCENDING"
+        },
+        {
+          "fieldPath": "featured_post",
+          "mode": "ASCENDING"
+        },
+        {
+          "fieldPath": "posted_date",
+          "mode": "DESCENDING"
+        }
+      ]
+    }
+  ]
 }
