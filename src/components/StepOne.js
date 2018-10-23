@@ -26,6 +26,9 @@ const styles = theme => ({
 class StepOne extends React.Component {
   constructor(props) {
     super(props);
+      this.state = {
+        length: '',
+      }
   }
 
   handleChange = name => event => {
@@ -51,6 +54,7 @@ class StepOne extends React.Component {
           type="number"
           id="length"
           label="Length"
+          value={this.state.length}
           className={classes.textField}
           onChange={this.handleChange('length')}
           margin="normal"

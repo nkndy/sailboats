@@ -51,6 +51,7 @@ class CreateListing extends React.Component {
         listingId: null,
         isPremium: false,
         uid: null,
+        stripe: null,
       }
       this.handleSubscriptionSelect = this.handleSubscriptionSelect.bind(this);
       this.handleNext = this.handleNext.bind(this);
@@ -80,13 +81,15 @@ class CreateListing extends React.Component {
             console.error("Error adding document: ", error);
         });
       } else {
-        Object.keys(valuesForUpdate).map((keyName, keyIndex) => {
-        // use keyName to get current key's name
-        // and a[keyName] to get its value
-          this.setState({
-            [keyName]: valuesForUpdate[keyName]
-          });
-        })
+        if (valuesForUpdate != null) {
+          Object.keys(valuesForUpdate).map((keyName, keyIndex) => {
+          // use keyName to get current key's name
+          // and a[keyName] to get its value
+            this.setState({
+              [keyName]: valuesForUpdate[keyName]
+            });
+          })
+        };
       }
     }
     componentDidUpdate() {
