@@ -48,8 +48,10 @@ class NewListing extends React.Component {
       this.state = {
         subscriptionId: null,
         isPremium: false,
+        uid: null,
       }
       this.handleSubscriptionSelect = this.handleSubscriptionSelect.bind(this);
+      this.handleNext = this.handleNext.bind(this);
     }
     handleSubscriptionSelect(e) {
       this.setState({
@@ -63,25 +65,27 @@ class NewListing extends React.Component {
             created_date: firebase.firestore.FieldValue.serverTimestamp(),
             posted_date: null,
             featured_post: this.state.isPremium,
+            user: this.props.user_id,
         })
-        .then(function(docRef) {
+        .then((docRef) => {
             console.log("Document written with ID: ", docRef.id);
             this.setState({
               subscriptionId: docRef.id,
-            })
+            });
         })
-        .catch(function(error) {
+        .catch((error) => {
             console.error("Error adding document: ", error);
         });
+      } else {
+        console.log('already exists')
       }
-      console.log("clicknext")
     }
     render() {
     const { classes } = this.props;
     return (
       <Grid container className={classes.layout} spacing={16}>
         <Grid item xs={12}>
-          <CreateListingStepper handleSubscriptionSelect={this.handleSubscriptionSelect} handleNext={this.props.handleNext}/>
+          <CreateListingStepper handleSubscriptionSelect={this.handleSubscriptionSelect} handleNext={this.handleNext} />
         </Grid>
       </Grid>
     );

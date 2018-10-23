@@ -82,7 +82,7 @@ class App extends Component {
               render={(props) => <AccountDialogue {...props} onUserUpdate={this.onUserUpdate} user={this.state.user} />}
             />
             <CreatePostRoute path="/new-sailboat-listing" component={NewListing} />
-            <AccountRoute path="/my-account" component={Account} />
+            <AccountRoute path="/my-account" component={NewListing} />
             <Route component={Error}/>
           </Switch>
           <Footer />
