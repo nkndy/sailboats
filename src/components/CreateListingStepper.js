@@ -56,7 +56,7 @@ class CreateListingStepper extends React.Component {
     this.setState(state => ({
       activeStep: state.activeStep + 1,
     }));
-    this.props.handleNext();
+    this.props.handleNext(this.state);
   };
 
   handleBack = () => {
@@ -71,6 +71,16 @@ class CreateListingStepper extends React.Component {
     });
   };
 
+  handleUpdate = (values) => {
+    this.setState({
+      values
+    })
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log(this.state);
+  }
+
   render() {
     const { classes } = this.props;
     const { activeStep } = this.state;
@@ -78,35 +88,11 @@ class CreateListingStepper extends React.Component {
     return (
       <div className={classes.root}>
         <Stepper activeStep={activeStep} orientation="vertical">
+
           <Step key={0}>
             <StepLabel>{getStepContent(0)}</StepLabel>
             <StepContent>
               <SelectAdType handleSubscriptionSelect={this.props.handleSubscriptionSelect} document_id={this.props.document_id} />
-              <div className={classes.actionsContainer}>
-                <div>
-                  <Button
-                    disabled={activeStep === 0}
-                    onClick={this.handleBack}
-                    className={classes.button}
-                  >
-                    Back
-                  </Button>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={()=>{ this.handleNext(); this.props.createStripeCustomer() }}
-                    className={classes.button}
-                  >
-                    Next
-                  </Button>
-                </div>
-              </div>
-            </StepContent>
-          </Step>
-          <Step key={1}>
-            <StepLabel>{getStepContent(1)}</StepLabel>
-            <StepContent>
-              <StepOne />
               <div className={classes.actionsContainer}>
                 <div>
                   <Button
@@ -128,6 +114,33 @@ class CreateListingStepper extends React.Component {
               </div>
             </StepContent>
           </Step>
+
+          <Step key={1}>
+            <StepLabel>{getStepContent(1)}</StepLabel>
+            <StepContent>
+              <StepOne updateValues={this.handleUpdate}/>
+              <div className={classes.actionsContainer}>
+                <div>
+                  <Button
+                    disabled={activeStep === 0}
+                    onClick={this.handleBack}
+                    className={classes.button}
+                  >
+                    Back
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={this.handleNext}
+                    className={classes.button}
+                  >
+                    Next
+                  </Button>
+                </div>
+              </div>
+            </StepContent>
+          </Step>
+
           <Step key={2}>
             <StepLabel>{getStepContent(2)}</StepLabel>
             <StepContent>

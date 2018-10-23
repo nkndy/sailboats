@@ -48,13 +48,12 @@ class CreateListing extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        subscriptionId: null,
+        listingId: null,
         isPremium: false,
         uid: null,
         stripe: null,
       }
       this.handleSubscriptionSelect = this.handleSubscriptionSelect.bind(this);
-      this.createStripeCustomer = this.createStripeCustomer.bind(this);
       this.handleNext = this.handleNext.bind(this);
     }
     handleSubscriptionSelect(e) {
@@ -62,11 +61,8 @@ class CreateListing extends React.Component {
         isPremium: e.target.value,
       })
     }
-    createStripeCustomer() {
-      console.log(window.Stripe('pk_test_D8R4GPbMBD7nAB4kO3QkiycS'));
-    }
     handleNext(inputValues) {
-      if (this.state.subscriptionId === null) {
+      if (this.state.listingId === null) {
         posts.add({
             active_post: false,
             created_date: firebase.firestore.FieldValue.serverTimestamp(),
@@ -84,7 +80,6 @@ class CreateListing extends React.Component {
             console.error("Error adding document: ", error);
         });
       } else {
-        console.log('already exists')
       }
     }
     render() {
@@ -94,7 +89,10 @@ class CreateListing extends React.Component {
       <StripeProvider stripe={this.state.stripe}>
         <Grid container className={classes.layout} spacing={16}>
           <Grid item xs={12}>
-            <CreateListingStepper handleSubscriptionSelect={this.handleSubscriptionSelect} handleNext={this.handleNext} createStripeCustomer={this.createStripeCustomer} />
+            <CreateListingStepper
+              handleSubscriptionSelect={this.handleSubscriptionSelect}
+              handleNext={this.handleNext}
+            />
           </Grid>
         </Grid>
       </StripeProvider>

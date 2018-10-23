@@ -34,6 +34,12 @@ class StepOne extends React.Component {
     });
   };
 
+  componentDidUpdate(prevProps, prevState) {
+    if ( this.state != prevState ) {
+      this.props.updateValues(this.state);
+    }
+  }
+
   render() {
     const { classes } = this.props;
     return (
