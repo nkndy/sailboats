@@ -51,7 +51,6 @@ class CreateListing extends React.Component {
         listingId: null,
         isPremium: false,
         uid: null,
-        stripe: null,
       }
       this.handleSubscriptionSelect = this.handleSubscriptionSelect.bind(this);
       this.handleNext = this.handleNext.bind(this);
@@ -63,7 +62,7 @@ class CreateListing extends React.Component {
     }
     handleNext(values) {
       let valuesForUpdate = values.values;
-      if (this.state.listingId === null) {
+      if (this.state.listingId == null) {
         posts.add({
             active_post: false,
             created_date: firebase.firestore.FieldValue.serverTimestamp(),
@@ -92,14 +91,18 @@ class CreateListing extends React.Component {
         };
       }
     }
-    componentDidUpdate() {
-      console.log(this.state);
+    componentDidUpdate(prevProps, prevState) {
+      if ( this.state != prevState ) {
+        posts.doc(this.state.listingId).set(Object.assign({}, this.state), { merge: true }).then(() => {
+          console.log('see if it worked then go to bed');
+        });
+      }
     }
     render() {
     const { classes } = this.props;
     return (
       <React.Fragment>
-      <StripeProvider stripe={this.state.stripe}>
+
         <Grid container className={classes.layout} spacing={16}>
           <Grid item xs={12}>
             <CreateListingStepper
@@ -108,7 +111,7 @@ class CreateListing extends React.Component {
             />
           </Grid>
         </Grid>
-      </StripeProvider>
+
       </React.Fragment>
     );
   }

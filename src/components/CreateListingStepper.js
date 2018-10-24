@@ -92,19 +92,12 @@ class CreateListingStepper extends React.Component {
               <div className={classes.actionsContainer}>
                 <div>
                   <Button
-                    disabled={activeStep === 0}
-                    onClick={this.handleBack}
-                    className={classes.button}
-                  >
-                    Back
-                  </Button>
-                  <Button
                     variant="contained"
                     color="primary"
                     onClick={this.handleNext}
                     className={classes.button}
                   >
-                    Next
+                    Begin
                   </Button>
                 </div>
               </div>
@@ -118,7 +111,7 @@ class CreateListingStepper extends React.Component {
               <div className={classes.actionsContainer}>
                 <div>
                   <Button
-                    disabled={activeStep === 0}
+                    disabled={activeStep === 1}
                     onClick={this.handleBack}
                     className={classes.button}
                   >

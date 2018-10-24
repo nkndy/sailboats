@@ -57,7 +57,6 @@ class StepOne extends React.Component {
     if ( this.state != prevState ) {
       this.props.updateValues(this.state);
       storedState = this.state;
-      console.log(storedState);
     }
   }
 
