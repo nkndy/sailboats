@@ -6,18 +6,12 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 
 const styles = theme => ({
   container: {
-    display: 'flex',
-    flexWrap: 'wrap',
+    marginTop: theme.spacing.unit * 1.5,
+    marginBottom: theme.spacing.unit * 3,
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-  },
-  dense: {
-    marginTop: 16,
-  },
-  menu: {
-    width: 200,
   },
 });
 
@@ -62,8 +56,8 @@ class StepOne extends React.Component {
     const { classes } = this.props;
     return (
       <React.Fragment>
-      <div>Let&#39;s start with some basic information about your Listing</div>
       <form className={classes.container} noValidate autoComplete="off">
+        <div>Let&#39;s start with some basic information about your listing:</div>
         <TextField
           required
           type="number"

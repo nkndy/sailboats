@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import SelectAdType from './SelectAdType';
 import StepOne from './StepOne';
+import StepTwo from './StepTwo';
 
 const styles = theme => ({
   root: {
@@ -34,7 +35,7 @@ function getStepContent(step) {
     case 1:
       return 'Size & Model';
     case 2:
-      return 'Price & Location & Condition';
+      return 'Price, Location & Condition';
     case 3:
       return 'Description & Contact Info';
     case 4:
@@ -84,7 +85,7 @@ class CreateListingStepper extends React.Component {
 
           <Step key={0}>
             <StepLabel>{getStepContent(0)}</StepLabel>
-            <StepContent>
+            <StepContent className={classes.stepContent}>
               <SelectAdType handleSubscriptionSelect={this.props.handleSubscriptionSelect} document_id={this.props.document_id} />
               <div className={classes.actionsContainer}>
                 <div>
@@ -103,7 +104,7 @@ class CreateListingStepper extends React.Component {
 
           <Step key={1}>
             <StepLabel>{getStepContent(1)}</StepLabel>
-            <StepContent>
+            <StepContent className={classes.stepContent}>
               <StepOne updateValues={this.handleUpdate}/>
               <div className={classes.actionsContainer}>
                 <div>
@@ -130,8 +131,8 @@ class CreateListingStepper extends React.Component {
 
           <Step key={2}>
             <StepLabel>{getStepContent(2)}</StepLabel>
-            <StepContent>
-              <p>test</p>
+            <StepContent className={classes.stepContent}>
+              <StepTwo />
               <div className={classes.actionsContainer}>
                 <div>
                   <Button
@@ -155,7 +156,7 @@ class CreateListingStepper extends React.Component {
           </Step>
           <Step key={3}>
             <StepLabel>{getStepContent(3)}</StepLabel>
-            <StepContent>
+            <StepContent className={classes.stepContent}>
               <p>test</p>
               <div className={classes.actionsContainer}>
                 <div>
