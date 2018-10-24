@@ -14,11 +14,6 @@ const styles = theme => ({
 });
 
 class ContactMethods extends React.Component {
-    constructor(props){
-      super(props);
-    };
-    componentDidMount() {
-    }
     render() {
         const { classes } = this.props;
         return(

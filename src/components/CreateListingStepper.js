@@ -45,9 +45,6 @@ function getStepContent(step) {
 }
 
 class CreateListingStepper extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   state = {
     activeStep: 0,
   };

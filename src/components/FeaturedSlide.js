@@ -3,7 +3,6 @@ import Paper from '@material-ui/core/Paper';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-import Typography from '@material-ui/core/Typography';
 import PostTitle from './PostTitle';
 import ContactMethods from './ContactMethods'
 import TruncatedDescription from './TruncatedDescription'
@@ -44,10 +43,7 @@ const styles = theme => ({
 });
 
 class FeaturedSlide extends React.Component {
-  constructor(props){
-    super(props);
-  }
-  getFeatured = (media) => media.find((media) => (media.featured_media == true));
+  getFeatured = (media) => media.find((media) => (media.featured_media === true));
   render() {
     const { classes } = this.props;
     return (
@@ -55,7 +51,7 @@ class FeaturedSlide extends React.Component {
       // already exists in slick slider library see lazy load settings
       <React.Fragment>
       <Paper elevation={0} className={classNames(classes.slide, classes.imageRoot)}>
-        <img src={(this.getFeatured(this.props.data.media)).media_url} className={classes.featuredImg}/>
+        <img src={(this.getFeatured(this.props.data.media)).media_url} className={classes.featuredImg} alt={this.props.data.year + " " + this.props.data.length + "' " + this.props.data.manufacturer + " " + this.props.data.model_name}/>
       </Paper>
       <Paper className={classes.slide} elevation={0}>
         <PostTitle data={this.props.data}/>

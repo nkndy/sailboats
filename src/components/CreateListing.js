@@ -1,14 +1,9 @@
 import React from 'react';
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import CreateListingStepper from './CreateListingStepper';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import firebase from '../firebase';
-import {Helmet} from "react-helmet";
-import {StripeProvider} from 'react-stripe-elements';
 
 const db = firebase.firestore();
 const settings = {timestampsInSnapshots: true};
@@ -80,7 +75,7 @@ class CreateListing extends React.Component {
             console.error("Error adding document: ", error);
         });
       } else {
-        if (valuesForUpdate != null) {
+        if (valuesForUpdate !== null) {
           Object.keys(valuesForUpdate).map((keyName, keyIndex) => {
           // use keyName to get current key's name
           // and a[keyName] to get its value
@@ -92,7 +87,7 @@ class CreateListing extends React.Component {
       }
     }
     componentDidUpdate(prevProps, prevState) {
-      if ( this.state != prevState ) {
+      if ( this.state !== prevState ) {
         posts.doc(this.state.listingId).set(Object.assign({}, this.state), { merge: true }).then(() => {
           console.log('see if it worked then go to bed');
         });

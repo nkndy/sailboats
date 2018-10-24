@@ -1,13 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import moment from 'moment';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import PostTitle from './PostTitle.js';
 import MediaSlider from './MediaSlider.js';
-import Condition from './Condition.js';
-import PostDetails from './PostDetails.js';
 
 const styles = theme => ({
   root: {
@@ -29,10 +26,10 @@ const styles = theme => ({
   },
 });
 
-function parseDate(date) {
-    const dateObject = moment.unix((date.seconds));
-    return dateObject.format("MMMM Do YYYY")
-}
+// function parseDate(date) {
+//     const dateObject = moment.unix((date.seconds));
+//     return dateObject.format("MMMM Do YYYY")
+// }
 
 function FeaturedPost(props) {
   const { classes } = props;

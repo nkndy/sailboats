@@ -1,7 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import ThumbnailPost from './ThumbnailPost'
 import { withStyles } from '@material-ui/core/styles';
 import firebase, { auth } from '../firebase';
 

@@ -28,7 +28,6 @@ class TruncatedDescription extends React.Component {
     	return content;
     }
     render() {
-        const { classes } = this.props;
         return(
           <React.Fragment>
           <Typography>

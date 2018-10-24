@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import green from '@material-ui/core/colors/green';
 import Radio from '@material-ui/core/Radio';
-import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
-import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
 
 const styles = {
   root: {
@@ -28,7 +26,6 @@ class RadioButtons extends React.Component {
     this.setState({ selectedValue: event.target.value });
   };
   render() {
-    const { classes } = this.props;
     return (
       <div>
         <Radio

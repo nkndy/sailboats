@@ -10,7 +10,7 @@ import AccountDialogue from "./components/AccountDialogue";
 import DetailView from "./components/DetailView";
 import Error from "./components/Error";
 import Footer from "./components/Footer";
-import firebase, { auth } from './firebase.js';
+import { auth } from './firebase.js';
 
 class App extends Component {
   constructor(props) {
