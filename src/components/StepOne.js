@@ -23,12 +23,28 @@ const styles = theme => ({
   },
 });
 
+let storedState = {
+  length: '',
+  beam: '',
+  draft: '',
+  manufacturer: '',
+  year: '',
+  model_name: '',
+  boat_name: '',
+};
+
 class StepOne extends React.Component {
   constructor(props) {
     super(props);
-      this.state = {
-        length: '',
-      }
+    this.state = {
+      length: storedState.length,
+      beam: storedState.beam,
+      draft: storedState.draft,
+      manufacturer: storedState.manufacturer,
+      year: storedState.year,
+      model_name: storedState.model,
+      boat_name: storedState.boat_name,
+    };
   }
 
   handleChange = name => event => {
@@ -40,6 +56,8 @@ class StepOne extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     if ( this.state != prevState ) {
       this.props.updateValues(this.state);
+      storedState = this.state;
+      console.log(storedState);
     }
   }
 
@@ -67,6 +85,7 @@ class StepOne extends React.Component {
           type="number"
           id="beam"
           label="Beam"
+          value={this.state.beam}
           className={classes.textField}
           onChange={this.handleChange('beam')}
           margin="normal"
@@ -79,6 +98,7 @@ class StepOne extends React.Component {
           type="number"
           id="draft"
           label="Draft"
+          value={this.state.draft}
           className={classes.textField}
           onChange={this.handleChange('draft')}
           margin="normal"
@@ -91,6 +111,7 @@ class StepOne extends React.Component {
           required
           id="manufacturer"
           label="Manufacturer"
+          value={this.state.manufacturer}
           className={classes.textField}
           onChange={this.handleChange('manufacturer')}
           margin="normal"
@@ -100,6 +121,7 @@ class StepOne extends React.Component {
           type="number"
           id="year"
           label="Year"
+          value={this.state.year}
           className={classes.textField}
           onChange={this.handleChange('year')}
           margin="normal"
@@ -108,6 +130,7 @@ class StepOne extends React.Component {
         <TextField
           id="model_name"
           label="Model Name"
+          value={this.state.model_name}
           className={classes.textField}
           onChange={this.handleChange('model_name')}
           margin="normal"
@@ -116,6 +139,7 @@ class StepOne extends React.Component {
         <TextField
           id="boat_name"
           label="Boat Name"
+          value={this.state.boat_name}
           className={classes.textField}
           onChange={this.handleChange('boat_name')}
           helperText="eg. S/V Tigan"
