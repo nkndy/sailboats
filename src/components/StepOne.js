@@ -40,7 +40,7 @@ class StepOne extends React.Component {
       draft: storedState.draft,
       manufacturer: storedState.manufacturer,
       year: storedState.year,
-      model_name: storedState.model,
+      model_name: storedState.model_name,
       boat_name: storedState.boat_name,
     };
   }

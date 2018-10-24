@@ -45,7 +45,6 @@ class CreateListing extends React.Component {
       this.state = {
         listingId: null,
         isPremium: false,
-        uid: null,
       }
       this.handleSubscriptionSelect = this.handleSubscriptionSelect.bind(this);
       this.handleNext = this.handleNext.bind(this);
@@ -56,13 +55,13 @@ class CreateListing extends React.Component {
       })
     }
     handleNext(values) {
+      console.log(values.values);
       let valuesForUpdate = values.values;
       if (this.state.listingId == null) {
         posts.add({
             active_post: false,
             created_date: firebase.firestore.FieldValue.serverTimestamp(),
             posted_date: null,
-            featured_post: this.state.isPremium,
             user: this.props.user_id,
         })
         .then((docRef) => {
@@ -89,7 +88,6 @@ class CreateListing extends React.Component {
     componentDidUpdate(prevProps, prevState) {
       if ( this.state !== prevState ) {
         posts.doc(this.state.listingId).set(Object.assign({}, this.state), { merge: true }).then(() => {
-          console.log('see if it worked then go to bed');
         });
       }
     }

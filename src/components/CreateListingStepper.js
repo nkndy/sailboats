@@ -47,6 +47,7 @@ function getStepContent(step) {
 class CreateListingStepper extends React.Component {
   state = {
     activeStep: 0,
+    values: {},
   };
 
   handleNext = () => {
@@ -77,7 +78,6 @@ class CreateListingStepper extends React.Component {
   render() {
     const { classes } = this.props;
     const { activeStep } = this.state;
-
     return (
       <div className={classes.root}>
         <Stepper activeStep={activeStep} orientation="vertical">
@@ -115,6 +115,7 @@ class CreateListingStepper extends React.Component {
                     Back
                   </Button>
                   <Button
+                    disabled={ (this.state.values.length === undefined || this.state.values.length === '' ) || ( this.state.values.manufacturer === undefined || this.state.values.manufacturer === '') }
                     variant="contained"
                     color="primary"
                     onClick={this.handleNext}
