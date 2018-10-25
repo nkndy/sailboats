@@ -55,7 +55,6 @@ class CreateListing extends React.Component {
       })
     }
     handleNext(values) {
-      console.log(values.values);
       let valuesForUpdate = values.values;
       if (this.state.listingId == null) {
         posts.add({
@@ -65,7 +64,6 @@ class CreateListing extends React.Component {
             user: this.props.user_id,
         })
         .then((docRef) => {
-            console.log("Document written with ID: ", docRef.id);
             this.setState({
               listingId: docRef.id,
             });

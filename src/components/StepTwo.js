@@ -4,6 +4,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import ConditionRadioSelect from './ConditionRadioSelect';
+import LocationInput from './LocationInput'
 
 // price
 // location
@@ -45,6 +46,7 @@ class StepTwo extends React.Component {
             endAdornment: <InputAdornment position="start">$</InputAdornment>,
           }}
         />
+        <LocationInput />
         <ConditionRadioSelect />
       </form>
       </React.Fragment>
