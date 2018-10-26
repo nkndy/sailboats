@@ -31,9 +31,9 @@ const styles = theme => ({
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return  'Select Ad Type'
+      return 'Select Ad Type'
     case 1:
-      return 'Size & Model';
+      return 'Size, Model & hull type';
     case 2:
       return 'Price, Location & Condition';
     case 3:
@@ -88,7 +88,7 @@ class CreateListingStepper extends React.Component {
             <StepContent className={classes.stepContent}>
               <SelectAdType handleSubscriptionSelect={this.props.handleSubscriptionSelect} document_id={this.props.document_id} />
               <div className={classes.actionsContainer}>
-                <div>
+                <div style={{paddingLeft: '2px',}}>
                   <Button
                     variant="contained"
                     color="primary"
