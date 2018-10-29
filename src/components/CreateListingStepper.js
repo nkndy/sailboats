@@ -76,9 +76,13 @@ class CreateListingStepper extends React.Component {
     for (const key of keysArray) {
       updatedState[key] = values[key]
     }
-    this.setState({
-      values: updatedState,
-    });
+    this.setState((prevState, props) => ({
+      values: {
+        ...prevState.values,
+        updatedState
+      }
+    }));
+    console.log(this.state);
   }
 
   render() {
