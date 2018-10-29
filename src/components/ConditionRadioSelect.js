@@ -22,12 +22,18 @@ const styles = theme => ({
 
 class ConditionRadioSelect extends React.Component {
   state = {
-    value: 'female',
+    value: 'Good',
   };
 
   handleChange = event => {
     this.setState({ value: event.target.value });
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    if ( this.state !== prevState ) {
+      this.props.updateCondition(this.state.value);
+    }
+  }
 
   render() {
     const { classes } = this.props;
@@ -40,7 +46,7 @@ class ConditionRadioSelect extends React.Component {
             aria-label="Vessel Condition"
             name="condition"
             className={classes.group}
-            value={this.state.value}
+            value={this.props.storedValue ? this.props.storedValue : 'Good'}
             onChange={this.handleChange}
             row={true}
           >

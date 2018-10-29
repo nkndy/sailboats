@@ -6,10 +6,6 @@ import { withStyles } from '@material-ui/core/styles';
 import ConditionRadioSelect from './ConditionRadioSelect';
 import LocationInput from './LocationInput'
 
-// price
-// location
-// condition
-
 const styles = theme => ({
   container: {
     marginTop: theme.spacing.unit * 1.5,
@@ -21,11 +17,41 @@ const styles = theme => ({
   },
 });
 
-class StepTwo extends React.Component {
+let storedState = {
+  asking_price: '',
+  location: '',
+  condition: '',
+};
 
-  handleChange = prop => event => {
-    this.setState({ [prop]: event.target.value });
+class StepTwo extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      asking_price: storedState.asking_price,
+      location: storedState.location,
+      condition: storedState.condition,
+    };
+  }
+
+  handleChange = name => event => {
+    this.setState({ [name]: event.target.value });
   };
+
+  updateLocation = input => {
+    this.setState({location: {name: input.label, coords: input.value}})
+    storedState.location = {name: input.label, coords: input.value};
+  }
+
+  updateCondition = input => {
+    this.setState({ condition: input });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if ( this.state !== prevState ) {
+      this.props.updateValues(this.state);
+      storedState = this.state;
+    }
+  }
 
   render() {
     const { classes } = this.props;
@@ -38,16 +64,17 @@ class StepTwo extends React.Component {
           type="number"
           id="asking-price"
           label="Asking Price"
+          value={this.state.asking_price}
           className={classes.textField}
           onChange={this.handleChange('asking_price')}
           margin="normal"
           variant="outlined"
           InputProps={{
-            endAdornment: <InputAdornment position="start">$</InputAdornment>,
+            startAdornment: <InputAdornment position="start">$</InputAdornment>,
           }}
         />
-        <LocationInput />
-        <ConditionRadioSelect />
+        <LocationInput updateLocation={this.updateLocation} storedValue={storedState.location} />
+        <ConditionRadioSelect updateCondition={this.updateCondition} storedValue={storedState.condition} />
       </form>
       </React.Fragment>
     );

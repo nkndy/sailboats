@@ -71,9 +71,14 @@ class CreateListingStepper extends React.Component {
   };
 
   handleUpdate = (values) => {
+    let updatedState = {}
+    let keysArray = Object.keys(values);
+    for (const key of keysArray) {
+      updatedState[key] = values[key]
+    }
     this.setState({
-      values
-    })
+      values: updatedState,
+    });
   }
 
   render() {
@@ -132,7 +137,7 @@ class CreateListingStepper extends React.Component {
           <Step key={2}>
             <StepLabel>{getStepContent(2)}</StepLabel>
             <StepContent className={classes.stepContent}>
-              <StepTwo />
+              <StepTwo updateValues={this.handleUpdate}/>
               <div className={classes.actionsContainer}>
                 <div>
                   <Button

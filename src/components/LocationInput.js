@@ -4,7 +4,7 @@ import MBXClient from '@mapbox/mapbox-sdk/services/geocoding';
 
 const geoClient = MBXClient({ accessToken: 'pk.eyJ1IjoibnNrZW5uZWR5IiwiYSI6ImNqbm5zempteTAxcnIza29jd2hhbjNoeTQifQ.y8Z-fAMGXoCLSqfZBlQNJg' });
 
-let locationResults = []
+let locationResults = [];
 
 const filterColors = (inputValue) =>
   locationResults.filter(i =>
@@ -12,30 +12,38 @@ const filterColors = (inputValue) =>
   );
 
 const locationOptions = (inputValue, callback) => {
-  geoClient
-  .forwardGeocode({
-    query: inputValue,
-    limit: 5,
-  })
-  .send()
-  .then(response => {
-    locationResults = (response.body.features).map((feature) => (
-      {
-      label: feature.place_name,
-      value: feature.geometry.coordinates
-      }
-    ));
-    callback(filterColors(inputValue));
-  });
+  if (inputValue) {
+    geoClient
+    .forwardGeocode({
+      query: inputValue,
+      limit: 5,
+    })
+    .send()
+    .then(response => {
+      locationResults = (response.body.features).map((feature) => (
+        {
+        label: feature.place_name,
+        value: feature.geometry.coordinates
+        }
+      ));
+      callback(filterColors(inputValue));
+    });
+  }
 };
 
 export default class LocationInput extends Component {
-  state = { inputValue: '' };
+  constructor(props){
+    super(props);
+    console.log(props);
+    this.state = '';
+  }
+
   handleInputChange = (newValue) => {
     const inputValue = newValue;
     this.setState({ inputValue });
     return inputValue;
   };
+
   render() {
     return (
       <div>
@@ -44,6 +52,9 @@ export default class LocationInput extends Component {
           loadOptions={locationOptions}
           defaultOptions
           onInputChange={this.handleInputChange}
+          onChange={opt => this.props.updateLocation(opt)}
+          name="location"
+          placeholder="Start Typing a location"
         />
       </div>
     );
