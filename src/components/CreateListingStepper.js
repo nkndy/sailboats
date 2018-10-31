@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import SelectAdType from './SelectAdType';
 import StepOne from './StepOne';
 import StepTwo from './StepTwo';
+import StepThree from './StepThree';
 
 const styles = theme => ({
   root: {
@@ -23,8 +24,9 @@ const styles = theme => ({
   actionsContainer: {
     marginBottom: theme.spacing.unit * 2,
   },
-  resetContainer: {
-    padding: theme.spacing.unit * 3,
+  publishContainer: {
+    paddingTop: theme.spacing.unit * 3,
+    paddingBottom: theme.spacing.unit * 3,
   },
 });
 
@@ -33,13 +35,13 @@ function getStepContent(step) {
     case 0:
       return 'Select Ad Type'
     case 1:
-      return 'Size, Model & hull type';
+      return 'Specify Size, Model & hull type';
     case 2:
       return 'Price, Location & Condition';
     case 3:
       return 'Description & Contact Info';
     case 4:
-      return 'Media';
+      return 'Add Media & Publish';
     default:
       return 'Unknown step';
   }
@@ -77,9 +79,6 @@ class CreateListingStepper extends React.Component {
       updatedState[key] = values[key]
     }
     this.setState((prevState, props) => (
-      // console.log(props)
-      // console.log(prevState)
-      // console.log(updatedState)
       {
         values: {
           ...prevState.values,
@@ -95,7 +94,7 @@ class CreateListingStepper extends React.Component {
     const { activeStep } = this.state;
     return (
       <div className={classes.root}>
-        <Stepper activeStep={activeStep} orientation="vertical">
+        <Stepper activeStep={activeStep} orientation="vertical" color="secondary">
 
           <Step key={0}>
             <StepLabel>{getStepContent(0)}</StepLabel>
@@ -168,10 +167,11 @@ class CreateListingStepper extends React.Component {
               </div>
             </StepContent>
           </Step>
+
           <Step key={3}>
             <StepLabel>{getStepContent(3)}</StepLabel>
             <StepContent className={classes.stepContent}>
-              <p>test</p>
+              <StepThree updateValues={this.handleUpdate} user_email={this.props.user.email}/>
               <div className={classes.actionsContainer}>
                 <div>
                   <Button
@@ -193,15 +193,32 @@ class CreateListingStepper extends React.Component {
               </div>
             </StepContent>
           </Step>
+
+          <Step key={4}>
+            <StepLabel>{getStepContent(4)}</StepLabel>
+            <StepContent className={classes.stepContent}>
+              <div className={classes.actionsContainer}>
+                <div>
+                  <Typography>Awesome! - you&quot;re finished. Click next to review your new listing & publish.</Typography>
+                  {activeStep === 4 && (
+                    <Paper square elevation={0} className={classes.publishContainer}>
+                      <Button
+                        disabled={activeStep === 0}
+                        onClick={this.handleBack}
+                        className={classes.button}
+                      >
+                        Back
+                      </Button>
+                      <Button className={classes.button}>
+                        Review & Publish
+                      </Button>
+                    </Paper>
+                  )}
+                </div>
+              </div>
+            </StepContent>
+          </Step>
         </Stepper>
-        {activeStep === 4 && (
-          <Paper square elevation={0} className={classes.resetContainer}>
-            <Typography>All steps completed - you&quot;re finished</Typography>
-            <Button onClick={this.handleReset} className={classes.button}>
-              Reset
-            </Button>
-          </Paper>
-        )}
       </div>
     );
   }

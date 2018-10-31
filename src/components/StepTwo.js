@@ -33,13 +33,13 @@ class StepTwo extends React.Component {
     };
   }
 
-  handleChange = name => event => {
-    this.setState({ [name]: event.target.value });
+  updateAskingPrice = name => event => {
+    this.setState({ [name]: Number(event.target.value) });
   };
 
   updateLocation = input => {
-    this.setState({location: {name: input.label, coords: input.value}})
-    storedState.location = {name: input.label, coords: input.value};
+    this.setState({ location: {name: input.label, coords: input.value}} )
+    storedState.location = { name: input.label, coords: input.value };
   }
 
   updateCondition = input => {
@@ -66,9 +66,8 @@ class StepTwo extends React.Component {
           label="Asking Price"
           value={this.state.asking_price}
           className={classes.textField}
-          onChange={this.handleChange('asking_price')}
+          onChange={this.updateAskingPrice('asking_price')}
           margin="normal"
-          variant="outlined"
           InputProps={{
             startAdornment: <InputAdornment position="start">$</InputAdornment>,
           }}

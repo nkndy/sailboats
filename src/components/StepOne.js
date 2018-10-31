@@ -67,7 +67,6 @@ class StepOne extends React.Component {
           className={classes.textField}
           onChange={this.handleChange('length')}
           margin="normal"
-          variant="outlined"
           InputProps={{
             endAdornment: <InputAdornment position="end">ft</InputAdornment>,
           }}
@@ -80,7 +79,6 @@ class StepOne extends React.Component {
           className={classes.textField}
           onChange={this.handleChange('beam')}
           margin="normal"
-          variant="outlined"
           InputProps={{
             endAdornment: <InputAdornment position="end">ft</InputAdornment>,
           }}
@@ -93,7 +91,6 @@ class StepOne extends React.Component {
           className={classes.textField}
           onChange={this.handleChange('draft')}
           margin="normal"
-          variant="outlined"
           InputProps={{
             endAdornment: <InputAdornment position="end">ft</InputAdornment>,
           }}
@@ -106,7 +103,6 @@ class StepOne extends React.Component {
           className={classes.textField}
           onChange={this.handleChange('manufacturer')}
           margin="normal"
-          variant="outlined"
         />
         <TextField
           type="number"
@@ -116,7 +112,6 @@ class StepOne extends React.Component {
           className={classes.textField}
           onChange={this.handleChange('year')}
           margin="normal"
-          variant="outlined"
         />
         <TextField
           id="model_name"
@@ -125,7 +120,6 @@ class StepOne extends React.Component {
           className={classes.textField}
           onChange={this.handleChange('model_name')}
           margin="normal"
-          variant="outlined"
         />
         <TextField
           id="boat_name"
@@ -135,7 +129,6 @@ class StepOne extends React.Component {
           onChange={this.handleChange('boat_name')}
           helperText="eg. S/V Tigan"
           margin="normal"
-          variant="outlined"
         />
       </form>
       </React.Fragment>

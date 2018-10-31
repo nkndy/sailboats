@@ -61,7 +61,7 @@ class CreateListing extends React.Component {
             active_post: false,
             created_date: firebase.firestore.FieldValue.serverTimestamp(),
             posted_date: null,
-            user: this.props.user_id,
+            user: this.props.user.user_id,
         })
         .then((docRef) => {
             this.setState({
@@ -79,6 +79,7 @@ class CreateListing extends React.Component {
             this.setState({
               [keyName]: valuesForUpdate[keyName]
             });
+            return null;
           })
         };
       }
@@ -99,6 +100,7 @@ class CreateListing extends React.Component {
             <CreateListingStepper
               handleSubscriptionSelect={this.handleSubscriptionSelect}
               handleNext={this.handleNext}
+              user={this.props.user}
             />
           </Grid>
         </Grid>
