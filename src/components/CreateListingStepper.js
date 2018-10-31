@@ -86,7 +86,6 @@ class CreateListingStepper extends React.Component {
         }
       }
     ));
-    console.log(this.state);
   }
 
   render() {

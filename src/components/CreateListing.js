@@ -48,20 +48,32 @@ class CreateListing extends React.Component {
       }
       this.handleSubscriptionSelect = this.handleSubscriptionSelect.bind(this);
       this.handleNext = this.handleNext.bind(this);
+      this.parseBool = this.parseBool.bind(this);
+    }
+    parseBool(value) {
+      let isPremium = this.state.isPremium;
+      let newValue = (value === isPremium.toString() ? isPremium : !isPremium);
+      return newValue;
     }
     handleSubscriptionSelect(e) {
+      let isPremium = this.state.isPremium
+      // this.setState((prevState, props) => {
+      //   (e.target.value === isPremium ? isPremium : !isPremium)
+      //   return {isPremium: isPremium};
+      // });
       this.setState({
-        isPremium: e.target.value,
+        isPremium: this.parseBool(e.target.value),
       })
     }
     handleNext(values) {
+      let user_id = this.props.user.uid;
       let valuesForUpdate = values.values;
       if (this.state.listingId == null) {
         posts.add({
             active_post: false,
             created_date: firebase.firestore.FieldValue.serverTimestamp(),
             posted_date: null,
-            user: this.props.user.user_id,
+            user: user_id,
         })
         .then((docRef) => {
             this.setState({
@@ -74,8 +86,6 @@ class CreateListing extends React.Component {
       } else {
         if (valuesForUpdate !== null) {
           Object.keys(valuesForUpdate).map((keyName, keyIndex) => {
-          // use keyName to get current key's name
-          // and a[keyName] to get its value
             this.setState({
               [keyName]: valuesForUpdate[keyName]
             });
@@ -85,16 +95,16 @@ class CreateListing extends React.Component {
       }
     }
     componentDidUpdate(prevProps, prevState) {
-      if ( this.state !== prevState ) {
+      if ( this.state !== prevState && this.state.listingId !== null ) {
         posts.doc(this.state.listingId).set(Object.assign({}, this.state), { merge: true }).then(() => {
         });
       }
+      console.log(this.state);
     }
     render() {
     const { classes } = this.props;
     return (
       <React.Fragment>
-
         <Grid container className={classes.layout} spacing={16}>
           <Grid item xs={12}>
             <CreateListingStepper
@@ -104,7 +114,6 @@ class CreateListing extends React.Component {
             />
           </Grid>
         </Grid>
-
       </React.Fragment>
     );
   }
