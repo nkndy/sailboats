@@ -12,6 +12,7 @@ import SelectAdType from './SelectAdType';
 import StepOne from './StepOne';
 import StepTwo from './StepTwo';
 import StepThree from './StepThree';
+import StepFour from './StepFour';
 
 const styles = theme => ({
   root: {
@@ -196,6 +197,7 @@ class CreateListingStepper extends React.Component {
           <Step key={4}>
             <StepLabel>{getStepContent(4)}</StepLabel>
             <StepContent className={classes.stepContent}>
+              <StepFour />
               <div className={classes.actionsContainer}>
                 <div>
                   <Typography>Awesome! - you&quot;re finished. Click next to review your new listing & publish.</Typography>
