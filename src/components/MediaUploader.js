@@ -3,8 +3,6 @@ import firebase from '../firebase.js';
 import { FilePond, File, registerPlugin } from 'react-filepond';
 import 'filepond/dist/filepond.min.css';
 
-//https://medium.com/equinox-blog/%E0%B8%A5%E0%B8%AD%E0%B8%87%E0%B9%83%E0%B8%8A%E0%B9%89-react-cloud-storage-for-firebase-%E0%B8%81%E0%B8%B1%E0%B8%99%E0%B9%80%E0%B8%96%E0%B8%AD%E0%B8%B0-fb62f897e357
-
 var storage = firebase.storage();
 var storageRef = storage.ref();
 
@@ -13,25 +11,73 @@ class MediaUploader extends React.Component {
     super(props);
     this.state = {
       files: [],
+      fileURLs: [],
     };
   }
+
   handleInit () {
-    // xử lý init file upload here
-    console . log ( ' now initialised ' , this.pond );
+    //init file upload here
+    // console.log( 'now initialised' , this.pond );
   }
 
   handleProcessing ( fieldName , file , metadata , load , error , progress , abort ) {
     // handle file upload here
-    console . log ( " handle file upload here " );
-    console . log (file);
+    console.log();
+    const fileUpload = file;
+    const storageRef = firebase.storage().ref( `${this.props.user_id}/${file.name}` );
+    let uploadTask = storageRef.put(fileUpload);
+
+    // Register three observers:
+    // 1. 'state_changed' observer, called any time the state changes
+    // 2. Error observer, called on failure
+    // 3. Completion observer, called on successful completion
+    uploadTask.on('state_changed', (snapshot) => {
+      // Observe state change events such as progress, pause, and resume
+      // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+      console.log(snapshot);
+
+      var lengthComputable = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      progress(lengthComputable, snapshot.bytesTransferred, snapshot.totalBytes);
+      switch (snapshot.state) {
+        case firebase.storage.TaskState.PAUSED: // or 'paused'
+          console.log('Upload is paused');
+          break;
+        case firebase.storage.TaskState.RUNNING: // or 'running'
+          console.log('Upload is running');
+          break;
+      }
+    }, (error) => {
+      // Handle unsuccessful uploads
+      console.log(error);
+    }, () => {
+      // Handle successful uploads on complete
+      // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+      uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+        // console.log('File available at', downloadURL);
+          // Set current file objects to this.state
+          this.setState({
+            fileURLs: [...this.state.fileURLs, downloadURL]
+          });
+          load(downloadURL);
+      });
+    });
   }
+
   render() {
     return(
       <FilePond allowMultiple = { true }
-        maxFiles = {3}
         ref = { ref => this.pond = ref }
-        server = {{process: this.handleProcessing.bind(this)}}
-        oninit = {() =>  this.handleInit()} >
+        server = {
+          {
+            process: this.handleProcessing.bind(this),
+            revert: null,
+            restore: null,
+            load: null,
+            fetch: null,
+          }
+        }
+        oninit = {() =>  this.handleInit()}
+      >
 
           { this.state.files.map( file  => (
             <File key={file} source={file} / >

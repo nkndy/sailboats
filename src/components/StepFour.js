@@ -8,7 +8,7 @@ class StepFour extends React.Component {
   }
   render() {
     return(
-      <MediaUploader />
+      <MediaUploader user_id={this.props.user_id} />
     );
   }
 }
