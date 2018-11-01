@@ -8,7 +8,7 @@ class StepFour extends React.Component {
   }
   render() {
     return(
-      <MediaUploader user_id={this.props.user_id} />
+      <MediaUploader user_id={this.props.user_id} listingId={this.props.listingId} />
     );
   }
 }

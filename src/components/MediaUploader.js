@@ -3,15 +3,21 @@ import firebase from '../firebase.js';
 import { FilePond, File, registerPlugin } from 'react-filepond';
 import 'filepond/dist/filepond.min.css';
 
-var storage = firebase.storage();
-var storageRef = storage.ref();
+const storage = firebase.storage();
+const storageRef = storage.ref();
+
+const db = firebase.firestore();
+const settings = {timestampsInSnapshots: true};
+db.settings(settings);
+
+let posts = db.collection('Posts');
 
 class MediaUploader extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      files: [],
-      fileURLs: [],
+      filesForUpload: [],
+      media: [],
     };
   }
 
@@ -36,7 +42,7 @@ class MediaUploader extends React.Component {
       // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
       console.log(snapshot);
 
-      var lengthComputable = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      let lengthComputable = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
       progress(lengthComputable, snapshot.bytesTransferred, snapshot.totalBytes);
       switch (snapshot.state) {
         case firebase.storage.TaskState.PAUSED: // or 'paused'
@@ -53,14 +59,21 @@ class MediaUploader extends React.Component {
       // Handle successful uploads on complete
       // For instance, get the download URL: https://firebasestorage.googleapis.com/...
       uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-        // console.log('File available at', downloadURL);
+          console.log('File available at', downloadURL);
           // Set current file objects to this.state
           this.setState({
-            fileURLs: [...this.state.fileURLs, downloadURL]
+            media: [...this.state.media, {media_url: downloadURL}]
           });
           load(downloadURL);
       });
     });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if ( this.state !== prevState && this.state.listingId !== null ) {
+      posts.doc(this.props.listingId).set({media: this.state.media}, { merge: true }).then(() => {
+      });
+    }
   }
 
   render() {
@@ -79,7 +92,7 @@ class MediaUploader extends React.Component {
         oninit = {() =>  this.handleInit()}
       >
 
-          { this.state.files.map( file  => (
+          { this.state.filesForUpload.map( file  => (
             <File key={file} source={file} / >
           )) }
 

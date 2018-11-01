@@ -197,7 +197,7 @@ class CreateListingStepper extends React.Component {
           <Step key={4}>
             <StepLabel>{getStepContent(4)}</StepLabel>
             <StepContent className={classes.stepContent}>
-              <StepFour user_id={this.props.user.uid} />
+              <StepFour user_id={this.props.user.uid} listingId={this.props.listingId}/>
               <div className={classes.actionsContainer}>
                 <div>
                   <Typography>Awesome! - you&quot;re finished. Click next to review your new listing & publish.</Typography>

@@ -106,6 +106,7 @@ class CreateListing extends React.Component {
               handleSubscriptionSelect={this.handleSubscriptionSelect}
               handleNext={this.handleNext}
               user={this.props.user}
+              listingId={this.state.listingId}
             />
           </Grid>
         </Grid>
