@@ -6,7 +6,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
-import CommentIcon from '@material-ui/icons/Comment';
+import EmailIcon from '@material-ui/icons/Email';
 import TextField from '@material-ui/core/TextField';
 
 const styles = theme => ({
@@ -33,7 +33,7 @@ class Input extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if ( this.state !== prevState ) {
-      this.props.updateParentState(this.state.email);
+      this.props.updateParentState(this.state);
     }
   }
 
@@ -56,15 +56,15 @@ class Input extends React.Component {
 
 class EmailContactInput extends React.Component {
   state = {
-    checked: true,
-    email: '',
+    acceptsEmail: true,
+    email: this.props.user_email,
   };
 
   handleToggle = () => {
-    const checked = this.state.checked;
-    const newChecked = !checked;
+    const acceptsEmail = this.state.acceptsEmail;
+    const newChecked = !acceptsEmail;
     this.setState({
-      checked: newChecked,
+      acceptsEmail: newChecked,
     });
   };
 
@@ -74,18 +74,22 @@ class EmailContactInput extends React.Component {
     })
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if ( this.state !== prevState ) {
+      this.props.updateParentState(this.state);
+    }
+  }
+
   render() {
     return (
       <ListItem role={undefined} dense>
         <Checkbox
-          checked={this.state.checked}
+          checked={this.state.acceptsEmail}
           onClick={this.handleToggle}
         />
-        <ListItemText primary={<Input updateParentState={this.handleInput} user_email={this.props.user_email} />} />
+        <ListItemText primary={this.props.user_email} />
         <ListItemSecondaryAction>
-          <IconButton aria-label="Comments">
-            <CommentIcon />
-          </IconButton>
+          <EmailIcon color='disabled'/>
         </ListItemSecondaryAction>
       </ListItem>
     );

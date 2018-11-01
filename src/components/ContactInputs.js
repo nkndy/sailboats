@@ -22,7 +22,24 @@ const styles = theme => ({
 class ContactInputs extends React.Component {
   state = {
     dense: false,
+    acceptsEmail: true,
+    acceptsPhone: false,
   };
+
+  updateState = input => {
+    let keysArray = Object.keys(input);
+    for (const key of keysArray) {
+      this.setState({
+        [key]: input[key]
+      })
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if ( this.state !== prevState ) {
+      this.props.updateParentState(this.state);
+    }
+  }
 
   render() {
     const { classes } = this.props;
@@ -33,8 +50,8 @@ class ContactInputs extends React.Component {
           <Grid item xs={12}>
             <div className={classes.demo}>
               <List dense={dense}>
-                <EmailContactInput user_email={this.props.user_email}/>
-                <PhoneContactInput />
+                <EmailContactInput user_email={this.props.user_email} updateParentState={this.updateState} />
+                <PhoneContactInput updateParentState={this.updateState} />
               </List>
             </div>
           </Grid>

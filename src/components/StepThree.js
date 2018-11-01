@@ -18,20 +18,29 @@ const styles = theme => ({
 
 class StepThree extends Component {
   state = {
-    multiline: '',
+    description: '',
+    email: this.props.user_email,
   };
 
   handleChangeMultiline = event => {
     this.setState({
-      multiline: event.target.value,
+      description: event.target.value,
     });
   };
 
-  componentDidMount() {
-    loadCSS(
-      'https://use.fontawesome.com/releases/v5.1.0/css/all.css',
-      document.querySelector('#insertion-point-jss'),
-    );
+  updateState = input => {
+    let keysArray = Object.keys(input);
+    for (const key of keysArray) {
+      this.setState({
+        [key]: input[key]
+      })
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if ( this.state !== prevState ) {
+      this.props.updateValues(this.state);
+    }
   }
 
   render() {
@@ -48,8 +57,9 @@ class StepThree extends Component {
           onChange={this.handleChangeMultiline}
           margin="normal"
           fullWidth
+          required
         />
-        <ContactInputs user_email={this.props.user_email}/>
+        <ContactInputs user_email={this.props.user_email} updateParentState={this.updateState}/>
       </div>
     );
   }

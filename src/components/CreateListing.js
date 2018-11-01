@@ -57,10 +57,6 @@ class CreateListing extends React.Component {
     }
     handleSubscriptionSelect(e) {
       let isPremium = this.state.isPremium
-      // this.setState((prevState, props) => {
-      //   (e.target.value === isPremium ? isPremium : !isPremium)
-      //   return {isPremium: isPremium};
-      // });
       this.setState({
         isPremium: this.parseBool(e.target.value),
       })
@@ -99,7 +95,6 @@ class CreateListing extends React.Component {
         posts.doc(this.state.listingId).set(Object.assign({}, this.state), { merge: true }).then(() => {
         });
       }
-      console.log(this.state);
     }
     render() {
     const { classes } = this.props;

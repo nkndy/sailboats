@@ -18,6 +18,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import { NavLink } from "react-router-dom";
 import Avatar from '@material-ui/core/Avatar';
+import Logo from '../assets/img/trdwnd.png';
 
 import './AppBar.css'
 
@@ -92,6 +93,9 @@ const styles = theme => ({
     [theme.breakpoints.up('md')]: {
       display: 'none',
     },
+  },
+  logo: {
+    maxWidth: '150px',
   },
 });
 
@@ -179,7 +183,7 @@ class PrimarySearchAppBar extends React.Component {
             </IconButton>*/}
             <Typography className={classes.title} variant="title" color="inherit" noWrap>
               <NavLink to="/listings">
-                Tradewind
+                <img src={Logo} className={classes.logo} />
               </NavLink>
             </Typography>
             <div className={classes.search}>
@@ -187,7 +191,7 @@ class PrimarySearchAppBar extends React.Component {
                 <SearchIcon />
               </div>
               <Input
-                placeholder="Search…"
+                placeholder="Search for a Sailboat…"
                 disableUnderline
                 classes={{
                   root: classes.inputRoot,
