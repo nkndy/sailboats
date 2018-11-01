@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import HullTypeRadioSelect from './HullTypeRadioSelect';
 
 const styles = theme => ({
   container: {
@@ -23,6 +24,7 @@ let storedState = {
   year: '',
   model_name: '',
   boat_name: '',
+  hull_type: '',
 };
 
 class StepOne extends React.Component {
@@ -36,6 +38,7 @@ class StepOne extends React.Component {
       year: storedState.year,
       model_name: storedState.model_name,
       boat_name: storedState.boat_name,
+      hull_type: storedState.hull_type,
     };
   }
 
@@ -44,6 +47,10 @@ class StepOne extends React.Component {
       [name]: event.target.value,
     });
   };
+
+  updateHullType = input => {
+    this.setState({ hull_type: input });
+  }
 
   componentDidUpdate(prevProps, prevState) {
     if ( this.state !== prevState ) {
@@ -130,6 +137,7 @@ class StepOne extends React.Component {
           helperText="eg. S/V Tigan"
           margin="normal"
         />
+        <HullTypeRadioSelect updateHullType={this.updateHullType} storedValue={storedState.hull_type} />
       </form>
       </React.Fragment>
     );
