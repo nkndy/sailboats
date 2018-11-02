@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import firebase from '../firebase.js';
 import { FilePond, File, registerPlugin } from 'react-filepond';
 import 'filepond/dist/filepond.min.css';
+import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
+import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
+import Typography from '@material-ui/core/Typography';
 
 const storage = firebase.storage();
 const storageRef = storage.ref();
@@ -11,6 +14,8 @@ const settings = {timestampsInSnapshots: true};
 db.settings(settings);
 
 let posts = db.collection('Posts');
+
+registerPlugin(FilePondPluginFileValidateType, FilePondPluginFileValidateSize);
 
 class MediaUploader extends React.Component {
   constructor(props) {
@@ -59,12 +64,11 @@ class MediaUploader extends React.Component {
       // Handle successful uploads on complete
       // For instance, get the download URL: https://firebasestorage.googleapis.com/...
       uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-          console.log('File available at', downloadURL);
-          // Set current file objects to this.state
           this.setState({
             media: [...this.state.media, {media_url: downloadURL}]
           });
           load(downloadURL);
+          this.props.hasMedia();
       });
     });
   }
@@ -77,26 +81,46 @@ class MediaUploader extends React.Component {
   }
 
   render() {
+    let inputProps = {
+      fileValidateTypeLabelExpectedTypes: 'Expects valid Image/Video format, Video only available to Premium',
+    }
+    if (this.props.isPremium) {
+      inputProps.acceptedFileTypes = ['image/*', 'video/*']
+    } else {
+      inputProps.acceptedFileTypes = ['image/*']
+    }
     return(
-      <FilePond allowMultiple = { true }
-        ref = { ref => this.pond = ref }
-        server = {
-          {
-            process: this.handleProcessing.bind(this),
-            revert: null,
-            restore: null,
-            load: null,
-            fetch: null,
+      <React.Fragment>
+        <FilePond
+          allowMultiple = { true }
+          ref = { ref => this.pond = ref }
+          server = {
+            {
+              process: this.handleProcessing.bind(this),
+              revert: null,
+              restore: null,
+              load: null,
+              fetch: null,
+            }
           }
-        }
-        oninit = {() =>  this.handleInit()}
-      >
+          oninit = {() =>  this.handleInit()}
+          maxFileSize = {'5MB'}
+          {...inputProps}
+        >
 
-          { this.state.filesForUpload.map( file  => (
-            <File key={file} source={file} / >
-          )) }
+            { this.state.filesForUpload.map( file  => (
+              <File key={file} source={file} / >
+            )) }
 
-      </FilePond>
+        </FilePond>
+        <Typography>
+          { this.state.media.length > 0 ?
+            'Awesome! - you\'re finished. Click \'Review & Publish\' to preview your new listing & publish.'
+            :
+            'Add at least one Image to complete your listing and publish'
+          }
+        </Typography>
+      </React.Fragment>
     );
   }
 }

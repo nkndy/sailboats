@@ -51,6 +51,7 @@ function getStepContent(step) {
 class CreateListingStepper extends React.Component {
   state = {
     activeStep: 0,
+    hasMedia: false,
     values: {},
   };
 
@@ -87,6 +88,12 @@ class CreateListingStepper extends React.Component {
         }
       }
     ));
+  }
+
+  hasMedia = () => {
+    this.setState({
+      hasMedia: true,
+    })
   }
 
   render() {
@@ -149,7 +156,6 @@ class CreateListingStepper extends React.Component {
               <div className={classes.actionsContainer}>
                 <div>
                   <Button
-                    disabled={activeStep === 0}
                     onClick={this.handleBack}
                     className={classes.button}
                   >
@@ -176,7 +182,6 @@ class CreateListingStepper extends React.Component {
               <div className={classes.actionsContainer}>
                 <div>
                   <Button
-                    disabled={activeStep === 0}
                     onClick={this.handleBack}
                     className={classes.button}
                   >
@@ -199,20 +204,21 @@ class CreateListingStepper extends React.Component {
           <Step key={4}>
             <StepLabel>{getStepContent(4)}</StepLabel>
             <StepContent className={classes.stepContent}>
-              <StepFour user_id={this.props.user.uid} listingId={this.props.listingId}/>
+              <StepFour user_id={this.props.user.uid} listingId={this.props.listingId} isPremium={this.props.isPremium} hasMedia={this.hasMedia}/>
               <div className={classes.actionsContainer}>
                 <div>
-                  <Typography>Awesome! - you&quot;re finished. Click next to review your new listing & publish.</Typography>
                   {activeStep === 4 && (
                     <Paper square elevation={0} className={classes.publishContainer}>
                       <Button
-                        disabled={activeStep === 0}
                         onClick={this.handleBack}
                         className={classes.button}
                       >
                         Back
                       </Button>
-                      <Button className={classes.button}>
+                      <Button
+                        className={classes.button}
+                        disabled={this.state.hasMedia === false}
+                      >
                         Review & Publish
                       </Button>
                     </Paper>

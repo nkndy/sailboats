@@ -10,6 +10,8 @@
     "ajv": "^6.5.4",
     "fg-loadcss": "^2.0.1",
     "filepond": "^3.3.0",
+    "filepond-plugin-file-validate-size": "^2.0.0",
+    "filepond-plugin-file-validate-type": "^1.2.0",
     "firebase": "^5.5.4",
     "firebaseui": "^3.4.1",
     "google-map-react": "^1.0.9",

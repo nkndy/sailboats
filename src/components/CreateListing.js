@@ -44,21 +44,21 @@ class CreateListing extends React.Component {
       super(props);
       this.state = {
         listingId: null,
-        isPremium: false,
+        is_premium: false,
       }
       this.handleSubscriptionSelect = this.handleSubscriptionSelect.bind(this);
       this.handleNext = this.handleNext.bind(this);
       this.parseBool = this.parseBool.bind(this);
     }
     parseBool(value) {
-      let isPremium = this.state.isPremium;
-      let newValue = (value === isPremium.toString() ? isPremium : !isPremium);
+      let is_premium = this.state.is_premium;
+      let newValue = (value === is_premium.toString() ? is_premium : !is_premium);
       return newValue;
     }
     handleSubscriptionSelect(e) {
-      let isPremium = this.state.isPremium
+      let is_premium = this.state.is_premium
       this.setState({
-        isPremium: this.parseBool(e.target.value),
+        is_premium: this.parseBool(e.target.value),
       })
     }
     handleNext(values) {
@@ -107,6 +107,7 @@ class CreateListing extends React.Component {
               handleNext={this.handleNext}
               user={this.props.user}
               listingId={this.state.listingId}
+              isPremium={this.state.is_premium}
             />
           </Grid>
         </Grid>
