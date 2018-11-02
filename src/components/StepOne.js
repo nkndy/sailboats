@@ -24,7 +24,7 @@ let storedState = {
   year: '',
   model_name: '',
   boat_name: '',
-  hull_type: '',
+  hull_type: 'monohull',
 };
 
 class StepOne extends React.Component {
@@ -77,9 +77,10 @@ class StepOne extends React.Component {
           InputProps={{
             endAdornment: <InputAdornment position="end">ft</InputAdornment>,
           }}
+          autoComplete="off"
         />
         <TextField
-          type="number"
+          type="text"
           id="beam"
           label="Beam"
           value={this.state.beam}
@@ -87,11 +88,12 @@ class StepOne extends React.Component {
           onChange={this.handleChange('beam')}
           margin="normal"
           InputProps={{
-            endAdornment: <InputAdornment position="end">ft</InputAdornment>,
+            endAdornment: <InputAdornment position="end">ft' in"</InputAdornment>,
           }}
+          autoComplete="off"
         />
         <TextField
-          type="number"
+          type="text"
           id="draft"
           label="Draft"
           value={this.state.draft}
@@ -99,8 +101,9 @@ class StepOne extends React.Component {
           onChange={this.handleChange('draft')}
           margin="normal"
           InputProps={{
-            endAdornment: <InputAdornment position="end">ft</InputAdornment>,
+            endAdornment: <InputAdornment position="end">ft' in"</InputAdornment>,
           }}
+          autoComplete="off"
         />
         <TextField
           required
@@ -110,6 +113,7 @@ class StepOne extends React.Component {
           className={classes.textField}
           onChange={this.handleChange('manufacturer')}
           margin="normal"
+          autoComplete="off"
         />
         <TextField
           type="number"
@@ -119,6 +123,7 @@ class StepOne extends React.Component {
           className={classes.textField}
           onChange={this.handleChange('year')}
           margin="normal"
+          autoComplete="off"
         />
         <TextField
           id="model_name"
@@ -127,6 +132,7 @@ class StepOne extends React.Component {
           className={classes.textField}
           onChange={this.handleChange('model_name')}
           margin="normal"
+          autoComplete="off"
         />
         <TextField
           id="boat_name"
@@ -136,6 +142,7 @@ class StepOne extends React.Component {
           onChange={this.handleChange('boat_name')}
           helperText="eg. S/V Tigan"
           margin="normal"
+          autoComplete="off"
         />
         <HullTypeRadioSelect updateHullType={this.updateHullType} storedValue={storedState.hull_type} />
       </form>

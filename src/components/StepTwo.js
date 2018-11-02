@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import ConditionRadioSelect from './ConditionRadioSelect';
 import LocationInput from './LocationInput'
+import NumberFormat from 'react-number-format';
 
 const styles = theme => ({
   container: {
@@ -22,6 +23,25 @@ let storedState = {
   location: '',
   condition: '',
 };
+
+function NumberFormatCustom(props) {
+  const { inputRef, onChange, ...other } = props;
+
+  return (
+    <NumberFormat
+      {...other}
+      getInputRef={inputRef}
+      onValueChange={values => {
+        onChange({
+          target: {
+            value: values.value,
+          },
+        });
+      }}
+      thousandSeparator
+    />
+  );
+}
 
 class StepTwo extends React.Component {
   constructor(props) {
@@ -60,8 +80,6 @@ class StepTwo extends React.Component {
       <form className={classes.container} noValidate autoComplete="off">
         <div>Let potential know what you are looking for:</div>
         <TextField
-          required
-          type="number"
           id="asking-price"
           label="Asking Price"
           value={this.state.asking_price}
@@ -70,6 +88,7 @@ class StepTwo extends React.Component {
           margin="normal"
           InputProps={{
             startAdornment: <InputAdornment position="start">$</InputAdornment>,
+            inputComponent: NumberFormatCustom,
           }}
         />
         <LocationInput updateLocation={this.updateLocation} storedValue={storedState.location} />

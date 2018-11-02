@@ -3,15 +3,12 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import green from '@material-ui/core/colors/green';
 import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
 
 const styles = {
-  root: {
-    color: green[600],
-    '&$checked': {
-      color: green[500],
-    },
-  },
-  checked: {},
 };
 
 class RadioButtons extends React.Component {
@@ -26,24 +23,45 @@ class RadioButtons extends React.Component {
     this.setState({ selectedValue: event.target.value });
   };
   render() {
+    const { classes } = this.props;
     return (
-      <div>
-        <Radio
-          checked={this.state.selectedValue === 'false'}
+      <FormControl component="fieldset" className={classes.formControl}>
+        <RadioGroup
+          aria-label="Ad Type"
+          name="adType"
+          className={classes.group}
+          value={this.state.value}
           onChange={this.handleChange}
-          value="false"
-          name="subscription-type-select"
-          aria-label="Standard"
-          label="test"
-        />
-        <Radio
-          checked={this.state.selectedValue === 'true'}
-          onChange={this.handleChange}
-          value="true"
-          name="subscription-type-select"
-          aria-label="Premium"
-        />
-      </div>
+        >
+          <FormControlLabel
+            value="standard"
+            control={
+              <Radio
+                checked={this.state.selectedValue === 'false'}
+                onChange={this.handleChange}
+                value="false"
+                name="subscription-type-select"
+                aria-label="Standard"
+                label="test"
+              />
+            }
+            label="Standard Listing"
+          />
+          <FormControlLabel
+            value="premium"
+            control={
+              <Radio
+                checked={this.state.selectedValue === 'true'}
+                onChange={this.handleChange}
+                value="true"
+                name="subscription-type-select"
+                aria-label="Premium"
+              />
+            }
+            label="Premium Listing"
+          />
+        </RadioGroup>
+      </FormControl>
     );
   }
 }
