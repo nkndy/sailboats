@@ -156,6 +156,7 @@ class CreateListingStepper extends React.Component {
                     Back
                   </Button>
                   <Button
+                    disabled={ (this.state.values.asking_price === undefined || this.state.values.asking_price === '' ) || ( this.state.values.location === undefined || this.state.values.location === '') }
                     variant="contained"
                     color="primary"
                     onClick={this.handleNext}
@@ -182,6 +183,7 @@ class CreateListingStepper extends React.Component {
                     Back
                   </Button>
                   <Button
+                    disabled={( this.state.values.description === undefined || this.state.values.description === '' ) || ( this.state.values.accepts_email === false && ( this.state.values.accepts_phone === false || this.state.values.phone_number === '' )) }
                     variant="contained"
                     color="primary"
                     onClick={this.handleNext}

@@ -56,15 +56,15 @@ class Input extends React.Component {
 
 class EmailContactInput extends React.Component {
   state = {
-    acceptsEmail: true,
+    accepts_email: true,
     email: this.props.user_email,
   };
 
   handleToggle = () => {
-    const acceptsEmail = this.state.acceptsEmail;
-    const newChecked = !acceptsEmail;
+    const accepts_email = this.state.accepts_email;
+    const newChecked = !accepts_email;
     this.setState({
-      acceptsEmail: newChecked,
+      accepts_email: newChecked,
     });
   };
 
@@ -84,7 +84,7 @@ class EmailContactInput extends React.Component {
     return (
       <ListItem role={undefined} dense>
         <Checkbox
-          checked={this.state.acceptsEmail}
+          checked={this.state.accepts_email}
           onClick={this.handleToggle}
         />
         <ListItemText primary={this.props.user_email} />

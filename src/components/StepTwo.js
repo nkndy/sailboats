@@ -86,6 +86,7 @@ class StepTwo extends React.Component {
           className={classes.textField}
           onChange={this.updateAskingPrice('asking_price')}
           margin="normal"
+          required
           InputProps={{
             startAdornment: <InputAdornment position="start">$</InputAdornment>,
             inputComponent: NumberFormatCustom,

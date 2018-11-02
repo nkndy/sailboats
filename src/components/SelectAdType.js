@@ -45,7 +45,7 @@ class RadioButtons extends React.Component {
                 label="test"
               />
             }
-            label="Standard Listing"
+            label="Free Standard Listing"
           />
           <FormControlLabel
             value="premium"
@@ -58,7 +58,7 @@ class RadioButtons extends React.Component {
                 aria-label="Premium"
               />
             }
-            label="Premium Listing"
+            label="Featured Premium Listing ($19/mo)"
           />
         </RadioGroup>
       </FormControl>

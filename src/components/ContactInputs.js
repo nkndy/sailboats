@@ -22,8 +22,8 @@ const styles = theme => ({
 class ContactInputs extends React.Component {
   state = {
     dense: false,
-    acceptsEmail: true,
-    acceptsPhone: false,
+    accepts_email: true,
+    accepts_phone: false,
   };
 
   updateState = input => {

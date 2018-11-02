@@ -16,9 +16,13 @@ const styles = theme => ({
   },
 });
 
+let storedState = {
+  description: '',
+};
+
 class StepThree extends Component {
   state = {
-    description: '',
+    description: storedState.description,
     email: this.props.user_email,
   };
 
@@ -40,6 +44,7 @@ class StepThree extends Component {
   componentDidUpdate(prevProps, prevState) {
     if ( this.state !== prevState ) {
       this.props.updateValues(this.state);
+      storedState.description = this.state.description;
     }
   }
 
@@ -51,6 +56,7 @@ class StepThree extends Component {
         <TextField
           id="multiline-static"
           label="Description"
+          value={storedState.description}
           multiline
           rows="4"
           className={classes.textField}

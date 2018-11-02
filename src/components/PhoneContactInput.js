@@ -18,11 +18,16 @@ const styles = theme => ({
   },
 });
 
+let storedState = {
+  accepts_phone: false,
+  phone_number: '',
+}
+
 class Input extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      phone_number: '',
+      phone_number: storedState.phone_number,
     }
   }
 
@@ -47,7 +52,7 @@ class Input extends React.Component {
         name="phone"
         autoComplete="off"
         margin="none"
-        value={this.state.phone_number}
+        value={storedState.phone_number}
         onChange={this.handleChange('phone_number')}
         fullWidth
       />
@@ -57,15 +62,15 @@ class Input extends React.Component {
 
 class PhoneContactInput extends React.Component {
   state = {
-    acceptsPhone: false,
-    phone_number: '',
+    accepts_phone: storedState.accepts_phone,
+    phone_number: storedState.phone_number,
   };
 
   handleToggle = () => {
-    const acceptsPhone = this.state.acceptsPhone;
-    const newState = !acceptsPhone;
+    const accepts_phone = this.state.accepts_phone;
+    const newState = !accepts_phone;
     this.setState({
-      acceptsPhone: newState,
+      accepts_phone: newState,
     });
   };
 
@@ -78,6 +83,7 @@ class PhoneContactInput extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     if ( this.state !== prevState ) {
       this.props.updateParentState(this.state);
+      storedState = this.state;
     }
   }
 
@@ -87,7 +93,7 @@ class PhoneContactInput extends React.Component {
     return (
       <ListItem role={undefined} dense>
         <Checkbox
-          checked={this.state.acceptsPhone}
+          checked={storedState.accepts_phone}
           onClick={this.handleToggle}
         />
         <ListItemText primary={<Input updateParentState={this.handleInput} />} />
