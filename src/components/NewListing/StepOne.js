@@ -74,6 +74,7 @@ class StepOne extends React.Component {
           className={classes.textField}
           onChange={this.handleChange('length')}
           margin="normal"
+          autoComplete="off"
           InputProps={{
             endAdornment: <InputAdornment position="end">ft</InputAdornment>,
           }}
@@ -87,6 +88,7 @@ class StepOne extends React.Component {
           className={classes.textField}
           onChange={this.handleChange('beam')}
           margin="normal"
+          autoComplete="off"
           InputProps={{
             endAdornment: <InputAdornment position="end">ft' in"</InputAdornment>,
           }}
@@ -100,6 +102,7 @@ class StepOne extends React.Component {
           className={classes.textField}
           onChange={this.handleChange('draft')}
           margin="normal"
+          autoComplete="off"
           InputProps={{
             endAdornment: <InputAdornment position="end">ft' in"</InputAdornment>,
           }}

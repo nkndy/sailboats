@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import firebase from '../firebase.js';
+import firebase from '../../firebase.js';
 import { FilePond, File, registerPlugin } from 'react-filepond';
 import 'filepond/dist/filepond.min.css';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import CreateListingStepper from './CreateListingStepper';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import firebase from '../firebase';
+import firebase from '../../firebase';
 
 const db = firebase.firestore();
 const settings = {timestampsInSnapshots: true};

@@ -13,6 +13,7 @@ import StepOne from './StepOne';
 import StepTwo from './StepTwo';
 import StepThree from './StepThree';
 import StepFour from './StepFour';
+import { Link } from "react-router-dom";
 
 const styles = theme => ({
   root: {
@@ -106,7 +107,7 @@ class CreateListingStepper extends React.Component {
           <Step key={0}>
             <StepLabel>{getStepContent(0)}</StepLabel>
             <StepContent className={classes.stepContent}>
-              <SelectAdType handleSubscriptionSelect={this.props.handleSubscriptionSelect} document_id={this.props.document_id} />
+              <SelectAdType handleSubscriptionSelect={this.props.handleSubscriptionSelect} />
               <div className={classes.actionsContainer}>
                 <div style={{paddingLeft: '2px',}}>
                   <Button
@@ -215,12 +216,14 @@ class CreateListingStepper extends React.Component {
                       >
                         Back
                       </Button>
-                      <Button
-                        className={classes.button}
-                        disabled={this.state.hasMedia === false}
-                      >
-                        Review & Publish
-                      </Button>
+                      <Link to={`/review-listing/${this.props.listingId}`}>
+                        <Button
+                          className={classes.button}
+                          disabled={this.state.hasMedia === false}
+                        >
+                          Review & Publish
+                        </Button>
+                      </Link>
                     </Paper>
                   )}
                 </div>

@@ -21,7 +21,7 @@ const styles = theme => ({
 let storedState = {
   asking_price: '',
   location: '',
-  condition: '',
+  condition: 'Good',
 };
 
 function NumberFormatCustom(props) {
