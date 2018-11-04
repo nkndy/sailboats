@@ -1,10 +1,18 @@
-import React, { Component } from 'react';
+import firebase from '../../firebase';
 
-export default class Listing extends Component {
-  constructor(props) {
-    super(props);
+const db = firebase.firestore();
+const settings = {timestampsInSnapshots: true};
+db.settings(settings);
+let posts = db.collection('Posts');
+
+export default class Listing {
+  constructor(listingId) {
+    posts.doc(listingId).get()
+        .then((querySnapshot) => {
+        this.data = querySnapshot.data();
+    });
   }
-  updateListing = () => {
-    console.log('update logic here');
+  updateListingData() {
+    console.log('this.data');
   }
 }

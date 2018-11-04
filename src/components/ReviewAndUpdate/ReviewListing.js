@@ -6,6 +6,13 @@ import Button from '@material-ui/core/Button';
 import Listing from './Listing';
 import SaveIcon from '@material-ui/icons/Save';
 
+import firebase from '../../firebase';
+
+const db = firebase.firestore();
+const settings = {timestampsInSnapshots: true};
+db.settings(settings);
+let posts = db.collection('Posts');
+
 const styles = theme => ({
   '@global': {
     body: {
@@ -39,10 +46,16 @@ class ReviewListing extends React.Component {
       super(props);
     };
     componentDidMount() {
+      posts.doc(this.props.match.params.listingId).get()
+          .then((querySnapshot) => {
+          let data = querySnapshot.data();
+          this.setState({
+              data
+          });
+      });
     }
     render() {
         const { classes } = this.props;
-        let listing = new Listing();
         return(
           <React.Fragment>
           <div className={classNames(classes.layout)}>
@@ -51,7 +64,7 @@ class ReviewListing extends React.Component {
               variant="contained"
               size="small"
               className={classes.button}
-              onClick={listing.updateListing}
+              onClick={() => console.log(this.state)}
             >
               <SaveIcon className={classNames(classes.leftIcon, classes.iconSmall)} />
               Save
