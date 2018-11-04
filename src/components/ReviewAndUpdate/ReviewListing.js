@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import Button from '@material-ui/core/Button';
-import Listing from './Listing';
 import SaveIcon from '@material-ui/icons/Save';
-
 import firebase from '../../firebase';
+
+import SelectFeaturedImage from './SelectFeaturedImage'
 
 const db = firebase.firestore();
 const settings = {timestampsInSnapshots: true};
@@ -57,20 +57,19 @@ class ReviewListing extends React.Component {
     render() {
         const { classes } = this.props;
         return(
-          <React.Fragment>
-          <div className={classNames(classes.layout)}>
-            <h4 className={classNames(classes.tagline)}>Review And Update</h4>
-            <Button
-              variant="contained"
-              size="small"
-              className={classes.button}
-              onClick={() => console.log(this.state)}
-            >
-              <SaveIcon className={classNames(classes.leftIcon, classes.iconSmall)} />
-              Save
-            </Button>
-          </div>
-          </React.Fragment>
+            <div className={classNames(classes.layout)}>
+              <h4 className={classNames(classes.tagline)}>Review And Update</h4>
+              <SelectFeaturedImage />
+              <Button
+                variant="contained"
+                size="small"
+                className={classes.button}
+                onClick={() => console.log(this.state)}
+              >
+                <SaveIcon className={classNames(classes.leftIcon, classes.iconSmall)} />
+                Save
+              </Button>
+            </div>
         );
     }
 }
