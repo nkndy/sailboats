@@ -33,7 +33,6 @@ class MediaUploader extends React.Component {
 
   handleProcessing ( fieldName , file , metadata , load , error , progress , abort ) {
     // handle file upload here
-    console.log();
     const fileUpload = file;
     const storageRef = firebase.storage().ref( `${this.props.user_id}/${file.name}` );
     let uploadTask = storageRef.put(fileUpload);
@@ -45,8 +44,6 @@ class MediaUploader extends React.Component {
     uploadTask.on('state_changed', (snapshot) => {
       // Observe state change events such as progress, pause, and resume
       // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-      console.log(snapshot);
-
       let lengthComputable = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
       progress(lengthComputable, snapshot.bytesTransferred, snapshot.totalBytes);
       switch (snapshot.state) {
@@ -64,25 +61,30 @@ class MediaUploader extends React.Component {
       // Handle successful uploads on complete
       // For instance, get the download URL: https://firebasestorage.googleapis.com/...
       uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-          this.setState({
-            media: [...this.state.media,
-              {
-                featured_media: false,
-                media_url: downloadURL,
-              }
-            ]
+          let checkType = (file) => {
+            if (file.startsWith('image')) {
+              return 1
+            } else {
+              return 2
+            }
+          }
+          posts.doc(this.props.listingId).collection('Media').add({
+            featured_media: false,
+            media_url: downloadURL,
+            media_type: checkType(file.type),
+          }).then((docRef) => {
+            this.setState({
+              media: [...this.state.media,
+                docRef.id,
+              ]
+            });
+            load(downloadURL);
+            this.props.hasMedia();
+          }).catch((error) => {
+            console.error('error adding doc: ', error)
           });
-          load(downloadURL);
-          this.props.hasMedia();
       });
     });
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if ( this.state !== prevState && this.state.listingId !== null ) {
-      posts.doc(this.props.listingId).set({media: this.state.media}, { merge: true }).then(() => {
-      });
-    }
   }
 
   render() {

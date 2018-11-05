@@ -45,39 +45,51 @@ class ReviewListing extends React.Component {
     constructor(props){
       super(props);
       this.state = {
-        data: {
-          media: [],
-        },
-        selectedImage: 0,
+        media: [],
+        selectedImage: '',
       }
     };
     componentDidMount() {
-      posts.doc(this.props.match.params.listingId).get()
-          .then((querySnapshot) => {
-          let data = querySnapshot.data();
+      posts.doc(this.props.match.params.listingId).collection('Media').get()
+        .then((querySnapshot) => {
+          let media = [];
+          let first = true;
+          querySnapshot.forEach((doc) => {
+            media.push({
+              id: doc.id,
+              data: doc.data(),
+            })
+            if (first) {
+              first = false;
+              this.setState({
+                selectedImage: doc.id,
+              })
+            }
+          });
           this.setState({
-              data
+              media: media,
           });
       });
     }
     setFeaturedImage = index => {
+      let selectedImage = this.state.media[index].id
       this.setState({
-        selectedImage: index,
+        selectedImage: selectedImage,
       })
     }
     updatePost = () => {
-      // posts.doc(this.props.match.params.listingId).set({
-      //     media[this.state.selectedImage].featured_image = true,
-      // }), { merge: true }).then(() => {
-      //   console.log('link here');
-      // });
+      //if post has already been published needs to remove old featured image bool from doc and update to false before applying 
+      let docRef = posts.doc(this.props.match.params.listingId);
+      docRef.collection('Media').doc(this.state.selectedImage).update({
+        featured_media: true,
+      })
     }
     render() {
         const { classes } = this.props;
         return(
             <div className={classNames(classes.layout)}>
               <h4 className={classNames(classes.tagline)}>Review And Update</h4>
-              <SelectFeaturedImage imagesArray={this.state.data.media} setFeaturedImage={this.setFeaturedImage}/>
+              <SelectFeaturedImage imagesArray={this.state.media} setFeaturedImage={this.setFeaturedImage}/>
               <Button
                 variant="contained"
                 size="small"

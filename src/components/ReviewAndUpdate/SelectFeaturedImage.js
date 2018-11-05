@@ -12,7 +12,10 @@ const styles = theme => ({
   },
   selected : {
     border: '2px solid black',
-  }
+  },
+  notSelected : {
+    border: '2px solid transparent',
+  },
 });
 
 class SelectFeaturedImage extends React.Component {
@@ -46,9 +49,9 @@ class SelectFeaturedImage extends React.Component {
                 <Grid container spacing={8}>
                 {this.state.imagesArray.map((image, index) => {
                   return(
-                    <Grid item xs={4} sm={3} key={index} className={ (index === this.state.selectedImage) ? classes.selected : null } >
+                    <Grid item xs={4} sm={3} key={index} className={ (index === this.state.selectedImage) ? classes.selected : classes.notSelected } >
                       <Paper className={classes.paper} elevation={0} onClick={() => this.select(index)}>
-                        <img className={classes.imgSelect} src={image.media_url}/>
+                        <img className={classes.imgSelect} src={image.data.media_url}/>
                       </Paper>
                     </Grid>
                   )}
