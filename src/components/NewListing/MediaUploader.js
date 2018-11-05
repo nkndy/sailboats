@@ -65,7 +65,12 @@ class MediaUploader extends React.Component {
       // For instance, get the download URL: https://firebasestorage.googleapis.com/...
       uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
           this.setState({
-            media: [...this.state.media, {media_url: downloadURL}]
+            media: [...this.state.media,
+              {
+                featured_media: false,
+                media_url: downloadURL,
+              }
+            ]
           });
           load(downloadURL);
           this.props.hasMedia();

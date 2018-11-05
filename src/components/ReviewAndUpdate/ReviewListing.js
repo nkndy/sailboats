@@ -44,6 +44,12 @@ const styles = theme => ({
 class ReviewListing extends React.Component {
     constructor(props){
       super(props);
+      this.state = {
+        data: {
+          media: [],
+        },
+        selectedImage: 0,
+      }
     };
     componentDidMount() {
       posts.doc(this.props.match.params.listingId).get()
@@ -54,17 +60,29 @@ class ReviewListing extends React.Component {
           });
       });
     }
+    setFeaturedImage = index => {
+      this.setState({
+        selectedImage: index,
+      })
+    }
+    updatePost = () => {
+      // posts.doc(this.props.match.params.listingId).set({
+      //     media[this.state.selectedImage].featured_image = true,
+      // }), { merge: true }).then(() => {
+      //   console.log('link here');
+      // });
+    }
     render() {
         const { classes } = this.props;
         return(
             <div className={classNames(classes.layout)}>
               <h4 className={classNames(classes.tagline)}>Review And Update</h4>
-              <SelectFeaturedImage />
+              <SelectFeaturedImage imagesArray={this.state.data.media} setFeaturedImage={this.setFeaturedImage}/>
               <Button
                 variant="contained"
                 size="small"
                 className={classes.button}
-                onClick={() => console.log(this.state)}
+                onClick={() => this.updatePost()}
               >
                 <SaveIcon className={classNames(classes.leftIcon, classes.iconSmall)} />
                 Save
