@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import firebase from '../../firebase';
+import LocationMap from './LocationMap';
 
 import SelectFeaturedImage from './SelectFeaturedImage'
 
@@ -78,7 +79,7 @@ class ReviewListing extends React.Component {
       })
     }
     updatePost = () => {
-      //if post has already been published needs to remove old featured image bool from doc and update to false before applying 
+      //if post has already been published needs to remove old featured image bool from doc and update to false before applying
       let docRef = posts.doc(this.props.match.params.listingId);
       docRef.collection('Media').doc(this.state.selectedImage).update({
         featured_media: true,
@@ -90,6 +91,8 @@ class ReviewListing extends React.Component {
             <div className={classNames(classes.layout)}>
               <h4 className={classNames(classes.tagline)}>Review And Update</h4>
               <SelectFeaturedImage imagesArray={this.state.media} setFeaturedImage={this.setFeaturedImage}/>
+              <LocationMap />
+              <h1>Data Inputs</h1>
               <Button
                 variant="contained"
                 size="small"

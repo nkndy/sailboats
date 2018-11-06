@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import ReactPlayer from 'react-player'
 
 const styles = theme => ({
   imgSelect: {
@@ -10,11 +11,19 @@ const styles = theme => ({
     width: '100%',
     height: '125px',
   },
+  imgFeatured: {
+    objectFit: 'cover',
+    width: '100%',
+    height: '325px',
+  },
   selected : {
     border: '2px solid black',
   },
   notSelected : {
     border: '2px solid transparent',
+  },
+  paper: {
+    borderRadius: '0px'
   },
 });
 
@@ -43,7 +52,18 @@ class SelectFeaturedImage extends React.Component {
         return(
             <Grid container spacing={8}>
               <Grid item xs={12} sm={4}>
-                <Paper className={classes.paper}>none</Paper>
+                <Paper className={classes.paper}>
+                  { this.state.imagesArray.length > 0 ?
+                    this.state.imagesArray[this.state.selectedImage].data.media_type === 1 ? (
+                      <img className={classes.imgFeatured} src={this.state.imagesArray[this.state.selectedImage].data.media_url}/>
+                    ) : (
+                      <ReactPlayer url={this.state.imagesArray[this.state.selectedImage].data.media_url} controls={true} width="100%" height="auto"/>
+                    )
+                  :
+                  //add skeleton loading element here
+                  null
+                  }
+                </Paper>
               </Grid>
               <Grid item xs={12} sm={8}>
                 <Grid container spacing={8}>
