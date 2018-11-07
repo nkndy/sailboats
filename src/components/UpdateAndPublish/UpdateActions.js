@@ -5,11 +5,23 @@ import classNames from 'classnames';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import Grid from '@material-ui/core/Grid';
+import {withRouter} from 'react-router-dom';
+import CheckoutModal from './CheckoutModal';
 
 const styles = theme => ({
 });
 
 class UpdateActions extends React.Component {
+    constructor(props) {
+      super(props)
+    }
+    createPaymentMethod = () => {
+      this.props.history.push('/my-account')
+    }
+    updateSuccess = () => {
+      //needs error handling
+      this.props.updatePost();
+    }
     render() {
         const { classes } = this.props;
         return(
@@ -18,11 +30,12 @@ class UpdateActions extends React.Component {
               variant="contained"
               size="small"
               className={classes.button}
-              onClick={() => this.updatePost()}
+              onClick={() => this.updateSuccess()}
             >
               <SaveIcon className={classNames(classes.leftIcon, classes.iconSmall)} />
               Save
             </Button>
+            <CheckoutModal />
           </Grid>
         );
     }
@@ -32,4 +45,4 @@ UpdateActions.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(UpdateActions);
+export default withRouter(withStyles(styles)(UpdateActions));

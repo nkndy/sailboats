@@ -14,19 +14,46 @@ const styles = theme => ({
 });
 
 class ContactMethods extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        data: {},
+      }
+    }
+    static getDerivedStateFromProps(nextProps, prevState){
+       if(nextProps.data !== prevState.data && nextProps.data !== undefined){
+         return { data: nextProps.data};
+      }
+      else return null;
+    }
     render() {
         const { classes } = this.props;
         return(
           <div className={classes.contactButtonWrapper}>
-            <IconButton className={classes.contactButton} aria-label="Email">
-              <EmailIcon fontSize="inherit"/>
-            </IconButton>
-            <IconButton className={classes.contactButton} aria-label="Phone">
-              <PhoneIcon fontSize="inherit"/>
-            </IconButton>
+            {
+                this.state.data.accepts_email
+                ?
+                <IconButton className={classes.contactButton} aria-label="Email">
+                  <EmailIcon fontSize="inherit"/>
+                </IconButton>
+                :
+                ''
+            }
+            {
+                this.state.data.accepts_phone
+                ?
+                <IconButton className={classes.contactButton} aria-label="Phone">
+                  <PhoneIcon fontSize="inherit"/>
+                </IconButton>
+                :
+                ''
+            }
+            {/*
+              Add SMS
             <IconButton className={classes.contactButton} aria-label="Text">
-              <TextIcon fontSize="inherit"/>
+                <TextIcon fontSize="inherit"/>
             </IconButton>
+            */}
           </div>
         );
     }

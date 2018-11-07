@@ -83,11 +83,11 @@ class SelectFeaturedImage extends React.Component {
                     if ( index === 0 ) {
                       return(
                         <React.Fragment key={'fragment' + index}>
-                          <Grid container item xs={6} sm={4} key={'newImage' + index} justify="center" alignItems="center">
+                          {/*<Grid container item xs={6} sm={4} key={'newImage' + index} justify="center" alignItems="center">
                             <Paper className={classes.addImage} elevation={0}>
                               <MediaUploader user_id={this.state.user_id} listingId={this.state.listingId} isPremium={this.state.is_premium} hasMedia={this.hasMedia} />
                             </Paper>
-                          </Grid>
+                          </Grid>*/}
                           <Grid item xs={6} sm={4} key={index} className={ (index === this.state.selectedImage) ? classes.selected : classes.notSelected } >
                             <Paper className={classes.paper} elevation={0} onClick={() => this.select(index)}>
                               <img className={classes.imgSelect} src={image.data.media_url}/>
@@ -97,9 +97,19 @@ class SelectFeaturedImage extends React.Component {
                       );
                     } else {
                       return(
-                        <Grid item xs={6} sm={4} key={index} className={ (index === this.state.selectedImage) ? classes.selected : classes.notSelected } >
-                          <Paper className={classes.paper} elevation={0} onClick={() => this.select(index)}>
-                            <img className={classes.imgSelect} src={image.data.media_url}/>
+                        <Grid container item alignItems="center" xs={6} sm={4} key={index} onClick={() => this.select(index)} className={ (index === this.state.selectedImage) ? classes.selected : classes.notSelected } >
+                          <Paper className={classes.paper} elevation={0} >
+                            {
+                              image.data.media_type === 1 ?
+                              <img className={classes.imgSelect} src={image.data.media_url}/>
+                              :
+                              <ReactPlayer
+                                url={image.data.media_url}
+                                controls={false}
+                                width='100%'
+                                height='auto'
+                              />
+                            }
                           </Paper>
                         </Grid>
                       )

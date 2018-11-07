@@ -39,19 +39,20 @@ class DetailFields extends React.Component {
                 {this.state.data.manufacturer + " " + (this.state.data.model_name ? this.state.data.model_name + " " : '' ) + this.state.data.length + "'"}
               </Typography>
               <Typography variant="subheading" component="h3" gutterBottom>
-                {this.state.data.boat_name === null ? (this.state.data.location.name) : (this.state.data.boat_name + ", " + this.state.data.location.name)}
+                {this.state.data.boat_name != null ? (this.state.data.location.name) : (this.state.data.boat_name + ", " + this.state.data.location.name)}
               </Typography>
               <Typography variant="headline" component="h4" gutterBottom>
                 {"$" + this.state.data.asking_price}
               </Typography>
-              <ContactMethods />
+              <ContactMethods data={this.state.data} />
               <Typography variant="caption" component="p" gutterBottom>
                 {"Declared by owner to be in " + this.state.data.condition + " condition overall."}
               </Typography>
               <Typography variant="body1" component="p" gutterBottom>
                 {this.state.data.description}
               </Typography>
-              <ListingSocialIcons />
+              {/*// listing social icons currently have no inputs in create listing*/}
+              {/*<ListingSocialIcons />*/}
             </Paper>
           </Grid>
         );

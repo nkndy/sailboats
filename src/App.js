@@ -5,7 +5,7 @@ import AppBar from "./components/AppBar";
 import Landing from "./components/Landing";
 import Listings from "./components/Listings";
 import CreateListing from "./components/NewListing/CreateListing";
-import ReviewListing from "./components/ReviewAndUpdate/ReviewListing";
+import ReviewListing from "./components/UpdateAndPublish/ReviewListing";
 import Account from "./components/Account";
 import AccountDialogue from "./components/AccountDialogue";
 import DetailView from "./components/DetailView";

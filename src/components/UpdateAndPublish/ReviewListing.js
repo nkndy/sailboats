@@ -106,12 +106,12 @@ class ReviewListing extends React.Component {
                 {(this.state.data.active_post === null || this.state.data.active_post === false) ? ' & Publish' : ' & Update'}
             </Typography>
             <Grid container spacing={24}>
-              <SelectFeaturedImage imagesArray={this.state.media} setFeaturedImage={this.setFeaturedImage}/>
+              <SelectFeaturedImage imagesArray={this.state.media} setFeaturedImage={this.setFeaturedImage} />
               <LocationMap data={this.state.data.location} />
               <DetailFields data={this.state.data} />
             </Grid>
             <Grid container spacing={24}>
-              <UpdateActions />
+              <UpdateActions updatePost={this.updatePost} />
             </Grid>
           </div>
         );

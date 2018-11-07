@@ -24,6 +24,8 @@ class StepThree extends Component {
   state = {
     description: storedState.description,
     email: this.props.user_email,
+    accepts_email: true,
+    accepts_phone: false,
   };
 
   handleChangeMultiline = event => {
