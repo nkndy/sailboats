@@ -11,7 +11,7 @@ MapboxGL.accessToken = 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmb
 const styles = theme => ({
   container: {
     position: 'relative',
-    // overflow: 'hidden',
+    height: '300px',
   }
 });
 
@@ -40,7 +40,7 @@ class LocationMap extends React.Component {
     render() {
         const { classes } = this.props;
         const style = {
-          // position: 'absolute',
+          position: 'absolute',
           top: 0,
           bottom: 0,
           width: '100%',
@@ -51,7 +51,6 @@ class LocationMap extends React.Component {
           <Grid item xs={12} sm={4}>
               <div className={classes.container}>
                 <div ref={el => this.mapContainer = el} style={style} />
-                <h1>chat</h1>
               </div>
           </Grid>
         );
