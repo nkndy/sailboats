@@ -2,10 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
-import Button from '@material-ui/core/Button';
-import SaveIcon from '@material-ui/icons/Save';
 import firebase from '../../firebase';
 import LocationMap from './LocationMap';
+import Grid from '@material-ui/core/Grid';
+import DetailFields from './DetailFields';
+import UpdateActions from './UpdateActions';
+import Typography from '@material-ui/core/Typography';
 
 import SelectFeaturedImage from './SelectFeaturedImage'
 
@@ -48,9 +50,16 @@ class ReviewListing extends React.Component {
       this.state = {
         media: [],
         selectedImage: '',
+        data: {},
       }
     };
     componentDidMount() {
+      posts.doc(this.props.match.params.listingId).get()
+        .then((querySnapshot) => {
+          this.setState({
+              data: querySnapshot.data(),
+          });
+      });
       posts.doc(this.props.match.params.listingId).collection('Media').get()
         .then((querySnapshot) => {
           let media = [];
@@ -87,22 +96,24 @@ class ReviewListing extends React.Component {
     }
     render() {
         const { classes } = this.props;
+        if (!this.state.data.user) {
+          return null;
+        }
         return(
-            <div className={classNames(classes.layout)}>
-              <h4 className={classNames(classes.tagline)}>Review And Update</h4>
+          <div className={classNames(classes.layout)}>
+            <Typography variant="headline" component="p" className={classNames(classes.tagline)}>
+              Review
+                {(this.state.data.active_post === null || this.state.data.active_post === false) ? ' & Publish' : ' & Update'}
+            </Typography>
+            <Grid container spacing={24}>
               <SelectFeaturedImage imagesArray={this.state.media} setFeaturedImage={this.setFeaturedImage}/>
-              <LocationMap />
-              <h1>Data Inputs</h1>
-              <Button
-                variant="contained"
-                size="small"
-                className={classes.button}
-                onClick={() => this.updatePost()}
-              >
-                <SaveIcon className={classNames(classes.leftIcon, classes.iconSmall)} />
-                Save
-              </Button>
-            </div>
+              <LocationMap data={this.state.data.location} />
+              <DetailFields data={this.state.data} />
+            </Grid>
+            <Grid container spacing={24}>
+              <UpdateActions />
+            </Grid>
+          </div>
         );
     }
 }

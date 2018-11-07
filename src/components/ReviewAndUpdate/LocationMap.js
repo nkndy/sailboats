@@ -2,42 +2,58 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import MapboxGL from 'mapbox-gl';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
 
 MapboxGL.accessToken = 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA';
 
 const styles = theme => ({
+  container: {
+    position: 'relative',
+    // overflow: 'hidden',
+  }
 });
 
 class LocationMap extends React.Component {
     constructor(props){
       super(props);
       this.state = {
-        lat: 0,
-        lng: 0,
-        zoom: 1.5,
+        data: {},
       }
     };
     componentDidMount() {
-      const { lng, lat, zoom } = this.state;
+      let lat = 1;
+      let lng = 2;
+      let zoom = 2;
       const map = new MapboxGL.Map({
         container: this.mapContainer,
         style: 'mapbox://styles/mapbox/streets-v9',
-        center: [lng, lat],
-        zoom
       });
+    }
+    static getDerivedStateFromProps(nextProps, prevState){
+       if(nextProps.data !== prevState.data && nextProps.data !== undefined){
+         return { data: nextProps.data};
+      }
+      else return null;
     }
     render() {
         const { classes } = this.props;
+        const style = {
+          // position: 'absolute',
+          top: 0,
+          bottom: 0,
+          width: '100%',
+          borderRadius: '3px'
+        };
         const { lng, lat, zoom } = this.state;
         return(
-          <React.Fragment>
-          <div>
-            <div className="inline-block absolute top left mt12 ml12 bg-darken75 color-white z1 py6 px12 round-full txt-s txt-bold">
-              <div>{`Longitude: ${lng} Latitude: ${lat} Zoom: ${zoom}`}</div>
-            </div>
-            <div ref={el => this.mapContainer = el} className="absolute top right left bottom" />
-          </div>
-          </React.Fragment>
+          <Grid item xs={12} sm={4}>
+              <div className={classes.container}>
+                <div ref={el => this.mapContainer = el} style={style} />
+                <h1>chat</h1>
+              </div>
+          </Grid>
         );
     }
 }

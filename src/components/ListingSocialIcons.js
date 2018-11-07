@@ -8,13 +8,11 @@ import Icon from '@material-ui/core/Icon';
 const styles = theme => ({
   root: {
     display: 'flex',
-    justifyContent: 'center',
     alignItems: 'flex-end',
   },
   icon: {
-    marginLeft: theme.spacing.unit * 2,
-    marginRight: theme.spacing.unit * 2,
-    marginTop: theme.spacing.unit * 1.25,
+    marginRight: theme.spacing.unit * 4,
+    marginTop: theme.spacing.unit * 2,
     overflow: 'visible',
   },
   iconHover: {

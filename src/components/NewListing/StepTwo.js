@@ -58,7 +58,7 @@ class StepTwo extends React.Component {
   };
 
   updateLocation = input => {
-    this.setState({ location: {name: input.label, coords: input.value}} )
+    this.setState({ location: { name: input.label, coords: input.value }} )
     storedState.location = { name: input.label, coords: input.value };
   }
 

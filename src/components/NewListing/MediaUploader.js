@@ -120,6 +120,7 @@ class MediaUploader extends React.Component {
             )) }
 
         </FilePond>
+        { this.props.inReview ?
         <Typography>
           { this.state.media.length > 0 ?
             'Awesome! - you\'re finished. Click \'Review & Publish\' to preview your new listing & publish.'
@@ -127,6 +128,9 @@ class MediaUploader extends React.Component {
             'Add at least one Image to complete your listing and publish'
           }
         </Typography>
+        :
+        ''
+        }
       </React.Fragment>
     );
   }
