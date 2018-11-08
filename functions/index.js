@@ -1,18 +1,3 @@
-/**
- * Copyright 2016 Google Inc. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 'use strict';
 
 const functions = require('firebase-functions');
@@ -23,6 +8,58 @@ const stripe = require('stripe')(functions.config().stripe.token);
 const currency = functions.config().stripe.currency || 'USD';
 
 const db = admin.firestore();
+
+const express = require('express');
+const cors = require('cors')({origin: true});
+const app = express();
+
+function charge(req, res) {
+    const body = JSON.parse(req.body);
+    const token = body.token.id;
+    const amount = body.charge.amount;
+    const currency = body.charge.currency;
+
+    // Charge card
+    stripe.charges.create({
+        amount,
+        currency,
+        description: 'Firebase Example',
+        source: token,
+    }).then(charge => {
+        send(res, 200, {
+            message: 'Success',
+            charge,
+        });
+    }).catch(err => {
+        console.log(err);
+        send(res, 500, {
+            error: err.message,
+        });
+    });
+}
+
+function send(res, code, body) {
+    res.send({
+        statusCode: code,
+        headers: {'Access-Control-Allow-Origin': '*'},
+        body: JSON.stringify(body),
+    });
+}
+
+app.use(cors);
+app.post('/', (req, res) => {
+    // Catch any unexpected errors to prevent crashing
+    try {
+        charge(req, res);
+    } catch(e) {
+        console.log(e);
+        send(res, 500, {
+            error: `The server received an unexpected error. Please try again and contact the site admin if the error persists.`,
+        });
+    }
+});
+
+exports.charge = functions.https.onRequest(app);
 
 // When a user is created, register them with Stripe
 exports.createStripeCustomer = functions.auth.user().onCreate((user) => {
