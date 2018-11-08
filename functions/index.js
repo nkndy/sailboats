@@ -30,7 +30,7 @@ exports.createStripeCustomer = functions.auth.user().onCreate((user) => {
     email: user.email,
   }).then((customer) => {
     let data = {
-      stripe_id: customer.id,
+      stripe_customer: customer,
       email: user.email
     };
     return db.collection('Users').doc(`${user.uid}`).set(data);
