@@ -9,9 +9,11 @@ const currency = functions.config().stripe.currency || 'USD';
 
 const db = admin.firestore();
 
-const express = require('express');
-const cors = require('cors')({origin: true});
-const app = express();
+const app = require('express')();
+const cors = require('cors');
+app.use(cors());
+app.use(require("body-parser").text());
+app.options('*', cors())
 
 function charge(req, res) {
     const body = JSON.parse(req.body);
@@ -46,8 +48,7 @@ function send(res, code, body) {
     });
 }
 
-app.use(cors);
-app.post('/', (req, res) => {
+app.post('/charge', (req, res) => {
     // Catch any unexpected errors to prevent crashing
     try {
         charge(req, res);
