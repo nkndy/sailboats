@@ -51,6 +51,7 @@ class ReviewListing extends React.Component {
         media: [],
         selectedImage: '',
         data: {},
+        paymentSources: [],
       }
     };
     componentDidMount() {
@@ -80,6 +81,16 @@ class ReviewListing extends React.Component {
               media: media,
           });
       });
+      // try {
+      //   let response = await fetch("https://us-central1-sailboats-445f9.cloudfunctions.net/charge", {
+      //     method: "GET"
+      //   })
+      //   let data = await response.json();
+      //   if (response.ok) console.log( "Payment Methods: ", data);
+      //   // if (response.ok) this.setState({complete: true});
+      // } catch (e) {
+      //   console.log(e);
+      // }
     }
     setFeaturedImage = index => {
       let selectedImage = this.state.media[index].id

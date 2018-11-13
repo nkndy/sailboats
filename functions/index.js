@@ -13,10 +13,35 @@ const app = express();
 const cors = require('cors')({origin: true});
 
 app.get('/', function (req, res) {
-  res.send('hello world')
+  try {
+      res.send(
+        {"response": "GET request to root"}
+      );
+      // charge(req, res);
+  } catch(e) {
+      console.log('error: ' + e);
+      send(res, 500, {
+          error: `The server received an unexpected error. Please try again and contact the site admin if the error persists.`,
+      });
+  }
 })
 
-exports.hello = functions.https.onRequest((req, res) => {
+app.post('/', (req, res) => {
+  // Catch any unexpected errors to prevent crashing
+  try {
+      res.send(
+        {"response": "POST request to root"}
+      );
+      // charge(req, res);
+  } catch(e) {
+      console.log('error: ' + e);
+      send(res, 500, {
+          error: `The server received an unexpected error. Please try again and contact the site admin if the error persists.`,
+      });
+  }
+});
+
+exports.charge = functions.https.onRequest((req, res) => {
 	// https://some-firebase-app-id.cloudfunctions.net/route
 	// without trailing "/" will have req.path = null, req.url = null
 	// which won't match to your app.get('/', ...) route
@@ -61,6 +86,7 @@ exports.hello = functions.https.onRequest((req, res) => {
 //         body: JSON.stringify(body),
 //     });
 // }
+
 // To keep on top of errors, we should raise a verbose error report with Stackdriver rather
 // than simply relying on console.error. This will calculate users affected + send you email
 // alerts, if you've opted into receiving them.

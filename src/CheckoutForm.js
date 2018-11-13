@@ -11,7 +11,6 @@ class CheckoutForm extends Component {
   async submit(ev) {
       try {
         let {token} = await this.props.stripe.createToken({name: "Name"});
-        console.log({token});
         // let response = await fetch("https://us-central1-sailboats-445f9.cloudfunctions.net/charge", {
         //   method: "POST",
         //   headers: {"Content-Type": "text/plain"},
@@ -23,11 +22,11 @@ class CheckoutForm extends Component {
         //     }
         //   }
         // });
-        let response = await fetch("https://us-central1-sailboats-445f9.cloudfunctions.net/hello", {
-          method: "GET"
+        let response = await fetch("https://us-central1-sailboats-445f9.cloudfunctions.net/charge", {
+          method: "POST"
         })
-        console.log(response);
-        if (response.ok) console.log( "Purchase Complete!: ", response );
+        let data = await response.json();
+        if (response.ok) console.log( "Purchase Complete!: ", data);
         if (response.ok) this.setState({complete: true});
       } catch (e) {
         console.log(e);
