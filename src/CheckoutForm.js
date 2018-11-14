@@ -26,8 +26,8 @@ class CheckoutForm extends Component {
           method: "POST"
         })
         let data = await response.json();
-        if (response.ok) console.log( "Purchase Complete!: ", data);
-        if (response.ok) this.setState({complete: true});
+        if (response.ok) console.log( "Purchase Complete: ", data);
+        // if (response.ok) this.setState({complete: true});
       } catch (e) {
         console.log(e);
       }

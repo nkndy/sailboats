@@ -12,32 +12,24 @@ const express = require('express');
 const app = express();
 const cors = require('cors')({origin: true});
 
-app.get('/', function (req, res) {
+app.post('/retrieve-payment-methods', function (req, res) {
   try {
-      res.send(
-        {"response": "GET request to root"}
-      );
-      // charge(req, res);
+    res.send(
+      {"response": "req.body"}
+    );
   } catch(e) {
-      console.log('error: ' + e);
-      send(res, 500, {
-          error: `The server received an unexpected error. Please try again and contact the site admin if the error persists.`,
-      });
+    next(e);
   }
 })
 
 app.post('/', (req, res) => {
-  // Catch any unexpected errors to prevent crashing
   try {
-      res.send(
-        {"response": "POST request to root"}
-      );
-      // charge(req, res);
+    res.send(
+      {"response": "POST request to root"}
+    );
+    // charge(req, res);
   } catch(e) {
-      console.log('error: ' + e);
-      send(res, 500, {
-          error: `The server received an unexpected error. Please try again and contact the site admin if the error persists.`,
-      });
+    next(e);
   }
 });
 
@@ -128,26 +120,6 @@ exports.charge = functions.https.onRequest((req, res) => {
 // }
 // [END reporterror]
 
-// Sanitize the error message for the user
-// function userFacingMessage(error) {
-//   return error.type ? error.message : 'An error occurred, developers have been alerted';
-// }
-
-// app.use(cors);
-// app.post('*', (req, res) => {
-//     // Catch any unexpected errors to prevent crashing
-//     try {
-//         res.send('POST request to wildcard');
-//         // charge(req, res);
-//     } catch(e) {
-//         console.log('error: ' + e);
-//         send(res, 500, {
-//             error: `The server received an unexpected error. Please try again and contact the site admin if the error persists.`,
-//         });
-//     }
-// });
-
-// exports.charge = functions.https.onRequest(app);
 
 // When a user is created, register them with Stripe
 exports.createStripeCustomer = functions.auth.user().onCreate((user) => {

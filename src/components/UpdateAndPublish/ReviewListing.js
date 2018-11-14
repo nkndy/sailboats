@@ -54,7 +54,7 @@ class ReviewListing extends React.Component {
         paymentSources: [],
       }
     };
-    componentDidMount() {
+    async componentDidMount() {
       posts.doc(this.props.match.params.listingId).get()
         .then((querySnapshot) => {
           this.setState({
@@ -81,16 +81,18 @@ class ReviewListing extends React.Component {
               media: media,
           });
       });
-      // try {
-      //   let response = await fetch("https://us-central1-sailboats-445f9.cloudfunctions.net/charge", {
-      //     method: "GET"
-      //   })
-      //   let data = await response.json();
-      //   if (response.ok) console.log( "Payment Methods: ", data);
-      //   // if (response.ok) this.setState({complete: true});
-      // } catch (e) {
-      //   console.log(e);
-      // }
+      try {
+        let response = await fetch("https://us-central1-sailboats-445f9.cloudfunctions.net/charge/retrieve-payment-methods", {
+          method: "POST",
+          headers: {"Content-Type": "text/plain"},
+          body: {"uid": this.state.data.user}
+        })
+        let data = await response.json();
+        if (response.ok) console.log( "Payment Methods: ", data);
+        // if (response.ok) this.setState({complete: true});
+      } catch (e) {
+        console.log(e);
+      }
     }
     setFeaturedImage = index => {
       let selectedImage = this.state.media[index].id
