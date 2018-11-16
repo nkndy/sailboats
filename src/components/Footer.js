@@ -61,11 +61,11 @@ function Footer(props) {
         <Grid container spacing={32} justify="space-evenly">
           {footers.map(footer => (
             <Grid item xs key={footer.title}>
-              <Typography variant="headline" color="textPrimary" gutterBottom>
+              <Typography variant="h5" color="textPrimary" gutterBottom>
                 {footer.title}
               </Typography>
               {footer.description.map(item => (
-                <Typography key={item} variant="subheading" color="textSecondary">
+                <Typography key={item} variant="subtitle1" color="textSecondary">
                   {item}
                 </Typography>
               ))}

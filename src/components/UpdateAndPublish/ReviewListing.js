@@ -84,11 +84,13 @@ class ReviewListing extends React.Component {
       try {
         let response = await fetch("https://us-central1-sailboats-445f9.cloudfunctions.net/charge/retrieve-payment-methods", {
           method: "POST",
-          headers: {"Content-Type": "text/plain"},
-          body: {"uid": this.state.data.user}
+          headers: {
+              "Content-Type": "application/json"
+          },
+          data: {"uid": this.state.data.user}
         })
         let data = await response.json();
-        if (response.ok) console.log( "Payment Methods: ", data);
+        if (response.ok) console.log( "Payment Methods: ", JSON.stringify(data));
         // if (response.ok) this.setState({complete: true});
       } catch (e) {
         console.log(e);

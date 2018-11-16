@@ -1,0 +1,33 @@
+[debug] [2018-11-15T00:36:43.415Z] ----------------------------------------------------------------------
+[debug] [2018-11-15T00:36:43.418Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\nicholaskennedy\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js serve
+[debug] [2018-11-15T00:36:43.418Z] CLI Version:   6.1.0
+[debug] [2018-11-15T00:36:43.418Z] Platform:      win32
+[debug] [2018-11-15T00:36:43.418Z] Node Version:  v8.12.0
+[debug] [2018-11-15T00:36:43.418Z] Time:          Wed Nov 14 2018 16:36:43 GMT-0800 (Pacific Standard Time)
+[debug] [2018-11-15T00:36:43.418Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-11-15T00:36:43.424Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-11-15T00:36:43.425Z] > authorizing via signed-in user
+[debug] [2018-11-15T00:36:43.425Z] [iam] checking project sailboats-445f9 for permissions ["firebase.projects.get"]
+[debug] [2018-11-15T00:36:43.426Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/sailboats-445f9:testIamPermissions  
+
+[debug] [2018-11-15T00:36:43.660Z] <<< HTTP RESPONSE 200
+[debug] [2018-11-15T00:36:43.660Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/sailboats-445f9  
+ 
+[debug] [2018-11-15T00:36:43.878Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\Sailboats'...
+[info] 
+[info] i  functions: Preparing to emulate functions.
+[debug] [2018-11-15T00:36:44.421Z] Fetching environment
+[warn] !  Setup required, please run: firebase setup:emulators:firestore
+[debug] [2018-11-15T00:36:44.426Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/1001262121491:getServerAppConfig  
+ 
+[debug] [2018-11-15T00:36:44.427Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/1001262121491/clients/_:getWebAppConfig  
+ 
+[debug] [2018-11-15T00:36:44.537Z] 
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2018-11-15T00:36:44.605Z] <<< HTTP RESPONSE 200
+[debug] [2018-11-15T00:36:44.605Z] Starting @google-cloud/functions-emulator
+[debug] [2018-11-15T00:36:44.787Z] <<< HTTP RESPONSE 200

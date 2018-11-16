@@ -38,7 +38,7 @@ class PostTitle extends React.Component {
                 <Grid item xs={12}>
                     <Grid container>
                         <Grid item xs={12} >
-                            <Typography variant="headline">
+                            <Typography variant="h5">
                                 {this.props.data.year + " " + this.props.data.length + "' " + this.props.data.manufacturer + " " + this.props.data.model_name}
                             </Typography>
                         </Grid>
@@ -52,7 +52,7 @@ class PostTitle extends React.Component {
                     </Grid>
                 </Grid>
                 <Grid item xs={12}>
-                    <Typography variant="title">
+                    <Typography variant="h6">
                         <NumberFormat value={this.props.data.asking_price} displayType={'text'} thousandSeparator={true} prefix={'$'} />
                     </Typography>
                 </Grid>

@@ -64,7 +64,7 @@ function PricingTable(props) {
     const { classes } = props;
     return (
       <React.Fragment>
-        <Typography variant="headline" component="h3" className={classNames(classes.tagline)}>
+        <Typography variant="h5" component="h3" className={classNames(classes.tagline)}>
           List your sailboat
         </Typography>
         <Grid container spacing={40} alignItems="flex-end">
@@ -82,15 +82,15 @@ function PricingTable(props) {
                 />
                 <CardContent>
                   <div className={classes.cardPricing}>
-                    <Typography component="h2" variant="title" color="textPrimary">
+                    <Typography component="h2" variant="h6" color="textPrimary">
                       ${tier.price}
                     </Typography>
-                    <Typography variant="subheading" color="textSecondary">
+                    <Typography variant="subtitle1" color="textSecondary">
                       /mo
                     </Typography>
                   </div>
                   {tier.description.map(line => (
-                    <Typography variant="subheading" align="center" key={line}>
+                    <Typography variant="subtitle1" align="center" key={line}>
                       {line}
                     </Typography>
                   ))}

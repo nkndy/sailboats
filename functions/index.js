@@ -6,21 +6,37 @@ admin.initializeApp(functions.config().firebase);
 const logging = require('@google-cloud/logging')();
 const stripe = require('stripe')(functions.config().stripe.token);
 const currency = functions.config().stripe.currency || 'USD';
-
 const db = admin.firestore();
+
+const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 const cors = require('cors')({origin: true});
 
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.json());
+app.use(function (req, res, next) {
+    //set headers to allow cross origin request
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 app.post('/retrieve-payment-methods', function (req, res) {
+  console.log('test');
+  console.log(req.body.uid);
+  console.log(req.body);
+  console.log(req.rwBody);
+  console.log('end');
   try {
     res.send(
-      {"response": "req.body"}
+      {"response": "test"}
     );
   } catch(e) {
     next(e);
   }
-})
+});
 
 app.post('/', (req, res) => {
   try {

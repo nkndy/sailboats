@@ -113,13 +113,13 @@ class DetailView extends React.Component {
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
               <Paper className={classes.paper} elevation={0}>
-                <Typography variant="title" component="h2">
+                <Typography variant="h6" component="h2">
                   {this.state.data.manufacturer + " " + this.state.data.length + "'"}
                 </Typography>
-                <Typography variant="subheading" component="h3" gutterBottom>
+                <Typography variant="subtitle1" component="h3" gutterBottom>
                   {this.state.boat_name != null ? (this.state.location) : (this.state.data.boat_name + ", " + this.state.location)}
                 </Typography>
-                <Typography variant="headline" component="h4">
+                <Typography variant="h5" component="h4">
                   {"$" + this.state.data.asking_price}
                 </Typography>
               </Paper>
@@ -130,7 +130,7 @@ class DetailView extends React.Component {
                 <Typography variant="caption" component="p" gutterBottom>
                   {"Declared by owner to be in " + this.state.data.condition + " condition overall."}
                 </Typography>
-                <Typography variant="body1" component="p">
+                <Typography variant="body2" component="p">
                   {this.state.data.description}
                 </Typography>
               </Paper>

@@ -74,13 +74,13 @@ function Landing(props) {
       </div>
       <div className={classNames(classes.layout)}>
         <div className={classNames(classes.landingSection)}>
-          <Typography variant="subheading" gutterBottom>
+          <Typography variant="subtitle1" gutterBottom>
             Tradewind is the best global online sailboat marketplace.
             Post a free Listing. Create a premium listing. Save searches.
             Chat to sellers. Communicate directly to buyers.
             List as a verified Broker.
           </Typography>
-          <Typography variant="headline" component="h2" gutterBottom>
+          <Typography variant="h5" component="h2" gutterBottom>
             Browse Thousands Of SailBoats Worldwide
           </Typography>
           <NavLink to="/listings">

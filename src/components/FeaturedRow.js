@@ -85,7 +85,7 @@ class FeaturedRow extends React.Component {
     };
     return (
       <React.Fragment>
-        <Typography variant="headline" component="h3" className={classNames(classes.tagline)}>
+        <Typography variant="h5" component="h3" className={classNames(classes.tagline)}>
           Featured SailBoats
         </Typography>
         <div>

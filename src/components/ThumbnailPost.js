@@ -50,7 +50,7 @@ function ThumnailPost(props) {
         >
         </div>
         <div className={classNames(classes.content)}>
-          <Typography variant="title" component="h3">
+          <Typography variant="h6" component="h3">
             {props.data.boat_name}
           </Typography>
           <Typography component="p">
