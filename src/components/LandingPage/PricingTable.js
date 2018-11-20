@@ -10,6 +10,7 @@ import CardHeader from '@material-ui/core/CardHeader';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { NavLink } from "react-router-dom";
+import PricingCard from './PricingCard';
 
 const styles = theme => ({
   tagline: {
@@ -67,42 +68,13 @@ function PricingTable(props) {
         <Typography variant="h5" component="h3" className={classNames(classes.tagline)}>
           List your sailboat
         </Typography>
-        <Grid container spacing={40} alignItems="flex-end">
+        <Grid container spacing={24} alignItems="flex-end">
           {tiers.map(tier => (
             // Premium card is full width at sm breakpoint
-            <Grid item key={tier.title} xs={12} sm={tier.title === 'Enterprise' ? 12 : 6} md={4}>
-              <Card>
-                <CardHeader
-                  title={tier.title}
-                  subheader={tier.subheader}
-                  titleTypographyProps={{ align: 'center' }}
-                  subheaderTypographyProps={{ align: 'center' }}
-                  // action={tier.title === 'Premium Listing' ? <StarIcon /> : null}
-                  className={classes.cardHeader}
-                />
-                <CardContent>
-                  <div className={classes.cardPricing}>
-                    <Typography component="h2" variant="h6" color="textPrimary">
-                      ${tier.price}
-                    </Typography>
-                    <Typography variant="subtitle1" color="textSecondary">
-                      /mo
-                    </Typography>
-                  </div>
-                  {tier.description.map(line => (
-                    <Typography variant="subtitle1" align="center" key={line}>
-                      {line}
-                    </Typography>
-                  ))}
-                </CardContent>
-                <CardActions className={classes.cardActions}>
-                  <NavLink to={tier.buttonLink} style={{ width: '100%' }}>
-                    <Button variant={tier.buttonVariant} color="secondary" className={classes.fullWidth}>
-                      {tier.buttonText}
-                    </Button>
-                  </NavLink>
-                </CardActions>
-              </Card>
+            <Grid item key={tier.title} xs={12} sm={4}>
+              <div>
+                <PricingCard title={tier.title}/>
+              </div>
             </Grid>
           ))}
         </Grid>

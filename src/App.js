@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import './App.css';
 import AppBar from "./components/AppBar";
-import Landing from "./components/Landing";
+import Landing from "./components/LandingPage/Landing";
 import Listings from "./components/Listings";
 import CreateListing from "./components/NewListing/CreateListing";
 import ReviewListing from "./components/UpdateAndPublish/ReviewListing";

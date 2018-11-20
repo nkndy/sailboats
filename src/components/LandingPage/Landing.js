@@ -6,9 +6,9 @@ import Button from '@material-ui/core/Button';
 import NearMe from '@material-ui/icons/NearMe';
 import { withStyles } from '@material-ui/core/styles';
 import { NavLink } from "react-router-dom";
-import bgImage from '../assets/img/headerbg.png';
+import bgImage from '../../assets/img/headerbg.png';
 import PricingTable from './PricingTable';
-import FeaturedRow from './FeaturedRow';
+import FeaturedRow from '../FeaturedRow';
 
 const styles = theme => ({
   '@global': {
@@ -95,7 +95,7 @@ function Landing(props) {
         <FeaturedRow />
       </div>
       <div className={classNames(classes.layout)}>
-          <PricingTable />
+        <PricingTable />
       </div>
       </React.Fragment>
     );
