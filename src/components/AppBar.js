@@ -30,8 +30,8 @@ const styles = theme => ({
     flexGrow: 1,
   },
   avatar: {
-    width: '35px',
-    height: '35px',
+    width: '30px',
+    height: '30px',
   },
   menuButton: {
     marginLeft: -12,
@@ -128,19 +128,6 @@ class PrimarySearchAppBar extends React.Component {
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-    const renderMenu = (
-      <Menu
-        anchorEl={anchorEl}
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-        open={isMenuOpen}
-        onClose={this.handleMenuClose}
-      >
-        <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-        <MenuItem onClick={this.handleClose}>My account</MenuItem>
-      </Menu>
-    );
-
     const renderMobileMenu = (
       <Menu
         anchorEl={mobileMoreAnchorEl}
@@ -151,25 +138,37 @@ class PrimarySearchAppBar extends React.Component {
       >
         <MenuItem>
           <IconButton color="inherit">
-            <Badge className={classes.margin} badgeContent={4} color="secondary">
-              <MailIcon />
-            </Badge>
+            <NavLink to="/new-sailboat-listing">
+              <AddCircle />
+            </ NavLink>
           </IconButton>
-          <p>Messages</p>
-        </MenuItem>
-        <MenuItem>
-          <IconButton color="inherit">
-            <Badge className={classes.margin} badgeContent={11} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
-          <p>Notifications</p>
+          <p>New Listing</p>
         </MenuItem>
         <MenuItem onClick={this.handleProfileMenuOpen}>
           <IconButton color="inherit">
-            <AccountCircle />
+          {
+            (this.props.user != null)
+            ?
+            <NavLink to="/my-account">
+              <Avatar
+                alt={this.props.user.displayName}
+                src={this.props.user.photoURL}
+                className={classes.avatar}
+              />
+            </ NavLink>
+            :
+            <NavLink to="/my-account">
+              <AccountCircle />
+            </ NavLink>
+          }
           </IconButton>
-          <p>Profile</p>
+          {
+            (this.props.user != null)
+            ?
+            <p>Account</p>
+            :
+            <p>Log In</p>
+          }
         </MenuItem>
       </Menu>
     );
@@ -178,9 +177,6 @@ class PrimarySearchAppBar extends React.Component {
       <div className={classes.root}>
         <AppBar position="fixed">
           <Toolbar>
-            {/*}<IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
-              <MenuIcon />
-            </IconButton>*/}
             <Typography className={classes.title} variant="h6" color="inherit" noWrap>
               <NavLink to="/listings">
                 <img src={Logo} className={classes.logo} />
@@ -220,7 +216,8 @@ class PrimarySearchAppBar extends React.Component {
                 :
                 <NavLink to="/my-account">
                   <AccountCircle />
-                </ NavLink> }
+                </ NavLink>
+              }
               </IconButton>
             </div>
             <div className={classes.sectionMobile}>
@@ -230,7 +227,6 @@ class PrimarySearchAppBar extends React.Component {
             </div>
           </Toolbar>
         </AppBar>
-        {renderMenu}
         {renderMobileMenu}
       </div>
     );

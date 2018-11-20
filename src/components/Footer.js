@@ -34,16 +34,16 @@ const styles = theme => ({
 });
 const footers = [
   {
-    title: 'About Us',
-    description: ['Our Story', 'Company', 'Careers'],
-  },
-  {
     title: 'FAQ',
     description: ['Are Listings on Tradewind Free?', 'What should I look out for when buying?'],
   },
   {
     title: 'Support',
     description: ['Ask Us', 'Become A Partner', 'Current Partners'],
+  },
+  {
+    title: 'About Us',
+    description: ['Our Story', 'Company'],
   },
   {
     title: 'Legal',
@@ -60,7 +60,7 @@ function Footer(props) {
       <footer className={classNames(classes.footer, classes.layout)}>
         <Grid container spacing={32} justify="space-evenly">
           {footers.map(footer => (
-            <Grid item xs key={footer.title}>
+            <Grid item xs={6} sm key={footer.title}>
               <Typography variant="h5" color="textPrimary" gutterBottom>
                 {footer.title}
               </Typography>

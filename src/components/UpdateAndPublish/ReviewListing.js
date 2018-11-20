@@ -116,7 +116,7 @@ class ReviewListing extends React.Component {
         }
         return(
           <div className={classNames(classes.layout)}>
-            <Typography variant="headline" component="p" className={classNames(classes.tagline)}>
+            <Typography variant="h5" component="p" className={classNames(classes.tagline)}>
               Review
                 {(this.state.data.active_post === null || this.state.data.active_post === false) ? ' & Publish' : ' & Update'}
             </Typography>
