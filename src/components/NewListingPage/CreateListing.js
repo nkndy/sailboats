@@ -100,7 +100,7 @@ class CreateListing extends React.Component {
     const { classes } = this.props;
     return (
       <React.Fragment>
-        <Grid container className={classes.layout} spacing={16}>
+        <Grid container className={classes.layout} spacing={24}>
           <Grid item xs={12}>
             <CreateListingStepper
               handleSubscriptionSelect={this.handleSubscriptionSelect}

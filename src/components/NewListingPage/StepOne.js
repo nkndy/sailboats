@@ -90,7 +90,7 @@ class StepOne extends React.Component {
           margin="normal"
           autoComplete="off"
           InputProps={{
-            endAdornment: <InputAdornment position="end">ft' in"</InputAdornment>,
+            endAdornment: <InputAdornment position="end">ft'in"</InputAdornment>,
           }}
           autoComplete="off"
         />
@@ -104,7 +104,7 @@ class StepOne extends React.Component {
           margin="normal"
           autoComplete="off"
           InputProps={{
-            endAdornment: <InputAdornment position="end">ft' in"</InputAdornment>,
+            endAdornment: <InputAdornment position="end">ft'in"</InputAdornment>,
           }}
           autoComplete="off"
         />

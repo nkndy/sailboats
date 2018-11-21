@@ -102,7 +102,7 @@ class DetailView extends React.Component {
 
       <div className={classNames(classes.layout)}>
         <div className={classes.root}>
-          <Grid container spacing={16}>
+          <Grid container spacing={24}>
             <Grid item xs={12} md={8}>
               <Paper className={classes.paper}>
                 <MediaSlider document_id={this.props.match.params.listingId} />

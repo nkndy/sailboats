@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import ReactPlayer from 'react-player';
 import Typography from '@material-ui/core/Typography';
-import MediaUploader from '../NewListing/MediaUploader';
+import MediaUploader from '../NewListingPage/MediaUploader';
 
 const styles = theme => ({
   imgSelect: {

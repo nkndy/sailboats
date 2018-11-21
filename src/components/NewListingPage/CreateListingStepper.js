@@ -16,8 +16,9 @@ import StepFour from './StepFour';
 import { Link } from "react-router-dom";
 
 const styles = theme => ({
-  root: {
-    width: '90%',
+  stepRoot: {
+    paddingLeft: '0px',
+    paddingRight: '0px',
   },
   button: {
     marginTop: theme.spacing.unit,
@@ -100,10 +101,10 @@ class CreateListingStepper extends React.Component {
   render() {
     const { classes } = this.props;
     const { activeStep } = this.state;
+    // const StyledIcon = withStyles({})(StepIcon);
     return (
       <div className={classes.root}>
-        <Stepper activeStep={activeStep} orientation="vertical" color="secondary">
-
+        <Stepper className={classes.stepRoot} activeStep={activeStep} orientation="vertical" color="primary">
           <Step key={0}>
             <StepLabel>{getStepContent(0)}</StepLabel>
             <StepContent className={classes.stepContent}>

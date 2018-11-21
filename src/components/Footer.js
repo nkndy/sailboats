@@ -58,7 +58,7 @@ function Footer(props) {
       <CssBaseline />
       {/* Footer */}
       <footer className={classNames(classes.footer, classes.layout)}>
-        <Grid container spacing={32} justify="space-evenly">
+        <Grid container spacing={24} justify="space-evenly">
           {footers.map(footer => (
             <Grid item xs={6} sm key={footer.title}>
               <Typography variant="h5" color="textPrimary" gutterBottom>
@@ -72,7 +72,7 @@ function Footer(props) {
             </Grid>
           ))}
         </Grid>
-        <Grid container spacing={32} justify="space-evenly">
+        <Grid container spacing={24} justify="space-evenly">
           <Grid item xs>
             <div className={classNames(classes.copyright)}>
               <Typography variant="caption" color="textSecondary">Fair Winds and Following Seas
