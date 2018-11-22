@@ -82,15 +82,16 @@ class ReviewListing extends React.Component {
           });
       });
       try {
-        let response = await fetch("https://us-central1-sailboats-445f9.cloudfunctions.net/charge/retrieve-payment-methods", {
+        let data = {"uid": this.state.data.user};
+        let response = await fetch("https://us-central1-sailboats-445f9.cloudfunctions.net/addCard", {
           method: "POST",
           headers: {
               "Content-Type": "application/json"
           },
-          data: {"uid": this.state.data.user}
-        })
-        let data = await response.json();
-        if (response.ok) console.log( "Payment Methods: ", JSON.stringify(data));
+          body: JSON.stringify(data)
+        });
+        let res = await response.json();
+        if (response.ok) console.log( "Payment Methods: ", JSON.stringify(res));
         // if (response.ok) this.setState({complete: true});
       } catch (e) {
         console.log(e);
@@ -126,7 +127,7 @@ class ReviewListing extends React.Component {
               <DetailFields data={this.state.data} />
             </Grid>
             <Grid container spacing={24}>
-              <UpdateActions updatePost={this.updatePost} />
+              <UpdateActions updatePost={this.updatePost} data={this.state.data} media={this.state.media} />
             </Grid>
           </div>
         );

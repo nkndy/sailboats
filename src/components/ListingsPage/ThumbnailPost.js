@@ -43,7 +43,7 @@ function ThumnailPost(props) {
         <div
           className={classNames(classes.thumbnailImage)}
           style={{
-            backgroundImage: `url(${props.data.media[0].media_url})`,
+            backgroundImage: `url()`,
             backgroundSize: `cover`,
             minWidth: 150,
           }}

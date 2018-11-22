@@ -136,40 +136,39 @@ class PrimarySearchAppBar extends React.Component {
         open={isMobileMenuOpen}
         onClose={this.handleMobileMenuClose}
       >
-        <MenuItem>
-          <IconButton color="inherit">
-            <NavLink to="/new-sailboat-listing">
-              <AddCircle />
-            </ NavLink>
-          </IconButton>
-          <p>New Listing</p>
-        </MenuItem>
-        <MenuItem onClick={this.handleProfileMenuOpen}>
-          <IconButton color="inherit">
-          {
-            (this.props.user != null)
-            ?
-            <NavLink to="/my-account">
-              <Avatar
-                alt={this.props.user.displayName}
-                src={this.props.user.photoURL}
-                className={classes.avatar}
-              />
-            </ NavLink>
-            :
-            <NavLink to="/my-account">
-              <AccountCircle />
-            </ NavLink>
-          }
-          </IconButton>
-          {
-            (this.props.user != null)
-            ?
-            <p>Account</p>
-            :
-            <p>Log In</p>
-          }
-        </MenuItem>
+        <NavLink to="/new-sailboat-listing">
+          <MenuItem>
+            <IconButton color="inherit">
+                <AddCircle />
+            </IconButton>
+            <p>New Listing</p>
+          </MenuItem>
+        </ NavLink>
+        <NavLink to="/my-account">
+          <MenuItem onClick={this.handleProfileMenuOpen}>
+            <IconButton color="inherit">
+            {
+              (this.props.user != null)
+              ?
+
+                <Avatar
+                  alt={this.props.user.displayName}
+                  src={this.props.user.photoURL}
+                  className={classes.avatar}
+                />
+              :
+                <AccountCircle />
+            }
+            </IconButton>
+            {
+              (this.props.user != null)
+              ?
+              <p>Account</p>
+              :
+              <p>Log In</p>
+            }
+          </MenuItem>
+        </ NavLink>
       </Menu>
     );
 

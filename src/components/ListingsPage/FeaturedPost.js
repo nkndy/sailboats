@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import PostTitle from './PostTitle.js';
-import MediaSlider from './MediaSlider.js';
+import PostTitle from '../PostTitle.js';
+import MediaSlider from '../MediaSlider.js';
 
 const styles = theme => ({
   root: {

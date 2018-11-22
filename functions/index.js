@@ -62,6 +62,14 @@ exports.charge = functions.https.onRequest((req, res) => {
   })
 });
 
+exports.addCard = functions.https.onRequest((req, res) => {
+  let response;
+  response = req.body.uid;
+  cors(req, res, () => {
+    res.status(200).send({"response": response});
+  });
+});
+
 // function charge(req, res) {
 //     const body = JSON.parse(req.body);
 //     const token = body.token.id;

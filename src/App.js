@@ -3,12 +3,12 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import './App.css';
 import AppBar from "./components/AppBar";
 import Landing from "./components/LandingPage/Landing";
-import Listings from "./components/Listings";
+import Listings from "./components/ListingsPage/Listings";
 import CreateListing from "./components/NewListingPage/CreateListing";
 import ReviewListing from "./components/UpdateAndPublishPage/ReviewListing";
 import Account from "./components/AccountPage/Account";
 import AccountDialogue from "./components/AccountDialogue";
-import DetailView from "./components/DetailView";
+import DetailView from "./components/DetailPage/DetailView";
 import Error from "./components/Error";
 import Footer from "./components/Footer";
 import { auth } from './firebase.js';
