@@ -53,14 +53,13 @@ class ReviewListing extends React.Component {
         data: {},
         paymentSources: [],
       }
-      this.getCards = this.getCards.bind(this);
+      this.retrieveSources = this.retrieveSources.bind(this);
     };
 
-    async getCards() {
+    async retrieveSources() {
       try {
-        console.log(this.state.data.user);
         let data = {"uid": this.state.data.user};
-        let response = await fetch("https://us-central1-sailboats-445f9.cloudfunctions.net/addCard", {
+        let response = await fetch("https://us-central1-sailboats-445f9.cloudfunctions.net/retrieveSources", {
           method: "POST",
           headers: {
               "Content-Type": "application/json"
@@ -83,7 +82,7 @@ class ReviewListing extends React.Component {
         });
       })
       .then(() => {
-        this.getCards();
+        this.retrieveSources();
       });
       posts.doc(this.props.match.params.listingId).collection('Media').get()
         .then((querySnapshot) => {

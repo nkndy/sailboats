@@ -13,63 +13,75 @@ const express = require('express');
 const app = express();
 const cors = require('cors')({origin: true});
 
-// app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(bodyParser.json());
 app.use(function (req, res, next) {
-    //set headers to allow cross origin request
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
+  //set headers to allow cross origin request
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
 });
 
-app.post('/retrieve-payment-methods', function (req, res) {
-  console.log('test');
+function subscribeToPlan() {
+
+}
+
+function createSource() {
+
+}
+
+function getSources(req, res) {
+  console.log("get sources");
   console.log(req.body.uid);
-  console.log(req.body);
-  console.log(req.rwBody);
-  console.log('end');
-  try {
-    res.send(
-      {"response": "test"}
-    );
-  } catch(e) {
-    next(e);
-  }
-});
+  let uid = req.body.uid;
+  db.collection('Users').doc(uid).get().then((doc) => {
+    console.log("Success");
+    res.send(doc);
+    // res.status(200).send(response);
+    // send(res, 200, {
+    //   message: 'Success',
+    //   doc,
+    // });
+  }).catch(() => {
+    console.log('fail');
+    res.status(500).send({"message": "failed"});
+    // send(res, 500, {
+    //   error: err.message,
+    // });
+  });
+}
 
-app.post('/', (req, res) => {
-  try {
-    res.send(
-      {"response": "POST request to root"}
-    );
-    // charge(req, res);
-  } catch(e) {
-    next(e);
-  }
-});
-
-exports.charge = functions.https.onRequest((req, res) => {
-	// https://some-firebase-app-id.cloudfunctions.net/route
-	// without trailing "/" will have req.path = null, req.url = null
-	// which won't match to your app.get('/', ...) route
-	if (!req.path) {
-		// prepending "/" keeps query params, path params intact
-		req.url = `/${req.url}`
-	}
-	return cors(req, res, () => {
-    app(req, res);
-  })
-});
-
-exports.addCard = functions.https.onRequest((req, res) => {
-  let response;
-  response = req.body;
+exports.retrieveSources = functions.https.onRequest((req, res) => {
   cors(req, res, () => {
+    getSources(req, res);
+    // try {
+    //   res.send(
+    //     response
+    //   );
+    //   getSources(req, res);
+    // } catch(e) {
+    //   next(e);
+    // }
     // res.status(200).send(response.uid);
-    res.status(200).send(response);
+    // res.status(200).send(response);
   });
 });
+
+// exports.retrieveSources = functions.https.onRequest((req, res) => {
+//   let response;
+//   response = req.body;
+//   cors(req, res, () => {
+//     try {
+//       res.send(
+//         response.uid
+//       );
+//       // charge(req, res);
+//     } catch(e) {
+//       next(e);
+//     }
+//     // res.status(200).send(response.uid);
+//     // res.status(200).send(response);
+//   });
+// });
 
 // function charge(req, res) {
 //     const body = JSON.parse(req.body);
@@ -104,49 +116,9 @@ exports.addCard = functions.https.onRequest((req, res) => {
 //     });
 // }
 
-// To keep on top of errors, we should raise a verbose error report with Stackdriver rather
-// than simply relying on console.error. This will calculate users affected + send you email
-// alerts, if you've opted into receiving them.
-// [START reporterror]
-// function reportError(err, context = {}) {
-//   // This is the name of the StackDriver log stream that will receive the log
-//   // entry. This name can be any valid log stream name, but must contain "err"
-//   // in order for the error to be picked up by StackDriver Error Reporting.
-//   const logName = 'errors';
-//   const log = logging.log(logName);
-//
-//   // https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/MonitoredResource
-//   const metadata = {
-//     resource: {
-//       type: 'cloud_function',
-//       labels: {function_name: process.env.FUNCTION_NAME},
-//     },
-//   };
-//
-//   // https://cloud.google.com/error-reporting/reference/rest/v1beta1/ErrorEvent
-//   const errorEvent = {
-//     message: err.stack,
-//     serviceContext: {
-//       service: process.env.FUNCTION_NAME,
-//       resourceType: 'cloud_function',
-//     },
-//     context: context,
-//   };
-//
-//   // Write the error log entry
-//   return new Promise((resolve, reject) => {
-//     log.write(log.entry(metadata, errorEvent), (error) => {
-//       if (error) {
-//        return reject(error);
-//       }
-//       return resolve();
-//     });
-//   });
-// }
-// [END reporterror]
-
 
 // When a user is created, register them with Stripe
+// needs error handling
 exports.createStripeCustomer = functions.auth.user().onCreate((user) => {
   return stripe.customers.create({
     email: user.email,
@@ -159,6 +131,47 @@ exports.createStripeCustomer = functions.auth.user().onCreate((user) => {
     // return admin.database().ref(`/Users/${user.uid}/stripe_id`).set(customer.id);
   });
 });
+
+// To keep on top of errors, we should raise a verbose error report with Stackdriver rather
+// than simply relying on console.error. This will calculate users affected + send you email
+// alerts, if you've opted into receiving them.
+// [START reporterror]
+function reportError(err, context = {}) {
+  // This is the name of the StackDriver log stream that will receive the log
+  // entry. This name can be any valid log stream name, but must contain "err"
+  // in order for the error to be picked up by StackDriver Error Reporting.
+  const logName = 'errors';
+  const log = logging.log(logName);
+
+  // https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/MonitoredResource
+  const metadata = {
+    resource: {
+      type: 'cloud_function',
+      labels: {function_name: process.env.FUNCTION_NAME},
+    },
+  };
+
+  // https://cloud.google.com/error-reporting/reference/rest/v1beta1/ErrorEvent
+  const errorEvent = {
+    message: err.stack,
+    serviceContext: {
+      service: process.env.FUNCTION_NAME,
+      resourceType: 'cloud_function',
+    },
+    context: context,
+  };
+
+  // Write the error log entry
+  return new Promise((resolve, reject) => {
+    log.write(log.entry(metadata, errorEvent), (error) => {
+      if (error) {
+       return reject(error);
+      }
+      return resolve();
+    });
+  });
+}
+// [END reporterror]
 
 // Add a payment source (card) for a user by writing a stripe payment source token to Realtime database
 // exports.addPaymentSource = functions.database
@@ -182,13 +195,3 @@ exports.createStripeCustomer = functions.auth.user().onCreate((user) => {
 //         });
 
 // When a user deletes their account, clean up after them
-// exports.cleanupUser = functions.auth.user().onDelete((user) => {
-//   return admin.database().ref(`/Users/${user.uid}`).once('value').then(
-//       (snapshot) => {
-//         return snapshot.val();
-//       }).then((customer) => {
-//         return stripe.customers.del(customer.stripe_id);
-//       }).then(() => {
-//         return admin.database().ref(`/Users/${user.uid}`).remove();
-//       });
-//     });
