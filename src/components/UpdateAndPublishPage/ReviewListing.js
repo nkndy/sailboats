@@ -53,13 +53,37 @@ class ReviewListing extends React.Component {
         data: {},
         paymentSources: [],
       }
+      this.getCards = this.getCards.bind(this);
     };
+
+    async getCards() {
+      try {
+        console.log(this.state.data.user);
+        let data = {"uid": this.state.data.user};
+        let response = await fetch("https://us-central1-sailboats-445f9.cloudfunctions.net/addCard", {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        });
+        let res = await response.json();
+        if (response.ok) console.log( "Payment Methods: ", res.uid);
+        // if (response.ok) this.setState({complete: true});
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
     async componentDidMount() {
       posts.doc(this.props.match.params.listingId).get()
-        .then((querySnapshot) => {
-          this.setState({
-              data: querySnapshot.data(),
-          });
+      .then((querySnapshot) => {
+        this.setState({
+            data: querySnapshot.data(),
+        });
+      })
+      .then(() => {
+        this.getCards();
       });
       posts.doc(this.props.match.params.listingId).collection('Media').get()
         .then((querySnapshot) => {
@@ -81,21 +105,6 @@ class ReviewListing extends React.Component {
               media: media,
           });
       });
-      try {
-        let data = {"uid": this.state.data.user};
-        let response = await fetch("https://us-central1-sailboats-445f9.cloudfunctions.net/addCard", {
-          method: "POST",
-          headers: {
-              "Content-Type": "application/json"
-          },
-          body: JSON.stringify(data)
-        });
-        let res = await response.json();
-        if (response.ok) console.log( "Payment Methods: ", JSON.stringify(res));
-        // if (response.ok) this.setState({complete: true});
-      } catch (e) {
-        console.log(e);
-      }
     }
     setFeaturedImage = index => {
       let selectedImage = this.state.media[index].id
