@@ -40,12 +40,14 @@ function getSources(req, res) {
   });
 }
 
+// update to only accept post requests
 exports.retrieveSources = functions.https.onRequest((req, res) => {
   cors(req, res, () => {
     getSources(req, res);
   });
 });
 
+//update to only accept post reaquests
 exports.createSource = functions.https.onRequest((req, res) => {
   cors(req, res, () => {
     createSource();

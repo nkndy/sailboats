@@ -10,7 +10,6 @@ class CheckoutForm extends Component {
 
   async submit(ev) {
     ev.preventDefault();
-    console.log('submit function');
     const {source, error} = await this.props.stripe.createSource({
       type: 'card',
       currency: 'eur',
@@ -18,7 +17,13 @@ class CheckoutForm extends Component {
         name: 'Jenny Rosen',
       },
     });
-    console.log("after function")
+    let response = await fetch("https://us-central1-sailboats-445f9.cloudfunctions.net/createSource", {
+      method: "POST",
+      headers: {"Content-Type": "text/plain"},
+      body: source.id
+    });
+    // add error handling
+    // add loading spinner while payment is processing
     console.log(source);
   }
 
