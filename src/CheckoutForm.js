@@ -9,28 +9,17 @@ class CheckoutForm extends Component {
   }
 
   async submit(ev) {
-      try {
-        let {token} = await this.props.stripe.createToken({name: "Name"});
-        // let response = await fetch("https://us-central1-sailboats-445f9.cloudfunctions.net/charge", {
-        //   method: "POST",
-        //   headers: {"Content-Type": "text/plain"},
-        //   body: {
-        //     "token": token,
-        //     "charge": {
-        //       "amount": "200",
-        //       "currency": "USD"
-        //     }
-        //   }
-        // });
-        let response = await fetch("https://us-central1-sailboats-445f9.cloudfunctions.net/charge", {
-          method: "POST"
-        })
-        let data = await response.json();
-        if (response.ok) console.log( "Purchase Complete: ", data);
-        // if (response.ok) this.setState({complete: true});
-      } catch (e) {
-        console.log(e);
-      }
+    ev.preventDefault();
+    console.log('submit function');
+    const {source, error} = await this.props.stripe.createSource({
+      type: 'card',
+      currency: 'eur',
+      owner: {
+        name: 'Jenny Rosen',
+      },
+    });
+    console.log("after function")
+    console.log(source);
   }
 
   render() {

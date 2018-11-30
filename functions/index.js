@@ -26,12 +26,12 @@ function subscribeToPlan() {
 }
 
 function createSource() {
-
+  stripe.customers.update("cus_DvtH8bwdPLY7CH", {
+    default_source: "src_18eYalAHEMiOZZp1l9ZTjSU0"
+  });
 }
 
 function getSources(req, res) {
-  console.log("get sources");
-  console.log(req.body.uid);
   let uid = req.body.uid;
   db.collection('Users').doc(uid).get().then((doc) => {
     res.send(doc.data());
@@ -46,6 +46,11 @@ exports.retrieveSources = functions.https.onRequest((req, res) => {
   });
 });
 
+exports.createSource = functions.https.onRequest((req, res) => {
+  cors(req, res, () => {
+    createSource();
+  });
+});
 
 // When a user is created, register them with Stripe
 // needs error handling
