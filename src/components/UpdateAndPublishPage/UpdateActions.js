@@ -35,7 +35,7 @@ class UpdateActions extends React.Component {
               <SaveIcon className={classNames(classes.leftIcon, classes.iconSmall)} />
               Save
             </Button>
-            <CheckoutModal data={this.props.data} />
+            <CheckoutModal data={this.props.data} paymentSources={this.props.paymentSources}/>
           </Grid>
         );
     }

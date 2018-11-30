@@ -115,9 +115,15 @@ class CheckoutModal extends React.Component {
                     total
                   </Grid>
                 </Grid>
-                <Typography variant="h6" gutterBottom>
-                No Existing Payment Methods
-                </Typography>
+                  { this.props.paymentSources.length > 0 ?
+                    <Typography variant="h6" gutterBottom>
+                    Payment Methods
+                    </Typography>
+                    :
+                    <Typography variant="h6" gutterBottom>
+                    No Existing Payment Methods
+                    </Typography>
+                  }
                 <Elements>
                   <CheckoutForm />
                 </Elements>

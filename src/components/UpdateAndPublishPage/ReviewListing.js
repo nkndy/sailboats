@@ -67,8 +67,9 @@ class ReviewListing extends React.Component {
           body: JSON.stringify(data)
         });
         let res = await response.json();
-        if (response.ok) console.log( "Payment Methods: ", res.uid);
-        // if (response.ok) this.setState({complete: true});
+        console.log(res);
+        let sources = res.stripe_customer.sources.data;
+        if (response.ok) this.setState({paymentSources: sources});
       } catch (e) {
         console.log(e);
       }
@@ -135,7 +136,7 @@ class ReviewListing extends React.Component {
               <DetailFields data={this.state.data} />
             </Grid>
             <Grid container spacing={24}>
-              <UpdateActions updatePost={this.updatePost} data={this.state.data} media={this.state.media} />
+              <UpdateActions updatePost={this.updatePost} data={this.state.data} media={this.state.media} paymentSources={this.state.paymentSources}/>
             </Grid>
           </div>
         );

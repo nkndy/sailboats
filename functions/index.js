@@ -34,87 +34,17 @@ function getSources(req, res) {
   console.log(req.body.uid);
   let uid = req.body.uid;
   db.collection('Users').doc(uid).get().then((doc) => {
-    console.log("Success");
-    res.send(doc);
-    // res.status(200).send(response);
-    // send(res, 200, {
-    //   message: 'Success',
-    //   doc,
-    // });
+    res.send(doc.data());
   }).catch(() => {
-    console.log('fail');
-    res.status(500).send({"message": "failed"});
-    // send(res, 500, {
-    //   error: err.message,
-    // });
+    res.status(500).send({error: err.message});
   });
 }
 
 exports.retrieveSources = functions.https.onRequest((req, res) => {
   cors(req, res, () => {
     getSources(req, res);
-    // try {
-    //   res.send(
-    //     response
-    //   );
-    //   getSources(req, res);
-    // } catch(e) {
-    //   next(e);
-    // }
-    // res.status(200).send(response.uid);
-    // res.status(200).send(response);
   });
 });
-
-// exports.retrieveSources = functions.https.onRequest((req, res) => {
-//   let response;
-//   response = req.body;
-//   cors(req, res, () => {
-//     try {
-//       res.send(
-//         response.uid
-//       );
-//       // charge(req, res);
-//     } catch(e) {
-//       next(e);
-//     }
-//     // res.status(200).send(response.uid);
-//     // res.status(200).send(response);
-//   });
-// });
-
-// function charge(req, res) {
-//     const body = JSON.parse(req.body);
-//     const token = body.token.id;
-//     const amount = body.charge.amount;
-//     const currency = body.charge.currency;
-//
-//     // Charge card
-//     stripe.charges.create({
-//         amount,
-//         currency,
-//         description: 'Firebase Example',
-//         source: token,
-//     }).then(charge => {
-//         send(res, 200, {
-//             message: 'Success',
-//             charge,
-//         });
-//     }).catch(err => {
-//         console.log(err);
-//         send(res, 500, {
-//             error: err.message,
-//         });
-//     });
-// }
-//
-// function send(res, code, body) {
-//     res.send({
-//         statusCode: code,
-//         headers: {'Access-Control-Allow-Origin': '*'},
-//         body: JSON.stringify(body),
-//     });
-// }
 
 
 // When a user is created, register them with Stripe
