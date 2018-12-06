@@ -125,7 +125,7 @@ class CheckoutModal extends React.Component {
                     </Typography>
                   }
                 <Elements>
-                  <CheckoutForm />
+                  <CheckoutForm user={this.props.data.user}/>
                 </Elements>
               </div>
             </StripeProvider>

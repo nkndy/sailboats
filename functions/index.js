@@ -13,11 +13,10 @@ const express = require('express');
 const app = express();
 const cors = require('cors')({origin: true});
 
-app.use(function (req, res, next) {
-  //set headers to allow cross origin request
-  res.header("Access-Control-Allow-Origin", "*");
+app.all('*', function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
   next();
 });
 
@@ -25,10 +24,39 @@ function subscribeToPlan() {
 
 }
 
-function createSource() {
-  stripe.customers.update("cus_DvtH8bwdPLY7CH", {
-    default_source: "src_18eYalAHEMiOZZp1l9ZTjSU0"
+function updateUser(uid, data) {
+  db.collection('Users').doc(uid).set({
+    stripe_customer: data
+  }, { merge: true })
+  .then(function() {
+      console.log("Document successfully updated!");
+  })
+  .catch(function(error) {
+      // The document probably doesn't exist.
+      console.error("Error updating document: ", error);
   });
+}
+
+function createSource(req, res) {
+  let source = req.body.source;
+  let uid = req.body.uid;
+  db.collection('Users').doc(uid).get().then((doc) => {
+    let data = doc.data();
+    stripe.customers.update(data.stripe_customer.id, {
+      source: source
+    }).then(
+      (result) => {
+        updateUser(uid, result)
+        res.send(result)
+      },
+      (err) => {
+        res.status(500).send({error: err.message});
+      }
+    );
+  }).catch((err) => {
+    res.status(500).send({error: err.message});
+  });
+  // charge and subscribe the customer to the appropiate plan
 }
 
 function getSources(req, res) {
@@ -50,7 +78,7 @@ exports.retrieveSources = functions.https.onRequest((req, res) => {
 //update to only accept post reaquests
 exports.createSource = functions.https.onRequest((req, res) => {
   cors(req, res, () => {
-    createSource();
+    createSource(req, res);
   });
 });
 
