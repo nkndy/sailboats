@@ -112,7 +112,7 @@ class ReviewListing extends React.Component {
         selectedImage: selectedImage,
       })
     }
-    updatePost = () => {
+    updateFeaturedImage = () => {
       //if post has already been published needs to remove old featured image bool from doc and update to false before applying
       let docRef = posts.doc(this.props.match.params.listingId);
       docRef.collection('Media').doc(this.state.selectedImage).update({
@@ -136,7 +136,7 @@ class ReviewListing extends React.Component {
               <DetailFields data={this.state.data} />
             </Grid>
             <Grid container spacing={24}>
-              <UpdateActions updatePost={this.updatePost} data={this.state.data} media={this.state.media} paymentSources={this.state.paymentSources}/>
+              <UpdateActions updateFeaturedImage={this.updateFeaturedImage} data={this.state.data} media={this.state.media} paymentSources={this.state.paymentSources}/>
             </Grid>
           </div>
         );

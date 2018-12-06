@@ -18,24 +18,11 @@ class UpdateActions extends React.Component {
     createPaymentMethod = () => {
       this.props.history.push('/my-account')
     }
-    updateSuccess = () => {
-      //needs error handling
-      this.props.updatePost();
-    }
     render() {
         const { classes } = this.props;
         return(
           <Grid item container xs={12} justify="flex-end" alignItems="center" >
-            <Button
-              variant="contained"
-              size="small"
-              className={classes.button}
-              onClick={() => this.updateSuccess()}
-            >
-              <SaveIcon className={classNames(classes.leftIcon, classes.iconSmall)} />
-              Save
-            </Button>
-            <CheckoutModal data={this.props.data} paymentSources={this.props.paymentSources}/>
+            <CheckoutModal data={this.props.data} paymentSources={this.props.paymentSources} updateFeaturedImage={this.props.updateFeaturedImage}/>
           </Grid>
         );
     }

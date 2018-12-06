@@ -14,7 +14,6 @@ class CheckoutForm extends Component {
       type: 'card'
     });
     // add error handling for stripe create source
-    console.log(source);
     let data = {
       "source": source.id,
       "uid": this.props.user
@@ -27,7 +26,6 @@ class CheckoutForm extends Component {
       body: JSON.stringify(data)
     });
     let res = await response.json();
-    console.log(res);
     // add error handling
     // add loading spinner while payment is processing
   }
@@ -37,7 +35,7 @@ class CheckoutForm extends Component {
       <div className="checkout">
         <p>Add a new payment method</p>
         <CardElement />
-        <button onClick={this.submit}>Send</button>
+        <button onClick={this.submit}>Publish</button>
       </div>
     );
   }

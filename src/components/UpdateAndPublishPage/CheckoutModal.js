@@ -41,7 +41,10 @@ class CheckoutModal extends React.Component {
   };
 
   handleOpen = () => {
-    this.setState({ open: true });
+    this.props.updateFeaturedImage();
+    if (this.props.data.is_premium == true) {
+      this.setState({ open: true });
+    }
   };
 
   handleClose = () => {
@@ -50,11 +53,9 @@ class CheckoutModal extends React.Component {
 
   render() {
     const { classes } = this.props;
-
     return (
       <div>
-        <Typography gutterBottom>Click to get the full Modal experience!</Typography>
-        <Button onClick={this.handleOpen}>Open Modal</Button>
+        <Button onClick={this.handleOpen}>Publish My Listing</Button>
         <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
