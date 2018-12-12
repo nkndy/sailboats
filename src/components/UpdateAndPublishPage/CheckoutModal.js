@@ -8,6 +8,7 @@ import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -113,9 +114,7 @@ class CheckoutModal extends React.Component {
                       />
                     </Grid>
                     <Grid item xs={4}>
-                      <Button
-                       size="large"
-                      >
+                      <Button>
                         Apply
                       </Button>
                     </Grid>
@@ -138,19 +137,42 @@ class CheckoutModal extends React.Component {
                 <Grid container spacing={24}>
                   <Grid item xs={12}>
                   { this.props.paymentSources.length > 0 ?
-                    <Typography variant="h6" gutterBottom>
-                    Payment Methods are present
-                    </Typography>
+                    <div>
+                      <Typography variant="caption" gutterBottom>
+                      Payment Method
+                      </Typography>
+                      <Typography variant="subtitle1">
+                      { this.props.data.email }
+                      </Typography>
+                      <Typography variant="overline">
+                      {/* add in a little card logo here*/}
+                      {"**** **** **** " + this.props.paymentSources[0].card.last4 }
+                      </Typography>
+                      <Typography variant="overline" gutterBottom>
+                      { this.props.paymentSources[0].card.exp_month + " / " + this.props.paymentSources[0].card.exp_year }
+                      </Typography>
+                    </div>
                     :
-                    <Typography variant="h6" gutterBottom>
-                    No Existing Payment Methods
-                    </Typography>
+                    <Elements>
+                      <CheckoutForm processing={this.processing} user={this.props.data.user}/>
+                    </Elements>
                   }
                   </Grid>
                 </Grid>
-                <Elements>
-                  <CheckoutForm processing={this.processing} user={this.props.data.user}/>
-                </Elements>
+                <Grid container spacing={24}>
+                  <Grid item xs={6}>
+                    <Button variant="contained" color="default" className={classes.button}>
+                      Update Payment Method
+                      <CloudUploadIcon className={classes.rightIcon} />
+                    </Button>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Button variant="contained" color="default" className={classes.button}>
+                      Publish
+                      <CloudUploadIcon className={classes.rightIcon} />
+                    </Button>
+                  </Grid>
+                </Grid>
               </div>
             </StripeProvider>
           </div>

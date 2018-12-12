@@ -68,6 +68,7 @@ class ReviewListing extends React.Component {
           body: JSON.stringify(data)
         });
         let res = await response.json();
+        console.log(res);
         let sources = res.stripe_customer.sources.data;
         if (response.ok) this.setState({paymentSources: sources});
       } catch (e) {

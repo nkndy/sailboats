@@ -30,7 +30,7 @@
     "react-number-format": "^3.6.2",
     "react-player": "^1.6.6",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.4",
+    "react-scripts": "^2.1.1",
     "react-select": "^2.1.1",
     "react-slick": "^0.23.2",
     "react-stripe-elements": "^2.0.1",

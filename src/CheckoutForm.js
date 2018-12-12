@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {CardElement, injectStripe} from 'react-stripe-elements';
+import Typography from '@material-ui/core/Typography';
 
 class CheckoutForm extends Component {
   constructor(props) {
@@ -38,7 +39,9 @@ class CheckoutForm extends Component {
   render() {
     return (
       <div className="checkout">
-        <p>Add a new payment method</p>
+        <Typography variant="caption" gutterBottom>
+        No
+        </Typography>
         <CardElement />
         <button onClick={this.submit}>Publish</button>
       </div>
