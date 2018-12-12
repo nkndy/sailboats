@@ -50,6 +50,7 @@ class ReviewListing extends React.Component {
       this.state = {
         media: [],
         selectedImage: '',
+        selectedImageUrl: '',
         data: {},
         paymentSources: [],
       }
@@ -67,7 +68,6 @@ class ReviewListing extends React.Component {
           body: JSON.stringify(data)
         });
         let res = await response.json();
-        console.log(res);
         let sources = res.stripe_customer.sources.data;
         if (response.ok) this.setState({paymentSources: sources});
       } catch (e) {
@@ -96,8 +96,10 @@ class ReviewListing extends React.Component {
             })
             if (first) {
               first = false;
+              let data = doc.data();
               this.setState({
                 selectedImage: doc.id,
+                selectedImageUrl: data.media_url,
               })
             }
           });
@@ -108,8 +110,10 @@ class ReviewListing extends React.Component {
     }
     setFeaturedImage = index => {
       let selectedImage = this.state.media[index].id
+      let selectedImageUrl = this.state.media[index].data.media_url
       this.setState({
         selectedImage: selectedImage,
+        selectedImageUrl: selectedImageUrl,
       })
     }
     updateFeaturedImage = () => {
@@ -131,12 +135,20 @@ class ReviewListing extends React.Component {
                 {(this.state.data.active_post === null || this.state.data.active_post === false) ? ' & Publish' : ' & Update'}
             </Typography>
             <Grid container spacing={24}>
-              <SelectFeaturedImage imagesArray={this.state.media} setFeaturedImage={this.setFeaturedImage} />
+              <SelectFeaturedImage
+                imagesArray={this.state.media}
+                setFeaturedImage={this.setFeaturedImage}
+              />
               <LocationMap data={this.state.data.location} />
               <DetailFields data={this.state.data} />
             </Grid>
             <Grid container spacing={24}>
-              <UpdateActions updateFeaturedImage={this.updateFeaturedImage} data={this.state.data} media={this.state.media} paymentSources={this.state.paymentSources}/>
+              <UpdateActions
+                updateFeaturedImage={this.updateFeaturedImage}
+                data={this.state.data}
+                selectedImage={this.state.selectedImageUrl}
+                paymentSources={this.state.paymentSources}
+              />
             </Grid>
           </div>
         );

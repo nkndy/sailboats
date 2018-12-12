@@ -15,14 +15,16 @@ class UpdateActions extends React.Component {
     constructor(props) {
       super(props)
     }
-    createPaymentMethod = () => {
-      this.props.history.push('/my-account')
-    }
     render() {
         const { classes } = this.props;
         return(
           <Grid item container xs={12} justify="flex-end" alignItems="center" >
-            <CheckoutModal data={this.props.data} paymentSources={this.props.paymentSources} updateFeaturedImage={this.props.updateFeaturedImage}/>
+            <CheckoutModal
+              data={this.props.data}
+              paymentSources={this.props.paymentSources}
+              updateFeaturedImage={this.props.updateFeaturedImage}
+              selectedImage={this.props.selectedImage}
+            />
           </Grid>
         );
     }

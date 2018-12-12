@@ -20,8 +20,18 @@ app.all('*', function(req, res, next) {
   next();
 });
 
-function subscribeToPlan() {
-
+function subscribeToPlan(customerId, res) {
+  console.log('subscribe');
+  console.log(customerId);
+  stripe.subscriptions.create({
+    customer: customerId,
+    items: [{plan: 'plan_Dptt0y1XO31qwt'}],
+  }).then((result) => {
+    console.log(result);
+    res.send(result)
+  }).catch((err) => {
+    res.status(500).send({error: err.message});
+  });
 }
 
 function updateUser(uid, data) {
@@ -46,8 +56,8 @@ function createSource(req, res) {
       source: source
     }).then(
       (result) => {
-        updateUser(uid, result)
-        res.send(result)
+        subscribeToPlan(result.id, res);
+        updateUser(uid, result);
       },
       (err) => {
         res.status(500).send({error: err.message});

@@ -9,6 +9,7 @@ class CheckoutForm extends Component {
   }
 
   async submit(ev) {
+    this.props.processing();
     ev.preventDefault();
     const {source, error} = await this.props.stripe.createSource({
       type: 'card'
@@ -26,6 +27,10 @@ class CheckoutForm extends Component {
       body: JSON.stringify(data)
     });
     let res = await response.json();
+    console.log(res);
+    if (res) {
+      this.props.processing();
+    }
     // add error handling
     // add loading spinner while payment is processing
   }
