@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import { loadCSS } from 'fg-loadcss/src/loadCSS';
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -46,11 +47,17 @@ const styles = theme => ({
 });
 
 class CheckoutModal extends React.Component {
-  state = {
-    open: false,
-    processing: false,
-  };
-
+  constructor(props) {
+    super(props);
+    this.child = React.createRef();
+    this.state = {
+      open: false,
+      processing: false,
+      updateSource: true,
+      paymentSources: [],
+    }
+  }
+  
   handleOpen = () => {
     this.props.updateFeaturedImage();
     if (this.props.data.is_premium === true) {
@@ -62,12 +69,43 @@ class CheckoutModal extends React.Component {
     this.setState({ open: false });
   };
 
+  updateSource = () => {
+    this.setState(prevState => ({
+      updateSource: !prevState.updateSource
+    }));
+  }
+
   processing = () => {
     console.log(this.state.processing);
     this.setState(prevState => ({
       processing: !prevState.processing
     }));
   };
+
+  savePaymentMethod = () => {
+    this.child.current.submit();
+  }
+
+  publish = () => {
+    console.log('publish');
+  }
+
+  componentDidMount() {
+    loadCSS(
+      'https://use.fontawesome.com/releases/v5.1.0/css/all.css',
+      document.querySelector('#insertion-point-jss'),
+    );
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if(prevProps.paymentSources!==this.props.paymentSources){
+      //Perform some operation here
+      this.setState({
+        paymentSources: this.props.paymentSources,
+        updateSource: false,
+      });
+    }
+  }
 
   render() {
     const { classes } = this.props;
@@ -136,40 +174,44 @@ class CheckoutModal extends React.Component {
                 </Grid>
                 <Grid container spacing={24}>
                   <Grid item xs={12}>
-                  { this.props.paymentSources.length > 0 ?
-                    <div>
-                      <Typography variant="caption" gutterBottom>
-                      Payment Method
-                      </Typography>
-                      <Typography variant="subtitle1">
-                      { this.props.data.email }
-                      </Typography>
-                      <Typography variant="overline">
-                      {/* add in a little card logo here*/}
-                      {"**** **** **** " + this.props.paymentSources[0].card.last4 }
-                      </Typography>
-                      <Typography variant="overline" gutterBottom>
-                      { this.props.paymentSources[0].card.exp_month + " / " + this.props.paymentSources[0].card.exp_year }
-                      </Typography>
-                    </div>
-                    :
-                    <Elements>
-                      <CheckoutForm processing={this.processing} user={this.props.data.user}/>
-                    </Elements>
-                  }
+                    { this.state.updateSource ?
+                      <Elements>
+                        <CheckoutForm processing={this.processing} user={this.props.data.user} ref={this.child} />
+                      </Elements>
+                      :
+                      <div>
+                        <Typography variant="caption" gutterBottom>
+                        Payment Method
+                        </Typography>
+                        <Typography variant="subtitle1">
+                        { this.props.data.email }
+                        </Typography>
+                        <Typography variant="overline">
+                        {"**** **** **** " + this.props.paymentSources[0].card.last4 }
+                        </Typography>
+                        <Typography variant="overline" gutterBottom>
+                        { this.props.paymentSources[0].card.exp_month + " / " + this.props.paymentSources[0].card.exp_year }
+                        </Typography>
+                      </div>
+                    }
                   </Grid>
                 </Grid>
                 <Grid container spacing={24}>
                   <Grid item xs={6}>
-                    <Button variant="contained" color="default" className={classes.button}>
-                      Update Payment Method
-                      <CloudUploadIcon className={classes.rightIcon} />
+                    <Button variant="contained" color="default" className={classes.button} onClick={this.updateSource}>
+                      { this.state.updateSource ? "Cancel" : "Update Payment Method" }
                     </Button>
                   </Grid>
                   <Grid item xs={6}>
-                    <Button variant="contained" color="default" className={classes.button}>
-                      Publish
-                      <CloudUploadIcon className={classes.rightIcon} />
+                    <Button variant="contained" color="default" className={classes.button} onClick={ this.state.updateSource ? this.savePaymentMethod : this.publish }>
+                      { this.state.updateSource ?
+                        <span>Save Payment Method</span>
+                        :
+                        <span>
+                        Publish My Listing
+                        <i className="fas fa-upload"></i>
+                        </span>
+                      }
                     </Button>
                   </Grid>
                 </Grid>

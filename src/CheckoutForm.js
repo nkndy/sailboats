@@ -1,13 +1,7 @@
 import React, {Component} from 'react';
 import {CardElement, injectStripe} from 'react-stripe-elements';
-import Typography from '@material-ui/core/Typography';
 
 class CheckoutForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {complete: false};
-    this.submit = this.submit.bind(this);
-  }
 
   async submit(ev) {
     this.props.processing();
@@ -39,9 +33,6 @@ class CheckoutForm extends Component {
   render() {
     return (
       <div className="checkout">
-        <Typography variant="caption" gutterBottom>
-        No
-        </Typography>
         <CardElement />
         <button onClick={this.submit}>Publish</button>
       </div>
