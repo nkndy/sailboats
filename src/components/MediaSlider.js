@@ -10,7 +10,7 @@ import ReactPlayer from 'react-player'
 import firebase from '../firebase.js';
 
 const db = firebase.firestore();
-const settings = {timestampsInSnapshots: true};
+const settings = {};
 db.settings(settings);
 
 const styles = theme => ({

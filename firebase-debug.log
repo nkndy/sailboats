@@ -138,3 +138,75 @@
 [debug] [2019-08-20T23:01:38.227Z] [runtime-status] Resolved module firebase-admin {"declared":true,"installed":true,"version":"6.0.0","resolution":"C:\\Sailboats\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
 [warn] !  The Cloud Functions emulator requires the module "firebase-admin" to be version >8.0.0 so your version is too old. You can probably fix this by running "npm install firebase-admin@latest" in your functions directory.
 [info] i  functions: Your functions could not be parsed due to an issue with your node_modules (see above)
+[debug] [2019-08-20T23:10:30.877Z] ----------------------------------------------------------------------
+[debug] [2019-08-20T23:10:30.878Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\nicholaskennedy\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js serve
+[debug] [2019-08-20T23:10:30.879Z] CLI Version:   7.2.4
+[debug] [2019-08-20T23:10:30.879Z] Platform:      win32
+[debug] [2019-08-20T23:10:30.879Z] Node Version:  v8.12.0
+[debug] [2019-08-20T23:10:30.879Z] Time:          Tue Aug 20 2019 16:10:30 GMT-0700 (Pacific Daylight Time)
+[debug] [2019-08-20T23:10:30.879Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-08-20T23:10:30.884Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-08-20T23:10:30.885Z] > authorizing via signed-in user
+[debug] [2019-08-20T23:10:30.885Z] [iam] checking project sailboats-445f9 for permissions ["firebase.projects.get"]
+[debug] [2019-08-20T23:10:30.886Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-08-20T23:10:30.886Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-08-20T23:10:31.104Z] <<< HTTP RESPONSE 200
+[debug] [2019-08-20T23:10:31.113Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/sailboats-445f9:testIamPermissions  
+
+[debug] [2019-08-20T23:10:31.310Z] <<< HTTP RESPONSE 200
+[debug] [2019-08-20T23:10:31.310Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/sailboats-445f9  
+ 
+[debug] [2019-08-20T23:10:31.633Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\Sailboats'...
+[info] 
+[debug] [2019-08-20T23:10:31.636Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/sailboats-445f9/webApps/-/config  
+ 
+[warn] !  Your functions directory does not specify a Node version.
+   - Learn more at https://firebase.google.com/docs/functions/manage-functions#set_runtime_options
+[info] +  functions: Emulator started at http://localhost:5001
+[debug] [2019-08-20T23:10:31.967Z] <<< HTTP RESPONSE 200
+[info] i  functions: Watching "C:\Sailboats\functions" for Cloud Functions...
+[info] i  hosting: Serving hosting files from: build
+[info] +  hosting: Local server: http://localhost:5000
+[debug] [2019-08-20T23:10:32.375Z] [runtime-status] Functions runtime initialized. {"cwd":"C:\\Sailboats\\functions","node_version":"8.12.0"}
+[debug] [2019-08-20T23:10:32.375Z] [runtime-status] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true} {}
+[debug] [2019-08-20T23:10:32.377Z] [runtime-status] Resolved module firebase-admin {"declared":true,"installed":true,"version":"6.0.0","resolution":"C:\\Sailboats\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[warn] !  The Cloud Functions emulator requires the module "firebase-admin" to be version >8.0.0 so your version is too old. You can probably fix this by running "npm install firebase-admin@latest" in your functions directory.
+[info] i  functions: Your functions could not be parsed due to an issue with your node_modules (see above)
+[debug] [2019-08-20T23:11:33.011Z] ----------------------------------------------------------------------
+[debug] [2019-08-20T23:11:33.012Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\nicholaskennedy\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js serve
+[debug] [2019-08-20T23:11:33.012Z] CLI Version:   7.2.4
+[debug] [2019-08-20T23:11:33.012Z] Platform:      win32
+[debug] [2019-08-20T23:11:33.012Z] Node Version:  v8.12.0
+[debug] [2019-08-20T23:11:33.013Z] Time:          Tue Aug 20 2019 16:11:33 GMT-0700 (Pacific Daylight Time)
+[debug] [2019-08-20T23:11:33.013Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-08-20T23:11:33.018Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-08-20T23:11:33.018Z] > authorizing via signed-in user
+[debug] [2019-08-20T23:11:33.018Z] [iam] checking project sailboats-445f9 for permissions ["firebase.projects.get"]
+[debug] [2019-08-20T23:11:33.020Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/sailboats-445f9:testIamPermissions  
+
+[debug] [2019-08-20T23:11:33.226Z] <<< HTTP RESPONSE 200
+[debug] [2019-08-20T23:11:33.227Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/sailboats-445f9  
+ 
+[debug] [2019-08-20T23:11:33.407Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\Sailboats'...
+[info] 
+[debug] [2019-08-20T23:11:33.424Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/sailboats-445f9/webApps/-/config  
+ 
+[warn] !  Your functions directory does not specify a Node version.
+   - Learn more at https://firebase.google.com/docs/functions/manage-functions#set_runtime_options
+[debug] [2019-08-20T23:11:33.687Z] <<< HTTP RESPONSE 200
+[info] +  functions: Emulator started at http://localhost:5001
+[info] i  functions: Watching "C:\Sailboats\functions" for Cloud Functions...
+[info] i  hosting: Serving hosting files from: build
+[info] +  hosting: Local server: http://localhost:5000
+[debug] [2019-08-20T23:11:34.101Z] [runtime-status] Functions runtime initialized. {"cwd":"C:\\Sailboats\\functions","node_version":"8.12.0"}
+[debug] [2019-08-20T23:11:34.101Z] [runtime-status] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true} {}
+[debug] [2019-08-20T23:11:34.103Z] [runtime-status] Resolved module firebase-admin {"declared":true,"installed":true,"version":"6.0.0","resolution":"C:\\Sailboats\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[warn] !  The Cloud Functions emulator requires the module "firebase-admin" to be version >8.0.0 so your version is too old. You can probably fix this by running "npm install firebase-admin@latest" in your functions directory.
+[info] i  functions: Your functions could not be parsed due to an issue with your node_modules (see above)

@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import SelectFeaturedImage from './SelectFeaturedImage'
 
 const db = firebase.firestore();
-const settings = {timestampsInSnapshots: true};
+const settings = {};
 db.settings(settings);
 let posts = db.collection('Posts');
 

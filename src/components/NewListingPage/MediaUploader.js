@@ -10,7 +10,7 @@ const storage = firebase.storage();
 const storageRef = storage.ref();
 
 const db = firebase.firestore();
-const settings = {timestampsInSnapshots: true};
+const settings = {};
 db.settings(settings);
 
 let posts = db.collection('Posts');

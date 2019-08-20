@@ -11,7 +11,7 @@ import Button from '@material-ui/core/Button';
 import AccountButton from './AccountButton'
 
 const db = firebase.firestore();
-const settings = {timestampsInSnapshots: true};
+const settings = {};
 
 db.settings(settings);
 

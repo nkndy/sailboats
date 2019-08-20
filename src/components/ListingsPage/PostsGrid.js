@@ -6,7 +6,7 @@ import firebase from '../../firebase.js';
 import Post from './Post.js'
 
 const db = firebase.firestore();
-const settings = {timestampsInSnapshots: true};
+const settings = {};
 db.settings(settings);
 
 const styles = theme => ({

@@ -8,7 +8,7 @@ import FeaturedSlide from './FeaturedSlide';
 import Slider from "react-slick";
 
 const db = firebase.firestore();
-const settings = {timestampsInSnapshots: true};
+const settings = {};
 db.settings(settings);
 
 const styles = theme => ({

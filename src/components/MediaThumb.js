@@ -3,7 +3,7 @@ import firebase from '../firebase.js';
 import '../App.css';
 
 const db = firebase.firestore();
-const settings = {timestampsInSnapshots: true};
+const settings = {};
 db.settings(settings);
 
 class MediaThumb extends React.Component {
