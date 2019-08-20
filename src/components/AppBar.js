@@ -176,11 +176,11 @@ class PrimarySearchAppBar extends React.Component {
       <div className={classes.root}>
         <AppBar position="fixed">
           <Toolbar>
-            <Typography className={classes.title} variant="h6" color="inherit" noWrap>
+
               <NavLink to="/listings">
                 <img src={Logo} className={classes.logo} />
               </NavLink>
-            </Typography>
+
             <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />

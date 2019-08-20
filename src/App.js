@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
+
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+
 import './App.css';
+
+import { auth } from './firebase.js';
+
 import AppBar from "./components/AppBar";
 import Landing from "./components/LandingPage/Landing";
 import Listings from "./components/ListingsPage/Listings";
@@ -11,7 +16,7 @@ import AccountDialogue from "./components/AccountDialogue";
 import DetailView from "./components/DetailPage/DetailView";
 import Error from "./components/Error";
 import Footer from "./components/Footer";
-import { auth } from './firebase.js';
+import PrivateRoute from './components/PrivateRoute';
 
 class App extends Component {
   constructor(props) {
@@ -38,38 +43,6 @@ class App extends Component {
     })
   }
   render() {
-    const AccountRoute = ({ component: Component, ...rest }) => (
-      <Route {...rest} render={(props) => (
-        (this.state.user != null)
-          ?
-          <Component {...props}
-            onUserLogout={this.onUserLogout}
-            user_id={this.state.user.uid}
-          />
-          :
-          <Redirect
-            to={{
-              pathname: "/login",
-            }}
-          />
-      )} />
-    );
-    const CreatePostRoute = ({component: Component, ...rest}) => (
-      <Route {...rest} render={(props) => (
-        (this.state.user != null)
-          ?
-          <Component {...props}
-            onUserLogout={this.onUserLogout}
-            user={this.state.user}
-          />
-          :
-          <Redirect
-            to={{
-              pathname: "/login",
-            }}
-          />
-      )} />
-    );
     return (
       <BrowserRouter>
         <div>
@@ -78,13 +51,23 @@ class App extends Component {
             <Route path="/" component={Landing} exact />
             <Route path="/listings" component={Listings} exact />
             <Route path={`/listing/:listingId`} component={DetailView} />
+            <Route path={`/review-listing/:listingId`} component={ReviewListing} />
             <Route
               path="/login"
               render={(props) => <AccountDialogue {...props} onUserUpdate={this.onUserUpdate} user={this.state.user} />}
             />
-            <CreatePostRoute path="/new-sailboat-listing" component={CreateListing} />
-            <Route path={`/review-listing/:listingId`} component={ReviewListing} />
-            <AccountRoute path="/my-account" component={Account} />
+            <PrivateRoute 
+              path="/new-sailboat-listing" 
+              component={CreateListing}
+              onUserLogout={this.onUserLogout}
+              user={this.state.user}
+            />
+            <PrivateRoute
+              path="/my-account" 
+              component={Account}
+              onUserLogout={this.onUserLogout}
+              user_id={this.state.user.uid}
+            />
             <Route component={Error}/>
           </Switch>
           <Footer />
