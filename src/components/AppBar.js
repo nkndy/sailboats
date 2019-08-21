@@ -21,6 +21,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Logo from '../assets/img/trdwnd.png';
 
 import './AppBar.css'
+import AppBarSearch from './AppBarSearch';
 
 const styles = theme => ({
   root: {
@@ -174,27 +175,15 @@ class PrimarySearchAppBar extends React.Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position="fixed">
+        <AppBar position="fixed" elevation={0}>
           <Toolbar>
-
-              <NavLink to="/listings">
-                <img src={Logo} className={classes.logo} />
-              </NavLink>
-
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-              <Input
-                placeholder="Search for a Sailboat…"
-                disableUnderline
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-              />
-            </div>
+            <NavLink to="/listings">
+              <img src={Logo} className={classes.logo} />
+            </NavLink>
             <div className={classes.grow} />
+            <div className={classes.search}>
+              <AppBarSearch />
+            </div>
             <div className={classes.sectionDesktop}>
               <IconButton color="inherit">
                 <NavLink to="/new-sailboat-listing">

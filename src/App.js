@@ -43,6 +43,9 @@ class App extends Component {
     })
   }
   render() {
+    if (!this.state.user) {
+      return null
+    }
     return (
       <BrowserRouter>
         <div>
